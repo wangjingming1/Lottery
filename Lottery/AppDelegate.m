@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "GlobalDefines.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +15,28 @@
 
 @implementation AppDelegate
 
+- (void)createFiles{
+    [self homePageCreateFiles];
+}
+
+- (void)homePageCreateFiles{
+    //轮播图片文件夹
+    NSLog(@"%@", kDocumentsPath);
+    NSString *documentsPath = kDocumentsPath;
+    NSString *bannerPath = [NSString stringWithFormat:@"%@/homePage/banner/", documentsPath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = NO;
+    // fileExistsAtPath 判断一个文件或目录是否有效，isDirectory判断是否一个目录
+    BOOL existed = [fileManager fileExistsAtPath:bannerPath isDirectory:&isDir];
+    if (!isDir && !existed) {//如果文件夹不存在
+        [fileManager createDirectoryAtPath:bannerPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self createFiles];
+    
     return YES;
 }
 

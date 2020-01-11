@@ -8,29 +8,232 @@
 
 #import "HomePageViewController.h"
 #import "Masonry.h"
+#import "GlobalDefines.h"
+#import "UIView+Color.h"
 
-@interface HomePageViewController ()
+#import "LotteryBannerView.h"
+#import "LSVCLotteryWinningView.h"
+#import "LottoryWinningModel.h"
 
+#import "HPVCHeaderView.h"
+#import "HPVCConvenientServiceView.h"
+#import "HPVCWinningListView.h"
+#import "HPVCNewsListView.h"
+
+#import "ProvinceListViewController.h"
+#import "UIViewController+Cloudox.h"
+
+#import "WebViewController.h"
+
+#define kConvenientServiceViewShadowColor kUIColorFromRGB10(230, 230, 230)
+
+@interface HomePageViewController ()<UINavigationControllerDelegate, UIScrollViewDelegate, HPVCConvenientServiceViewDelegate, HPVCWinningListViewDelegate, HPVCNewListViewDelegate>
+@property (nonatomic, weak) HPVCHeaderView *headerView;
+@property (nonatomic, weak) HPVCConvenientServiceView *convenientServiceView;
+@property (nonatomic, weak) HPVCWinningListView *winningListView;
+@property (nonatomic, weak) HPVCNewsListView *newsListView;
+@property (nonatomic, copy) NSString *city;
 @end
 
 @implementation HomePageViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.headerView){
+        [self.headerView.bannerView startTimer];
+    }
+    [self changeBarImageViewAlpha:self.scrollView.contentOffset.y];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.view.backgroundColor = [UIColor whiteColor];
-    CGFloat navigationbarHeight = [self getNavigationbarHeight];
-    CGFloat tabbarH = [self getTabbarHeight];
-    UIView *v = [[UIView alloc] init];
-    [self.view addSubview:v];
-    v.backgroundColor = [UIColor redColor];
-    [v mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(navigationbarHeight);
-        make.bottom.mas_equalTo(-tabbarH);
-    }];
+    self.city = @"全国";
+    self.scrollView.delegate = self;
+    [self setNavTitleBar];
+    [self reloadNavBarLeftTitle];
+    [self setUI];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self changeBarImageViewAlpha:MAXFLOAT];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.headerView.bannerView pauseTimer];
+}
+
+- (void)setNavTitleBar{
+    [self changeBarImageViewAlpha:self.scrollView.contentOffset.y];
+    //设置导航栏背景图片为一个空的image，这样就透明了(设成nil就显示出来了)
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    //去掉透明后导航栏下边的黑边(设成nil就显示出来了)
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+}
+
+- (void)setUI{
+    [self initHeaderView];
+    [self initConvenientServiceView];
+    [self initLotteryWinningListView];
+    [self initNewListView];
+}
+
+- (void)reloadNavBarLeftTitle{
+    NSString *leftBtnStr = [NSString stringWithFormat:@"彩票 ● %@  ▼", self.city];
+    NSMutableAttributedString *leftBtnAttributedStr = [[NSMutableAttributedString alloc] initWithString:leftBtnStr];
+    NSRange range1 = [leftBtnStr rangeOfString:@"●"];
+    NSRange range2 = [leftBtnStr rangeOfString:@"▼"];
+    NSRange rangeAll = NSMakeRange(0, leftBtnStr.length);
+    [leftBtnAttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:8] range:range1];
+    [leftBtnAttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:range2];
+    
+    [leftBtnAttributedStr addAttribute:NSBaselineOffsetAttributeName value:@(3) range:range1];
+    [leftBtnAttributedStr addAttribute:NSBaselineOffsetAttributeName value:@(1) range:range2];
+    [leftBtnAttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:rangeAll];
+    [self setNavBarLeftButtonAttributedTitle:leftBtnAttributedStr];
+}
+
+- (NSString *)navBarLeftButtonImage{
+    return @"";
+}
+
+- (void)initHeaderView{
+    CGFloat navBarH = [self getNavigationbarHeight];
+    CGFloat headerViewH = 150;
+    HPVCHeaderView *headerView = [[HPVCHeaderView alloc] init];
+    [self.scrollView addSubview:headerView];
+    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(0);
+        make.width.mas_equalTo(self.view);
+        make.height.mas_equalTo(navBarH + headerViewH);
+    }];
+    [headerView.bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(navBarH);
+    }];
+    [self.view layoutIfNeeded];
+    NSArray *colors = @[[UIColor redColor], [UIColor blueColor], [UIColor clearColor]];
+    [headerView setGradationColor:colors startPoint:CGPointMake(0.5, 0.0) endPoint:CGPointMake(0.5, 1.0)];
+    [headerView reloadBannerView];
+    
+    self.headerView = headerView;
+}
+
+- (void)initConvenientServiceView{
+    HPVCConvenientServiceView *csView = [[HPVCConvenientServiceView alloc] init];
+    [self.scrollView addSubview:csView];
+    csView.delegate = self;
+    
+    WS(weakSelf);
+    [csView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(kPadding10);
+        make.width.mas_equalTo(weakSelf.view).offset(-kPadding20);
+        make.top.mas_equalTo(weakSelf.headerView.mas_bottom).offset(kPadding10);
+    }];
+    [csView setShadowAndColor:kConvenientServiceViewShadowColor];
+    
+    self.convenientServiceView = csView;
+    [self.convenientServiceView refreshView];
+}
+
+- (void)initLotteryWinningListView{
+    HPVCWinningListView *winningListVie = [[HPVCWinningListView alloc] init];
+    [self.scrollView addSubview:winningListVie];
+    winningListVie.delegate = self;
+    
+    WS(weakSelf);
+    [winningListVie mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.width.mas_equalTo(weakSelf.convenientServiceView);
+        make.top.mas_equalTo(weakSelf.convenientServiceView.mas_bottom).offset(kPadding10);
+    }];
+    [winningListVie setShadowAndColor:kConvenientServiceViewShadowColor];
+    
+    self.winningListView = winningListVie;
+    [self.winningListView refreshView];
+}
+
+- (void)initNewListView{
+    HPVCNewsListView *newsListView = [[HPVCNewsListView alloc] init];
+    [self.scrollView addSubview:newsListView];
+    newsListView.delegate = self;
+    
+    WS(weakSelf);
+    [newsListView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.width.mas_equalTo(weakSelf.winningListView);
+        make.top.mas_equalTo(weakSelf.winningListView.mas_bottom).offset(kPadding10);
+    }];
+    
+    [newsListView setShadowAndColor:kConvenientServiceViewShadowColor];
+    self.newsListView = newsListView;
+    [self.newsListView refreshView];
+}
+
+- (void)navBarLeftButtonClick:(UIButton *)leftButton{
+    ProvinceListViewController *vc = [[ProvinceListViewController alloc] init];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"leftTitle"] = @"省份列表";
+    vc.params = params;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)changeBarImageViewAlpha:(CGFloat)offset{
+    CGFloat minAlphaOffset = 0;//- 64;
+    CGFloat maxAlphaOffset = 200;
+    CGFloat alpha = (offset - minAlphaOffset) / (maxAlphaOffset - minAlphaOffset);
+//    UIView *barImageView = self.navigationController.navigationBar.subviews.firstObject;
+//    barImageView.alpha = alpha;
+    if (alpha < 0) alpha = 0;
+    if (alpha > 1) alpha = 1;
+    self.navBarBgAlpha = [NSString stringWithFormat:@"%f", alpha];
+}
+
+- (CGFloat)getCurrentAlpha{
+    CGFloat minAlphaOffset = 0;//- 64;
+    CGFloat maxAlphaOffset = 200;
+    CGFloat alpha = (self.scrollView.contentOffset.y - minAlphaOffset) / (maxAlphaOffset - minAlphaOffset);
+    return alpha;
+}
+
+#pragma mark - scrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self changeBarImageViewAlpha:scrollView.contentOffset.y];
+}
+
+#pragma mark - HPVCConvenientServiceViewDelegate
+- (void)pushViewController:(Class)vcClass params:(NSDictionary *)params{
+    [super pushViewController:vcClass params:params];
+}
+
+- (void)reloadViewFinish:(UIView *)initiator{
+    [self.view layoutIfNeeded];
+    self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.newsListView.frame) + 20);
+    
+    NSLog(@"reloadViewFinish(contentSize.h):%.2f", self.scrollView.contentSize.height);
+}
+
+#pragma mark - UINavigationControllerDelegate(由LotteryNavigationController处理自己的代理方法)
+// 设置导航控制器的代理为self, 通过代理设置导航栏隐藏
+//    self.navigationController.delegate = self;
+// 将要显示控制器
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//    // 判断要显示的控制器是否是自己
+//    UIImage *image;
+//    if ([viewController isKindOfClass:[self class]]){
+//        image = [[UIImage alloc] init];
+//    }
+//    //设置导航栏背景图片为一个空的image，这样就透明了(设成nil就显示出来了)
+//    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+//    //去掉透明后导航栏下边的黑边(设成nil就显示出来了)
+//    [self.navigationController.navigationBar setShadowImage:image];
+//    self.navigationController.navigationBar.translucent = YES;
+//}
 /*
 #pragma mark - Navigation
 

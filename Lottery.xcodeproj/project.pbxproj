@@ -9,12 +9,22 @@
 /* Begin PBXBuildFile section */
 		E8024FDF23B4792000DC035C /* LotteryTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8024FDE23B4792000DC035C /* LotteryTabBarViewController.m */; };
 		E8024FE323B4A1AA00DC035C /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8024FE223B4A1AA00DC035C /* MineViewController.m */; };
-		E8024FE823B4A2B000DC035C /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8024FE723B4A2B000DC035C /* NewsViewController.m */; };
+		E8024FE823B4A2B000DC035C /* LotteryServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8024FE723B4A2B000DC035C /* LotteryServiceViewController.m */; };
 		E8024FEB23B4A2C500DC035C /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8024FEA23B4A2C500DC035C /* HomePageViewController.m */; };
-		E877B2AA23B4BD23003D13E5 /* LotteryTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E877B2A923B4BD23003D13E5 /* LotteryTabBar.m */; };
+		E81ECF6923C7843600647D0E /* res.json in Resources */ = {isa = PBXBuildFile; fileRef = E81ECF6823C7843500647D0E /* res.json */; };
+		E81ECF6C23C7848100647D0E /* LottoryNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF6B23C7848100647D0E /* LottoryNewsModel.m */; };
+		E81ECF6F23C8C00000647D0E /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81ECF6D23C8BE0700647D0E /* AFNetworking.framework */; };
+		E81ECF7023C8C00000647D0E /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E81ECF6D23C8BE0700647D0E /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E81ECF7323C9A3A300647D0E /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7223C9A3A300647D0E /* WebViewController.m */; };
+		E81ECF7923CA26DC00647D0E /* UINavigationController+Cloudox.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7523CA26DB00647D0E /* UINavigationController+Cloudox.m */; };
+		E81ECF7A23CA26DC00647D0E /* UIViewController+Cloudox.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */; };
+		E84E5B2B23BF8802008D3C9A /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84E5B2A23BF8802008D3C9A /* CalculatorViewController.m */; };
+		E84E5B4023C1C3AD008D3C9A /* LSVCLotteryWinningView.m in Sources */ = {isa = PBXBuildFile; fileRef = E84E5B3F23C1C3AD008D3C9A /* LSVCLotteryWinningView.m */; };
+		E853DEDA23BF35C2004686BB /* UIImageView+AddImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E853DED923BF35C2004686BB /* UIImageView+AddImage.m */; };
 		E877B2AB23B4C27A003D13E5 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F5163C23B4710E005F3147 /* Masonry.framework */; };
 		E877B2AC23B4C27A003D13E5 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8F5163C23B4710E005F3147 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E877B2B423B4C4D9003D13E5 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E877B2B323B4C4D9003D13E5 /* BaseUIViewController.m */; };
+		E8A6665523C1C68C009F3F32 /* LottoryWinningModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8A6665423C1C68C009F3F32 /* LottoryWinningModel.mm */; };
 		E8CF485823B3CFDD0081BE1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485723B3CFDD0081BE1F /* AppDelegate.m */; };
 		E8CF485B23B3CFDD0081BE1F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485A23B3CFDD0081BE1F /* SceneDelegate.m */; };
 		E8CF485E23B3CFDD0081BE1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485D23B3CFDD0081BE1F /* ViewController.m */; };
@@ -24,7 +34,24 @@
 		E8CF486923B3CFDE0081BE1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF486823B3CFDE0081BE1F /* main.m */; };
 		E8CF487323B3CFDE0081BE1F /* LotteryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF487223B3CFDE0081BE1F /* LotteryTests.m */; };
 		E8CF487E23B3CFDE0081BE1F /* LotteryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF487D23B3CFDE0081BE1F /* LotteryUITests.m */; };
+		E8E206C723BDC3F60072A144 /* MJRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E206C623BDC3F60072A144 /* MJRefresh.framework */; };
+		E8E206C823BDC3F60072A144 /* MJRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8E206C623BDC3F60072A144 /* MJRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E8E206CE23BDD5F90072A144 /* BaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E206CD23BDD5F90072A144 /* BaseCollectionViewCell.m */; };
+		E8E206D123BDE3410072A144 /* HPVCHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E206D023BDE3410072A144 /* HPVCHeaderView.m */; };
+		E8E2070423BDEDCF0072A144 /* LotteryBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E2070323BDEDCF0072A144 /* LotteryBannerView.m */; };
+		E8E2070E23BE150A0072A144 /* UIView+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E2070D23BE150A0072A144 /* UIView+Color.m */; };
+		E8E44A5123C1F5A900FDDC56 /* LotteryStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A5023C1F5A900FDDC56 /* LotteryStationViewController.m */; };
+		E8E44A5423C1F5BD00FDDC56 /* TrendChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A5323C1F5BD00FDDC56 /* TrendChartViewController.m */; };
+		E8E44A5723C1F5E800FDDC56 /* ImitationLotteryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A5623C1F5E800FDDC56 /* ImitationLotteryViewController.m */; };
+		E8E44A5A23C2248900FDDC56 /* LotteryPastPeriodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A5923C2248900FDDC56 /* LotteryPastPeriodViewController.m */; };
+		E8E44A5D23C225F100FDDC56 /* HPVCWinningListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A5C23C225F100FDDC56 /* HPVCWinningListView.m */; };
+		E8E44A6023C4F10300FDDC56 /* ProvinceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A5F23C4F10300FDDC56 /* ProvinceListViewController.m */; };
+		E8E44A6323C600E800FDDC56 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A6223C600E700FDDC56 /* NewsViewController.m */; };
+		E8E44A6623C6016600FDDC56 /* NewsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A6523C6016600FDDC56 /* NewsCollectionViewCell.m */; };
+		E8E44A6923C61A5600FDDC56 /* HPVCNewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A6823C61A5600FDDC56 /* HPVCNewsListView.m */; };
+		E8E501E423BF6146009777E7 /* HPVCConvenientServiceView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.mm */; };
 		E8FC025023BC5E1900CB1FCA /* LotteryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC024F23BC5E1900CB1FCA /* LotteryNavigationController.m */; };
+		E8FC025D23BC769900CB1FCA /* GamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC025C23BC769900CB1FCA /* GamesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +79,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E877B2AC23B4C27A003D13E5 /* Masonry.framework in Embed Frameworks */,
+				E81ECF7023C8C00000647D0E /* AFNetworking.framework in Embed Frameworks */,
+				E8E206C823BDC3F60072A144 /* MJRefresh.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,14 +92,30 @@
 		E8024FDE23B4792000DC035C /* LotteryTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryTabBarViewController.m; sourceTree = "<group>"; };
 		E8024FE123B4A1AA00DC035C /* MineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		E8024FE223B4A1AA00DC035C /* MineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
-		E8024FE623B4A2B000DC035C /* NewsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
-		E8024FE723B4A2B000DC035C /* NewsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		E8024FE623B4A2B000DC035C /* LotteryServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryServiceViewController.h; sourceTree = "<group>"; };
+		E8024FE723B4A2B000DC035C /* LotteryServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryServiceViewController.m; sourceTree = "<group>"; };
 		E8024FE923B4A2C500DC035C /* HomePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
 		E8024FEA23B4A2C500DC035C /* HomePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
-		E877B2A823B4BD23003D13E5 /* LotteryTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryTabBar.h; sourceTree = "<group>"; };
-		E877B2A923B4BD23003D13E5 /* LotteryTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryTabBar.m; sourceTree = "<group>"; };
+		E81ECF6823C7843500647D0E /* res.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = res.json; sourceTree = "<group>"; };
+		E81ECF6A23C7848100647D0E /* LottoryNewsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LottoryNewsModel.h; sourceTree = "<group>"; };
+		E81ECF6B23C7848100647D0E /* LottoryNewsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LottoryNewsModel.m; sourceTree = "<group>"; };
+		E81ECF6D23C8BE0700647D0E /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E81ECF7123C9A3A300647D0E /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		E81ECF7223C9A3A300647D0E /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		E81ECF7523CA26DB00647D0E /* UINavigationController+Cloudox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Cloudox.m"; sourceTree = "<group>"; };
+		E81ECF7623CA26DB00647D0E /* UIViewController+Cloudox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Cloudox.h"; sourceTree = "<group>"; };
+		E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Cloudox.m"; sourceTree = "<group>"; };
+		E81ECF7823CA26DB00647D0E /* UINavigationController+Cloudox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Cloudox.h"; sourceTree = "<group>"; };
+		E84E5B2923BF8802008D3C9A /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
+		E84E5B2A23BF8802008D3C9A /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
+		E84E5B3E23C1C3AD008D3C9A /* LSVCLotteryWinningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSVCLotteryWinningView.h; sourceTree = "<group>"; };
+		E84E5B3F23C1C3AD008D3C9A /* LSVCLotteryWinningView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSVCLotteryWinningView.m; sourceTree = "<group>"; };
+		E853DED823BF35C2004686BB /* UIImageView+AddImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AddImage.h"; sourceTree = "<group>"; };
+		E853DED923BF35C2004686BB /* UIImageView+AddImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AddImage.m"; sourceTree = "<group>"; };
 		E877B2B223B4C4D9003D13E5 /* BaseUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUIViewController.h; sourceTree = "<group>"; };
 		E877B2B323B4C4D9003D13E5 /* BaseUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUIViewController.m; sourceTree = "<group>"; };
+		E8A6665323C1C68C009F3F32 /* LottoryWinningModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LottoryWinningModel.h; sourceTree = "<group>"; };
+		E8A6665423C1C68C009F3F32 /* LottoryWinningModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LottoryWinningModel.mm; sourceTree = "<group>"; };
 		E8CF485323B3CFDD0081BE1F /* Lottery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lottery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8CF485623B3CFDD0081BE1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8CF485723B3CFDD0081BE1F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -89,9 +134,42 @@
 		E8CF487923B3CFDE0081BE1F /* LotteryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LotteryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8CF487D23B3CFDE0081BE1F /* LotteryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryUITests.m; sourceTree = "<group>"; };
 		E8CF487F23B3CFDE0081BE1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8E206C323BDC3C30072A144 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8E206C623BDC3F60072A144 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8E206CC23BDD5F90072A144 /* BaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewCell.h; sourceTree = "<group>"; };
+		E8E206CD23BDD5F90072A144 /* BaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewCell.m; sourceTree = "<group>"; };
+		E8E206CF23BDE3410072A144 /* HPVCHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPVCHeaderView.h; sourceTree = "<group>"; };
+		E8E206D023BDE3410072A144 /* HPVCHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPVCHeaderView.m; sourceTree = "<group>"; };
+		E8E2070223BDEDCF0072A144 /* LotteryBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LotteryBannerView.h; sourceTree = "<group>"; };
+		E8E2070323BDEDCF0072A144 /* LotteryBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LotteryBannerView.m; sourceTree = "<group>"; };
+		E8E2070C23BE150A0072A144 /* UIView+Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Color.h"; sourceTree = "<group>"; };
+		E8E2070D23BE150A0072A144 /* UIView+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Color.m"; sourceTree = "<group>"; };
+		E8E44A4F23C1F5A900FDDC56 /* LotteryStationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryStationViewController.h; sourceTree = "<group>"; };
+		E8E44A5023C1F5A900FDDC56 /* LotteryStationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryStationViewController.m; sourceTree = "<group>"; };
+		E8E44A5223C1F5BD00FDDC56 /* TrendChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendChartViewController.h; sourceTree = "<group>"; };
+		E8E44A5323C1F5BD00FDDC56 /* TrendChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrendChartViewController.m; sourceTree = "<group>"; };
+		E8E44A5523C1F5E800FDDC56 /* ImitationLotteryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImitationLotteryViewController.h; sourceTree = "<group>"; };
+		E8E44A5623C1F5E800FDDC56 /* ImitationLotteryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImitationLotteryViewController.m; sourceTree = "<group>"; };
+		E8E44A5823C2248900FDDC56 /* LotteryPastPeriodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryPastPeriodViewController.h; sourceTree = "<group>"; };
+		E8E44A5923C2248900FDDC56 /* LotteryPastPeriodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryPastPeriodViewController.m; sourceTree = "<group>"; };
+		E8E44A5B23C225F100FDDC56 /* HPVCWinningListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPVCWinningListView.h; sourceTree = "<group>"; };
+		E8E44A5C23C225F100FDDC56 /* HPVCWinningListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPVCWinningListView.m; sourceTree = "<group>"; };
+		E8E44A5E23C4F10300FDDC56 /* ProvinceListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProvinceListViewController.h; sourceTree = "<group>"; };
+		E8E44A5F23C4F10300FDDC56 /* ProvinceListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProvinceListViewController.m; sourceTree = "<group>"; };
+		E8E44A6123C600E700FDDC56 /* NewsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		E8E44A6223C600E700FDDC56 /* NewsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		E8E44A6423C6016600FDDC56 /* NewsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsCollectionViewCell.h; sourceTree = "<group>"; };
+		E8E44A6523C6016600FDDC56 /* NewsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsCollectionViewCell.m; sourceTree = "<group>"; };
+		E8E44A6723C61A5600FDDC56 /* HPVCNewsListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPVCNewsListView.h; sourceTree = "<group>"; };
+		E8E44A6823C61A5600FDDC56 /* HPVCNewsListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPVCNewsListView.m; sourceTree = "<group>"; };
+		E8E501E223BF6146009777E7 /* HPVCConvenientServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPVCConvenientServiceView.h; sourceTree = "<group>"; };
+		E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HPVCConvenientServiceView.mm; sourceTree = "<group>"; };
 		E8F5163C23B4710E005F3147 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8FC024E23BC5E1900CB1FCA /* LotteryNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryNavigationController.h; sourceTree = "<group>"; };
 		E8FC024F23BC5E1900CB1FCA /* LotteryNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryNavigationController.m; sourceTree = "<group>"; };
+		E8FC025B23BC769900CB1FCA /* GamesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GamesViewController.h; sourceTree = "<group>"; };
+		E8FC025C23BC769900CB1FCA /* GamesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GamesViewController.m; sourceTree = "<group>"; };
+		E8FC027823BCF38900CB1FCA /* GlobalDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E877B2AB23B4C27A003D13E5 /* Masonry.framework in Frameworks */,
+				E81ECF6F23C8C00000647D0E /* AFNetworking.framework in Frameworks */,
+				E8E206C723BDC3F60072A144 /* MJRefresh.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,8 +205,6 @@
 			children = (
 				E8024FDD23B4792000DC035C /* LotteryTabBarViewController.h */,
 				E8024FDE23B4792000DC035C /* LotteryTabBarViewController.m */,
-				E877B2A823B4BD23003D13E5 /* LotteryTabBar.h */,
-				E877B2A923B4BD23003D13E5 /* LotteryTabBar.m */,
 			);
 			path = LotteryTabBarVC;
 			sourceTree = "<group>";
@@ -143,28 +221,109 @@
 		E8024FE423B4A1C700DC035C /* HomePageViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E84E5B4123C1C56C008D3C9A /* Model */,
+				E84E5B3D23C1C32C008D3C9A /* Views */,
 				E8024FE923B4A2C500DC035C /* HomePageViewController.h */,
 				E8024FEA23B4A2C500DC035C /* HomePageViewController.m */,
 			);
 			path = HomePageViewController;
 			sourceTree = "<group>";
 		};
-		E8024FE523B4A1E000DC035C /* NewsViewController */ = {
+		E8024FE523B4A1E000DC035C /* LotteryServiceViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E8024FE623B4A2B000DC035C /* NewsViewController.h */,
-				E8024FE723B4A2B000DC035C /* NewsViewController.m */,
+				E8A6665F23C1EAEA009F3F32 /* model */,
+				E8A6665E23C1EA1D009F3F32 /* views */,
+				E8024FE623B4A2B000DC035C /* LotteryServiceViewController.h */,
+				E8024FE723B4A2B000DC035C /* LotteryServiceViewController.m */,
+				E8E44A5823C2248900FDDC56 /* LotteryPastPeriodViewController.h */,
+				E8E44A5923C2248900FDDC56 /* LotteryPastPeriodViewController.m */,
 			);
-			path = NewsViewController;
+			path = LotteryServiceViewController;
 			sourceTree = "<group>";
 		};
-		E877B2AE23B4C2AB003D13E5 /* BaseView */ = {
+		E81ECF7423C9A3BD00647D0E /* views */ = {
 			isa = PBXGroup;
 			children = (
+				E8E44A6423C6016600FDDC56 /* NewsCollectionViewCell.h */,
+				E8E44A6523C6016600FDDC56 /* NewsCollectionViewCell.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		E84E5B2C23BF8810008D3C9A /* CommunalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E81ECF7423C9A3BD00647D0E /* views */,
+				E84E5B2923BF8802008D3C9A /* CalculatorViewController.h */,
+				E84E5B2A23BF8802008D3C9A /* CalculatorViewController.m */,
+				E8E44A4F23C1F5A900FDDC56 /* LotteryStationViewController.h */,
+				E8E44A5023C1F5A900FDDC56 /* LotteryStationViewController.m */,
+				E8E44A5223C1F5BD00FDDC56 /* TrendChartViewController.h */,
+				E8E44A5323C1F5BD00FDDC56 /* TrendChartViewController.m */,
+				E8E44A5523C1F5E800FDDC56 /* ImitationLotteryViewController.h */,
+				E8E44A5623C1F5E800FDDC56 /* ImitationLotteryViewController.m */,
+				E8E44A5E23C4F10300FDDC56 /* ProvinceListViewController.h */,
+				E8E44A5F23C4F10300FDDC56 /* ProvinceListViewController.m */,
+				E8E44A6123C600E700FDDC56 /* NewsViewController.h */,
+				E8E44A6223C600E700FDDC56 /* NewsViewController.m */,
+				E81ECF7123C9A3A300647D0E /* WebViewController.h */,
+				E81ECF7223C9A3A300647D0E /* WebViewController.m */,
+			);
+			path = CommunalViewController;
+			sourceTree = "<group>";
+		};
+		E84E5B3D23C1C32C008D3C9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E8E206CF23BDE3410072A144 /* HPVCHeaderView.h */,
+				E8E206D023BDE3410072A144 /* HPVCHeaderView.m */,
+				E8E501E223BF6146009777E7 /* HPVCConvenientServiceView.h */,
+				E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.mm */,
+				E8E44A5B23C225F100FDDC56 /* HPVCWinningListView.h */,
+				E8E44A5C23C225F100FDDC56 /* HPVCWinningListView.m */,
+				E8E44A6723C61A5600FDDC56 /* HPVCNewsListView.h */,
+				E8E44A6823C61A5600FDDC56 /* HPVCNewsListView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E84E5B4123C1C56C008D3C9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E877B2AE23B4C2AB003D13E5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E8E206CC23BDD5F90072A144 /* BaseCollectionViewCell.h */,
+				E8E206CD23BDD5F90072A144 /* BaseCollectionViewCell.m */,
 				E877B2B223B4C4D9003D13E5 /* BaseUIViewController.h */,
 				E877B2B323B4C4D9003D13E5 /* BaseUIViewController.m */,
 			);
-			path = BaseView;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E8A6665E23C1EA1D009F3F32 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				E84E5B3E23C1C3AD008D3C9A /* LSVCLotteryWinningView.h */,
+				E84E5B3F23C1C3AD008D3C9A /* LSVCLotteryWinningView.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		E8A6665F23C1EAEA009F3F32 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				E8A6665323C1C68C009F3F32 /* LottoryWinningModel.h */,
+				E8A6665423C1C68C009F3F32 /* LottoryWinningModel.mm */,
+				E81ECF6A23C7848100647D0E /* LottoryNewsModel.h */,
+				E81ECF6B23C7848100647D0E /* LottoryNewsModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		E8CF484A23B3CFDD0081BE1F = {
@@ -191,12 +350,17 @@
 		E8CF485523B3CFDD0081BE1F /* Lottery */ = {
 			isa = PBXGroup;
 			children = (
+				E81ECF6823C7843500647D0E /* res.json */,
+				E8FC027823BCF38900CB1FCA /* GlobalDefines.h */,
+				E8E2070523BE013E0072A144 /* BaseUI */,
 				E8FC024D23BC5DC500CB1FCA /* LorreryNavigationController */,
 				E8024FDC23B4789F00DC035C /* LotteryTabBarVC */,
-				E877B2AE23B4C2AB003D13E5 /* BaseView */,
+				E877B2AE23B4C2AB003D13E5 /* ViewController */,
 				E8024FE423B4A1C700DC035C /* HomePageViewController */,
-				E8024FE523B4A1E000DC035C /* NewsViewController */,
+				E8024FE523B4A1E000DC035C /* LotteryServiceViewController */,
+				E8FC025A23BC765A00CB1FCA /* GamesViewController */,
 				E8024FE023B4A15E00DC035C /* MineViewController */,
+				E84E5B2C23BF8810008D3C9A /* CommunalViewController */,
 				E8CF485623B3CFDD0081BE1F /* AppDelegate.h */,
 				E8CF485723B3CFDD0081BE1F /* AppDelegate.m */,
 				E8CF485923B3CFDD0081BE1F /* SceneDelegate.h */,
@@ -230,9 +394,29 @@
 			path = LotteryUITests;
 			sourceTree = "<group>";
 		};
+		E8E2070523BE013E0072A144 /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				E8E2070223BDEDCF0072A144 /* LotteryBannerView.h */,
+				E8E2070323BDEDCF0072A144 /* LotteryBannerView.m */,
+				E8E2070C23BE150A0072A144 /* UIView+Color.h */,
+				E8E2070D23BE150A0072A144 /* UIView+Color.m */,
+				E853DED823BF35C2004686BB /* UIImageView+AddImage.h */,
+				E853DED923BF35C2004686BB /* UIImageView+AddImage.m */,
+				E81ECF7823CA26DB00647D0E /* UINavigationController+Cloudox.h */,
+				E81ECF7523CA26DB00647D0E /* UINavigationController+Cloudox.m */,
+				E81ECF7623CA26DB00647D0E /* UIViewController+Cloudox.h */,
+				E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */,
+			);
+			path = BaseUI;
+			sourceTree = "<group>";
+		};
 		E8F5163B23B4710E005F3147 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E81ECF6D23C8BE0700647D0E /* AFNetworking.framework */,
+				E8E206C623BDC3F60072A144 /* MJRefresh.framework */,
+				E8E206C323BDC3C30072A144 /* MJRefresh.framework */,
 				E8F5163C23B4710E005F3147 /* Masonry.framework */,
 			);
 			name = Frameworks;
@@ -247,6 +431,15 @@
 			path = LorreryNavigationController;
 			sourceTree = "<group>";
 		};
+		E8FC025A23BC765A00CB1FCA /* GamesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E8FC025B23BC769900CB1FCA /* GamesViewController.h */,
+				E8FC025C23BC769900CB1FCA /* GamesViewController.m */,
+			);
+			path = GamesViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -258,6 +451,7 @@
 				E8CF485023B3CFDD0081BE1F /* Frameworks */,
 				E8CF485123B3CFDD0081BE1F /* Resources */,
 				E877B2AD23B4C27A003D13E5 /* Embed Frameworks */,
+				E8FC027623BCE6C100CB1FCA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -353,6 +547,7 @@
 			files = (
 				E8CF486623B3CFDE0081BE1F /* LaunchScreen.storyboard in Resources */,
 				E8CF486323B3CFDE0081BE1F /* Assets.xcassets in Resources */,
+				E81ECF6923C7843600647D0E /* res.json in Resources */,
 				E8CF486123B3CFDD0081BE1F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,22 +568,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E8FC027623BCE6C100CB1FCA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/build-run-script/copy-files.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E8CF484F23B3CFDD0081BE1F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E877B2AA23B4BD23003D13E5 /* LotteryTabBar.m in Sources */,
+				E8E44A6023C4F10300FDDC56 /* ProvinceListViewController.m in Sources */,
 				E8024FEB23B4A2C500DC035C /* HomePageViewController.m in Sources */,
+				E8E206CE23BDD5F90072A144 /* BaseCollectionViewCell.m in Sources */,
+				E8E44A6923C61A5600FDDC56 /* HPVCNewsListView.m in Sources */,
+				E81ECF6C23C7848100647D0E /* LottoryNewsModel.m in Sources */,
 				E8CF485E23B3CFDD0081BE1F /* ViewController.m in Sources */,
+				E8E206D123BDE3410072A144 /* HPVCHeaderView.m in Sources */,
+				E853DEDA23BF35C2004686BB /* UIImageView+AddImage.m in Sources */,
+				E8E44A6323C600E800FDDC56 /* NewsViewController.m in Sources */,
 				E8FC025023BC5E1900CB1FCA /* LotteryNavigationController.m in Sources */,
+				E8E501E423BF6146009777E7 /* HPVCConvenientServiceView.mm in Sources */,
+				E8FC025D23BC769900CB1FCA /* GamesViewController.m in Sources */,
+				E81ECF7923CA26DC00647D0E /* UINavigationController+Cloudox.m in Sources */,
+				E84E5B2B23BF8802008D3C9A /* CalculatorViewController.m in Sources */,
+				E81ECF7323C9A3A300647D0E /* WebViewController.m in Sources */,
+				E8E44A6623C6016600FDDC56 /* NewsCollectionViewCell.m in Sources */,
+				E8E44A5123C1F5A900FDDC56 /* LotteryStationViewController.m in Sources */,
+				E84E5B4023C1C3AD008D3C9A /* LSVCLotteryWinningView.m in Sources */,
+				E8E2070423BDEDCF0072A144 /* LotteryBannerView.m in Sources */,
+				E8A6665523C1C68C009F3F32 /* LottoryWinningModel.mm in Sources */,
 				E8CF485823B3CFDD0081BE1F /* AppDelegate.m in Sources */,
 				E8CF486923B3CFDE0081BE1F /* main.m in Sources */,
 				E8024FE323B4A1AA00DC035C /* MineViewController.m in Sources */,
+				E8E44A5723C1F5E800FDDC56 /* ImitationLotteryViewController.m in Sources */,
 				E8CF485B23B3CFDD0081BE1F /* SceneDelegate.m in Sources */,
 				E877B2B423B4C4D9003D13E5 /* BaseUIViewController.m in Sources */,
+				E8E44A5A23C2248900FDDC56 /* LotteryPastPeriodViewController.m in Sources */,
 				E8024FDF23B4792000DC035C /* LotteryTabBarViewController.m in Sources */,
-				E8024FE823B4A2B000DC035C /* NewsViewController.m in Sources */,
+				E8E44A5D23C225F100FDDC56 /* HPVCWinningListView.m in Sources */,
+				E81ECF7A23CA26DC00647D0E /* UIViewController+Cloudox.m in Sources */,
+				E8E44A5423C1F5BD00FDDC56 /* TrendChartViewController.m in Sources */,
+				E8E2070E23BE150A0072A144 /* UIView+Color.m in Sources */,
+				E8024FE823B4A2B000DC035C /* LotteryServiceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +734,9 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
+				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
+				PRODUCT_NAME = Lottery;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -548,6 +788,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
+				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
+				PRODUCT_NAME = Lottery;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -559,14 +802,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3U637LKUZ7;
-				HEADER_SEARCH_PATHS = ../Vendor/Masonry/Masonry;
+				HEADER_SEARCH_PATHS = (
+					../Vendor/Masonry/Masonry,
+					../Vendor/MJRefreshExample/MJRefresh,
+					../Vendor/AFNetworking/AFNetworking,
+					"../Vendor/AFNetworking/UIKit+AFNetworking",
+				);
 				INFOPLIST_FILE = Lottery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
+				PRODUCT_NAME = Lottery;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -577,14 +826,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3U637LKUZ7;
-				HEADER_SEARCH_PATHS = ../Vendor/Masonry/Masonry;
+				HEADER_SEARCH_PATHS = (
+					../Vendor/Masonry/Masonry,
+					../Vendor/MJRefreshExample/MJRefresh,
+					../Vendor/AFNetworking/AFNetworking,
+					"../Vendor/AFNetworking/UIKit+AFNetworking",
+				);
 				INFOPLIST_FILE = Lottery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
+				PRODUCT_NAME = Lottery;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
