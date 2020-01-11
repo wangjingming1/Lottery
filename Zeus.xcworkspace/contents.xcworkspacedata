@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../Vendor/Vendor.xcodeproj">
+      location = "group:/Users/wangjingming/Documents/Lottery/workspace/Vendor/Vendor">
    </FileRef>
    <FileRef
       location = "group:Lottery.xcodeproj">
