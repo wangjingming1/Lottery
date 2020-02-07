@@ -28,34 +28,31 @@
     return self;
 }
 
-#pragma mark - test
-+ (NSArray <LottoryWinningModel *> *)lottoryWinningModelRandomizedByIdentifier:(NSString *)identifier number:(NSInteger)number{
-    NSMutableArray <LottoryWinningModel *> *array = [[NSMutableArray alloc] initWithCapacity:0];
-    NSString *icon = [LottoryWinningModel identifierToString:identifier type:@"icon"];
-    NSString *name = [LottoryWinningModel identifierToString:identifier type:@"name"];
-    for (NSInteger i = 0; i < number; i++){
-        LottoryWinningModel *model = [[LottoryWinningModel alloc] init];
-        model.icon = icon;
-        model.kindName = name;
-        model.issueNumber = [LottoryWinningModel getIssueNumber:i];
-        model.date = [LottoryWinningModel getDate:-i];
-        double sales = 100000000 + arc4random_uniform(999999999);
-        model.sales = [LottoryWinningModel removeSuffix:[NSString stringWithFormat:@"%.2f", sales/100000000.0]];
-        model.jackpot = [LottoryWinningModel removeSuffix:[NSString stringWithFormat:@"%.2f", (sales + 100000000 + arc4random_uniform(999999999))/100000000.0]];
-        NSInteger maxBall = 0, minBall = 0, maxCount = 0;
-        BOOL allowDuplicate = NO, isSort = NO;
-        if ([LottoryWinningModel getBallData:identifier ballColor:@"red" maxBall:maxBall minBall:minBall maxCount:maxCount allowDuplicate:allowDuplicate isSort:isSort]){
-            model.radBall = [LottoryWinningModel getRandomBallByMaxNumber:maxBall minNumber:minBall maxCount:maxCount allowDuplicate:allowDuplicate isSort:isSort];
-        }
-        if ([LottoryWinningModel getBallData:identifier ballColor:@"blue" maxBall:maxBall minBall:minBall maxCount:maxCount allowDuplicate:allowDuplicate isSort:isSort]){
-            model.blueBall = [LottoryWinningModel getRandomBallByMaxNumber:maxBall minNumber:minBall maxCount:maxCount allowDuplicate:allowDuplicate isSort:isSort];
-        }
-        model.testNumber = [LottoryWinningModel getTestNumber:identifier];
-        [array addObject:model];
+- (instancetype)initWithDict:(NSDictionary *)dict{
+    self = [self init];
+    if (self){
+        self.identifier = [dict objectForKey:@"identifier"];
+        self.kindName = [dict objectForKey:@"kindName"];
+        self.icon = [dict objectForKey:@"icon"];
+        self.issueNumber = [dict objectForKey:@"issueNumber"];
+        self.date = [dict objectForKey:@"date"];
+        self.sales = [dict objectForKey:@"sales"];
+        self.jackpot = [dict objectForKey:@"jackpot"];
+        self.radBall = [dict objectForKey:@"radBall"];
+        self.blueBall = [dict objectForKey:@"blueBall"];
+        self.testNumber = [dict objectForKey:@"testNumber"];
     }
-    return array;
+    return self;
 }
 
+- (void)setIcon:(NSString *)icon{
+    if ([icon isEqualToString:@""]){
+        icon = [LottoryWinningModel identifierToString:self.identifier type:@"icon"];
+    }
+    _icon = icon;
+}
+
+#pragma mark - test
 + (NSString *)identifierToString:(NSString *)identifier type:(NSString *)type{
     if ([identifier isEqualToString:@"shuangseqiu"]){
         if ([type isEqualToString:@"icon"]) return @"shuangseqiu";
@@ -82,182 +79,4 @@
     return @"";
 }
 
-+ (BOOL)getBallData:(NSString *)identifier ballColor:(NSString *)ballColor maxBall:(NSInteger &)maxBall minBall:(NSInteger &)minBall maxCount:(NSInteger &)maxCount allowDuplicate:(BOOL &)allowDuplicate isSort:(BOOL &)isSort{
-    if ([identifier isEqualToString:@"shuangseqiu"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 1;
-            maxBall = 33;
-            maxCount = 6;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            minBall = 1;
-            maxBall = 16;
-            maxCount = 1;
-        }
-        allowDuplicate = NO;
-        isSort = YES;
-        return YES;
-    } else if ([identifier isEqualToString:@"daletou"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 1;
-            maxBall = 35;
-            maxCount = 5;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            minBall = 1;
-            maxBall = 12;
-            maxCount = 2;
-        }
-        allowDuplicate = NO;
-        isSort = YES;
-        return YES;
-    } else if ([identifier isEqualToString:@"fucai3d"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 0;
-            maxBall = 9;
-            maxCount = 3;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            maxCount = 0;
-        }
-        allowDuplicate = YES;
-        isSort = NO;
-        return YES;
-    } else if ([identifier isEqualToString:@"pailie3"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 0;
-            maxBall = 9;
-            maxCount = 3;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            maxCount = 0;
-        }
-        allowDuplicate = YES;
-        isSort = NO;
-        return YES;
-    } else if ([identifier isEqualToString:@"pailie5"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 0;
-            maxBall = 9;
-            maxCount = 5;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            maxCount = 0;
-        }
-        allowDuplicate = YES;
-        isSort = NO;
-        return YES;
-    } else if ([identifier isEqualToString:@"qixingcai"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 0;
-            maxBall = 9;
-            maxCount = 7;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            maxCount = 0;
-        }
-        allowDuplicate = YES;
-        isSort = NO;
-        return YES;
-    } else if ([identifier isEqualToString:@"qilecai"]){
-        if ([ballColor isEqualToString:@"red"]) {
-            minBall = 1;
-            maxBall = 30;
-            maxCount = 7;
-        } else if ([ballColor isEqualToString:@"blue"]) {
-            minBall = 1;
-            maxBall = 30;
-            maxCount = 1;
-        }
-        allowDuplicate = NO;
-        isSort = YES;
-        return YES;
-    }
-    return NO;
-}
-
-+ (NSString *)getTestNumber:(NSString *)identifier{
-    if ([identifier isEqualToString:@"fucai3d"]){
-        NSString *testNumber = [LottoryWinningModel getRandomBallByMaxNumber:9 minNumber:0 maxCount:3 allowDuplicate:YES isSort:NO];
-        NSString *doneTestNumber = @"";
-        for (int i = 0; i < testNumber.length; i++) {
-            doneTestNumber = [doneTestNumber stringByAppendingString:[testNumber substringWithRange:NSMakeRange(i, 1)]];
-            if (i%2 == 1 && i+1 != testNumber.length) {
-                doneTestNumber = [NSString stringWithFormat:@"%@ ", doneTestNumber];
-            }
-        }
-    }
-    return @"";
-}
-
-+ (NSString *)getDate:(NSInteger)dateOffset{
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval days = 24 * 60 * 60 * dateOffset;  // 一天一共有多少秒
-    NSDate *appointDate = [currentDate dateByAddingTimeInterval:days];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM.dd"];
-    //获取当前时间日期展示字符串 如：05.23
-    NSString *str = [formatter stringFromDate:appointDate];
-    return str;
-}
-
-+ (NSString *)getIssueNumber:(NSInteger)number{
-    number = number + 1;
-    if (number > 0 && number < 10){
-        return [NSString stringWithFormat:@"2000%ld期", number];
-    }
-    if (number >= 10 && number < 100){
-        return [NSString stringWithFormat:@"200%ld期", number];
-    }
-    return [NSString stringWithFormat:@"20%ld期", number];
-}
-
-+ (NSString *)getRandomBallByMaxNumber:(NSInteger)maxNumber minNumber:(NSInteger)minNumber maxCount:(NSInteger)maxCount allowDuplicate:(BOOL)allowDuplicate isSort:(BOOL)isSort{
-    NSMutableSet *set = [NSMutableSet setWithCapacity:maxCount];
-    if (allowDuplicate){
-        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
-        while (array.count < maxCount) {
-            NSInteger value = arc4random() % (maxNumber - minNumber + 1) + minNumber;
-            [array addObject:[NSNumber numberWithInteger:value]];
-        }
-        set = [NSMutableSet setWithArray:array];
-    } else {
-        while (set.count < maxCount) {
-            NSInteger value = arc4random() % (maxNumber - minNumber + 1) + minNumber;
-            [set addObject:[NSNumber numberWithInteger:value]];
-        }
-    }
-    NSArray *sortSetArray = [set allObjects];
-    if (isSort){
-        NSArray *sortDesc = @[[[NSSortDescriptor alloc] initWithKey:nil ascending:YES]];
-        sortSetArray = [set sortedArrayUsingDescriptors:sortDesc];
-    }
-    NSString *ballStr = @"";
-    for (NSUInteger i = 0; i < sortSetArray.count; i++){
-        if (i != 0){
-            ballStr = [ballStr stringByAppendingString:@","];
-        }
-        NSInteger number =  [sortSetArray[i] integerValue];
-        NSString *numberStr = [NSString stringWithFormat:@"%ld", number];
-        if (number < 10){
-            numberStr = [NSString stringWithFormat:@"0%@", numberStr];
-        }
-        ballStr = [ballStr stringByAppendingString:numberStr];
-    }
-    return ballStr;
-}
-
-+ (NSString *)removeSuffix:(NSString *)numberStr{
-    if (numberStr.length > 1) {
-        if ([numberStr componentsSeparatedByString:@"."].count == 2) {
-            NSString *last = [numberStr componentsSeparatedByString:@"."].lastObject;
-            if ([last isEqualToString:@"00"]) {
-                numberStr = [numberStr substringToIndex:numberStr.length - (last.length + 1)];
-                return numberStr;
-            }else{
-                if ([[last substringFromIndex:last.length -1] isEqualToString:@"0"]) {
-                    numberStr = [numberStr substringToIndex:numberStr.length - 1];
-                    return numberStr;
-                }
-            }
-        }
-        return numberStr;
-    }
-    return numberStr;
-}
 @end

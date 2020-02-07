@@ -47,4 +47,8 @@
 #define kSubtitleTintTextColor              kUIColorFromRGB10(165, 166, 167)
 
 
+//屏幕宽和高
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #endif /* GlobalDefines_h */

@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *blueBall;
 /**试机号*/
 @property (nonatomic, copy) NSString *testNumber;
-/**
- 测试方法，用来批量生成model
- */
-+ (NSArray <LottoryWinningModel *> *)lottoryWinningModelRandomizedByIdentifier:(NSString *)identifier number:(NSInteger)number;
+
+- (instancetype)initWithDict:(NSDictionary *)dict;
+
++ (NSString *)identifierToString:(NSString *)identifier type:(NSString *)type;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**新闻链接*/
 @property (nonatomic, copy) NSString *newsUrl;
 
-
-+ (NSArray *)geTestLottoryNewsModelArray:(NSInteger)begin count:(NSInteger)count;
 @end
 
 NS_ASSUME_NONNULL_END

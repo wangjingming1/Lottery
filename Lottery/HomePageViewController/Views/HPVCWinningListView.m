@@ -13,6 +13,8 @@
 #import "LottoryWinningModel.h"
 #import "LSVCLotteryWinningView.h"
 
+#import "LottoryDownloadManager.h"
+
 @interface HPVCWinningListView()<LSVCLotteryWinningViewDelegate>
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) NSArray *modelArray;
@@ -44,15 +46,13 @@
 }
 
 - (void)reloadData:(void(^)(void))finsh{
-    NSMutableArray *modelArray = [[NSMutableArray alloc] initWithCapacity:0];
     NSArray *lottoryKindArray = @[@"daletou", @"shuangseqiu"];
-    NSInteger lottaryNumber = 1;
-    for (NSString *kind in lottoryKindArray){
-        LottoryWinningModel *model = [LottoryWinningModel lottoryWinningModelRandomizedByIdentifier:kind number:lottaryNumber].firstObject;
-        [modelArray addObject:model];
-    }
-    self.modelArray = modelArray;
-    if (finsh) finsh();
+    NSInteger begin = 0, count = 1;
+    WS(weakSelf);
+    [LottoryDownloadManager lottoryDownload:begin count:count identifiers:lottoryKindArray finsh:^(NSArray * _Nonnull lottorys) {
+        [weakSelf setModelArray:lottorys];
+        if (finsh) finsh();
+    }];
 }
 
 - (void)reloadView{

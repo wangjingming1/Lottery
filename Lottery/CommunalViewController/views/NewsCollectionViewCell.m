@@ -7,6 +7,7 @@
 //
 
 #import "NewsCollectionViewCell.h"
+#import "UITableViewCell+HYBMasonryAutoCellHeight.h"
 #import "Masonry.h"
 #import "GlobalDefines.h"
 #import "LottoryNewsModel.h"
@@ -25,10 +26,17 @@
 @end
 
 @implementation NewsCollectionViewCell
-- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    MASConstraint *_thumbnailImageViewCenterY;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        CGRect frame = self.frame;
+        //这里由于tableviewCell的size始终默认为CGSizeMake(320, 44),只有界面显示后才会更新为正确的宽度,所以这里给了屏幕宽度为默认值
+        frame.size.width = SCREEN_WIDTH;
+        self.frame = frame;
         [self setUI];
     }
     return self;
@@ -42,20 +50,18 @@
     [self.contentView addSubview:self.bottomLineView];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(kPadding15);
+        make.top.left.mas_equalTo(kPadding15);
         make.right.mas_equalTo(self.thumbnailImageView.mas_left).offset(-kPadding10);
-        make.top.mas_equalTo(self.thumbnailImageView);
-        make.height.mas_equalTo(45);
     }];
     [self.thumbnailImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kPadding15);
         make.right.mas_equalTo(-kPadding15);
         make.size.mas_equalTo(kNCVCellThumbnailImageViewSize);
-        make.bottom.mas_equalTo(-kPadding15);
+        make.top.mas_equalTo(self.titleLabel).priority(MASLayoutPriorityDefaultMedium);//设置优先级为中
+        _thumbnailImageViewCenterY = make.centerY.mas_equalTo(self.contentView).priority(MASLayoutPriorityDefaultHigh);//设置优先级为高
     }];
     [self.informationSourcesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel);
-        make.bottom.mas_equalTo(self.thumbnailImageView);
+        make.bottom.mas_equalTo(-kPadding15);
     }];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.informationSourcesLabel.mas_right).offset(kPadding10);
@@ -64,7 +70,7 @@
     [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding15);
         make.right.mas_equalTo(-kPadding15);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-1);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(0.5);
         make.height.mas_equalTo(1);
     }];
 }
@@ -80,6 +86,26 @@
     self.timeLabel.text = model.time;
     self.thumbnailImageView.image = nil;
     [self.thumbnailImageView setImageWithName:model.imageUrl];
+    
+    //默认不使用centerY约束
+    [_thumbnailImageViewCenterY uninstall];
+    
+    [self setNeedsLayout];//设置重新布局标记
+    [self layoutIfNeeded];//在当前runloop中立即重新布局
+    
+    CGRect titleLabelFrame = self.titleLabel.frame;
+    CGRect informationSourcesLabelFrame = self.informationSourcesLabel.frame;
+    CGRect thumbnailImageViewFrame = self.thumbnailImageView.frame;
+    
+    //如果标题的高度超出了图片的高度
+    if (CGRectGetHeight(titleLabelFrame) + kPadding10 > CGRectGetHeight(thumbnailImageViewFrame)){
+        self.hyb_bottomOffsetToCell = kPadding15*2 + CGRectGetHeight(informationSourcesLabelFrame);
+        [_thumbnailImageViewCenterY install];
+        self.hyb_lastViewsInCell = @[self.titleLabel];
+    } else {
+        self.hyb_bottomOffsetToCell = kPadding15;
+        self.hyb_lastViewsInCell = @[self.thumbnailImageView];
+    }
 }
 
 //用来更新特殊约束
@@ -93,8 +119,6 @@
         _titleLabel.textColor = kTitleTintTextColor;
         _titleLabel.font = [UIFont systemFontOfSize:kNCVCellTitleLabelFontSize];
         _titleLabel.numberOfLines = 0;
-//        _titleLabel.preferredMaxLayoutWidth = 250;
-//        [_titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     }
     return _titleLabel;
 }
@@ -104,7 +128,6 @@
         _informationSourcesLabel = [[UILabel alloc] init];
         _informationSourcesLabel.textColor = kSubtitleTintTextColor;
         _informationSourcesLabel.font = [UIFont systemFontOfSize:kNCVCellTimeLabelFontSize];
-        
     }
     return _informationSourcesLabel;
 }

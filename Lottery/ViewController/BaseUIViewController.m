@@ -99,6 +99,7 @@
     if ([vc isKindOfClass:[BaseUIViewController class]]){
         ((BaseUIViewController *)vc).params = params;
     }
+    //隐藏底部tabbar
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

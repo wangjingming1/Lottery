@@ -8,12 +8,16 @@
 
 #import "HPVCNewsListView.h"
 #import "NewsCollectionViewCell.h"
+#import "UITableViewCell+HYBMasonryAutoCellHeight.h"
 #import "GlobalDefines.h"
 #import "Masonry.h"
 #import "LottoryNewsModel.h"
 
 #import "WebViewController.h"
 #import "NewsViewController.h"
+
+#import "NewsDownloadManager.h"
+
 #define kHeadLabelFontSize      (kSystemFontOfSize + 5)
 #define kFootLabelFontSize      (kSystemFontOfSize - 2)
 
@@ -68,9 +72,12 @@
 }
 
 - (void)reloadData:(void (^)(void))finsh{
-    NSArray *array = [LottoryNewsModel geTestLottoryNewsModelArray:0 count:10];
-    self.modelArray = array;
-    if (finsh) finsh();
+    NSInteger begin = 0, count = 10;
+    WS(weakSelf);
+    [NewsDownloadManager newsDownloadBegin:begin count:count finsh:^(NSArray *news) {
+        [weakSelf setModelArray:news];
+        if (finsh) finsh();
+    }];
 }
 
 - (void)reloadView{
@@ -78,11 +85,14 @@
     UIView *lastView;
     for (LottoryNewsModel *model in self.modelArray){
         NewsCollectionViewCell *view = [[NewsCollectionViewCell alloc] init];
+        [view setFrame:CGRectMake(0, 0, SCREEN_WIDTH - kPadding10*2, 44)];
         view.model = model;
         [self.newsView addSubview:view];
+        CGFloat height = [view getCellHeight];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
+            make.left.mas_equalTo(0);
             make.width.mas_equalTo(self.newsView);
+            make.height.mas_equalTo(height);
             if (lastView){
                 make.top.mas_equalTo(lastView.mas_bottom);
             } else {
@@ -91,6 +101,8 @@
         }];
         [view.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
+            make.width.mas_equalTo(self.newsView);
+            make.height.mas_equalTo(height);
         }];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAcyion:)];
@@ -143,7 +155,7 @@
         _footLabel.font = [UIFont systemFontOfSize:kFootLabelFontSize];
         _footLabel.textAlignment = NSTextAlignmentCenter;
         _footLabel.text = @"查看更多资讯";
-        
+        _footLabel.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAcyion:)];
         [_footLabel addGestureRecognizer:tap];
     }

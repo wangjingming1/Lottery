@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class LottoryNewsModel;
-@interface NewsCollectionViewCell : UICollectionViewCell
+@interface NewsCollectionViewCell : UITableViewCell
 @property (nonatomic, strong) LottoryNewsModel *model;
 @end
 

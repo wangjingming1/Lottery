@@ -18,6 +18,11 @@
 		E81ECF7323C9A3A300647D0E /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7223C9A3A300647D0E /* WebViewController.m */; };
 		E81ECF7923CA26DC00647D0E /* UINavigationController+Cloudox.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7523CA26DB00647D0E /* UINavigationController+Cloudox.m */; };
 		E81ECF7A23CA26DC00647D0E /* UIViewController+Cloudox.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */; };
+		E81ECF7F23CF5C7600647D0E /* UITableView+HYBCacheHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7C23CF5C7500647D0E /* UITableView+HYBCacheHeight.m */; };
+		E81ECF8023CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF7D23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m */; };
+		E81ECF8A23D2F6DF00647D0E /* NewsDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF8923D2F6DF00647D0E /* NewsDownloadManager.m */; };
+		E81ECF8D23D2F8C100647D0E /* HttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF8C23D2F8C100647D0E /* HttpManager.m */; };
+		E81ECF9023D2FA9C00647D0E /* LottoryDownloadManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E81ECF8F23D2FA9C00647D0E /* LottoryDownloadManager.mm */; };
 		E84E5B2B23BF8802008D3C9A /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84E5B2A23BF8802008D3C9A /* CalculatorViewController.m */; };
 		E84E5B4023C1C3AD008D3C9A /* LSVCLotteryWinningView.m in Sources */ = {isa = PBXBuildFile; fileRef = E84E5B3F23C1C3AD008D3C9A /* LSVCLotteryWinningView.m */; };
 		E853DEDA23BF35C2004686BB /* UIImageView+AddImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E853DED923BF35C2004686BB /* UIImageView+AddImage.m */; };
@@ -106,6 +111,16 @@
 		E81ECF7623CA26DB00647D0E /* UIViewController+Cloudox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Cloudox.h"; sourceTree = "<group>"; };
 		E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Cloudox.m"; sourceTree = "<group>"; };
 		E81ECF7823CA26DB00647D0E /* UINavigationController+Cloudox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Cloudox.h"; sourceTree = "<group>"; };
+		E81ECF7B23CF5C7500647D0E /* UITableView+HYBCacheHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HYBCacheHeight.h"; sourceTree = "<group>"; };
+		E81ECF7C23CF5C7500647D0E /* UITableView+HYBCacheHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HYBCacheHeight.m"; sourceTree = "<group>"; };
+		E81ECF7D23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+HYBMasonryAutoCellHeight.m"; sourceTree = "<group>"; };
+		E81ECF7E23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+HYBMasonryAutoCellHeight.h"; sourceTree = "<group>"; };
+		E81ECF8823D2F6DF00647D0E /* NewsDownloadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDownloadManager.h; sourceTree = "<group>"; };
+		E81ECF8923D2F6DF00647D0E /* NewsDownloadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDownloadManager.m; sourceTree = "<group>"; };
+		E81ECF8B23D2F8C100647D0E /* HttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpManager.h; sourceTree = "<group>"; };
+		E81ECF8C23D2F8C100647D0E /* HttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpManager.m; sourceTree = "<group>"; };
+		E81ECF8E23D2FA9C00647D0E /* LottoryDownloadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LottoryDownloadManager.h; sourceTree = "<group>"; };
+		E81ECF8F23D2FA9C00647D0E /* LottoryDownloadManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LottoryDownloadManager.mm; sourceTree = "<group>"; };
 		E84E5B2923BF8802008D3C9A /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		E84E5B2A23BF8802008D3C9A /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		E84E5B3E23C1C3AD008D3C9A /* LSVCLotteryWinningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSVCLotteryWinningView.h; sourceTree = "<group>"; };
@@ -251,6 +266,19 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		E81ECF8723D2F64400647D0E /* DownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				E81ECF8B23D2F8C100647D0E /* HttpManager.h */,
+				E81ECF8C23D2F8C100647D0E /* HttpManager.m */,
+				E81ECF8823D2F6DF00647D0E /* NewsDownloadManager.h */,
+				E81ECF8923D2F6DF00647D0E /* NewsDownloadManager.m */,
+				E81ECF8E23D2FA9C00647D0E /* LottoryDownloadManager.h */,
+				E81ECF8F23D2FA9C00647D0E /* LottoryDownloadManager.mm */,
+			);
+			path = DownloadManager;
+			sourceTree = "<group>";
+		};
 		E84E5B2C23BF8810008D3C9A /* CommunalViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +378,7 @@
 		E8CF485523B3CFDD0081BE1F /* Lottery */ = {
 			isa = PBXGroup;
 			children = (
+				E81ECF8723D2F64400647D0E /* DownloadManager */,
 				E81ECF6823C7843500647D0E /* res.json */,
 				E8FC027823BCF38900CB1FCA /* GlobalDefines.h */,
 				E8E2070523BE013E0072A144 /* BaseUI */,
@@ -397,6 +426,10 @@
 		E8E2070523BE013E0072A144 /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
+				E81ECF7B23CF5C7500647D0E /* UITableView+HYBCacheHeight.h */,
+				E81ECF7C23CF5C7500647D0E /* UITableView+HYBCacheHeight.m */,
+				E81ECF7E23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.h */,
+				E81ECF7D23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m */,
 				E8E2070223BDEDCF0072A144 /* LotteryBannerView.h */,
 				E8E2070323BDEDCF0072A144 /* LotteryBannerView.m */,
 				E8E2070C23BE150A0072A144 /* UIView+Color.h */,
@@ -594,8 +627,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E44A6023C4F10300FDDC56 /* ProvinceListViewController.m in Sources */,
+				E81ECF7F23CF5C7600647D0E /* UITableView+HYBCacheHeight.m in Sources */,
 				E8024FEB23B4A2C500DC035C /* HomePageViewController.m in Sources */,
 				E8E206CE23BDD5F90072A144 /* BaseCollectionViewCell.m in Sources */,
+				E81ECF8A23D2F6DF00647D0E /* NewsDownloadManager.m in Sources */,
 				E8E44A6923C61A5600FDDC56 /* HPVCNewsListView.m in Sources */,
 				E81ECF6C23C7848100647D0E /* LottoryNewsModel.m in Sources */,
 				E8CF485E23B3CFDD0081BE1F /* ViewController.m in Sources */,
@@ -611,12 +646,14 @@
 				E8E44A6623C6016600FDDC56 /* NewsCollectionViewCell.m in Sources */,
 				E8E44A5123C1F5A900FDDC56 /* LotteryStationViewController.m in Sources */,
 				E84E5B4023C1C3AD008D3C9A /* LSVCLotteryWinningView.m in Sources */,
+				E81ECF8D23D2F8C100647D0E /* HttpManager.m in Sources */,
 				E8E2070423BDEDCF0072A144 /* LotteryBannerView.m in Sources */,
 				E8A6665523C1C68C009F3F32 /* LottoryWinningModel.mm in Sources */,
 				E8CF485823B3CFDD0081BE1F /* AppDelegate.m in Sources */,
 				E8CF486923B3CFDE0081BE1F /* main.m in Sources */,
 				E8024FE323B4A1AA00DC035C /* MineViewController.m in Sources */,
 				E8E44A5723C1F5E800FDDC56 /* ImitationLotteryViewController.m in Sources */,
+				E81ECF8023CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m in Sources */,
 				E8CF485B23B3CFDD0081BE1F /* SceneDelegate.m in Sources */,
 				E877B2B423B4C4D9003D13E5 /* BaseUIViewController.m in Sources */,
 				E8E44A5A23C2248900FDDC56 /* LotteryPastPeriodViewController.m in Sources */,
@@ -626,6 +663,7 @@
 				E8E44A5423C1F5BD00FDDC56 /* TrendChartViewController.m in Sources */,
 				E8E2070E23BE150A0072A144 /* UIView+Color.m in Sources */,
 				E8024FE823B4A2B000DC035C /* LotteryServiceViewController.m in Sources */,
+				E81ECF9023D2FA9C00647D0E /* LottoryDownloadManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,7 +839,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3U637LKUZ7;
+				DEVELOPMENT_TEAM = 9T3SMZB4XW;
 				HEADER_SEARCH_PATHS = (
 					../Vendor/Masonry/Masonry,
 					../Vendor/MJRefreshExample/MJRefresh,
@@ -813,7 +851,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery1;
 				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
 				PRODUCT_NAME = Lottery;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -825,7 +863,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3U637LKUZ7;
+				DEVELOPMENT_TEAM = 9T3SMZB4XW;
 				HEADER_SEARCH_PATHS = (
 					../Vendor/Masonry/Masonry,
 					../Vendor/MJRefreshExample/MJRefresh,
@@ -837,7 +875,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery1;
 				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
 				PRODUCT_NAME = Lottery;
 				TARGETED_DEVICE_FAMILY = "1,2";
