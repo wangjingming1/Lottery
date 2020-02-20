@@ -14,6 +14,8 @@
 #import "NewsDownloadManager.h"
 #import "GlobalDefines.h"
 #import "WebViewController.h"
+#import "MJRefresh.h"
+
 
 #define kNewsViewControllerCellIdentifier   @"NewsViewControllerCellIdentifier"
 
@@ -30,7 +32,6 @@
     // Do any additional setup after loading the view.
     [self initData];
     [self setUI];
-    [self refreshView];
 }
 
 - (void)initData{
@@ -40,17 +41,28 @@
 
 - (void)setUI{
     [self.view addSubview:self.newsTableView];
-    
+    [self.newsTableView.mj_header beginRefreshing];
 }
 
-- (void)reloadView{
+- (void)reloadNewsTableViewData{
     [self.newsTableView reloadData];
+    [self.newsTableView.mj_header endRefreshing];
+    [self.newsTableView.mj_footer endRefreshing];
 }
 
-- (void)refreshView{
+- (void)updateNewdata{
+    self.newPage = 0;
+    [self.newsListArray removeAllObjects];
     WS(weakSelf);
     [self reloadData:^{
-        [weakSelf reloadView];
+        [weakSelf reloadNewsTableViewData];
+    }];
+}
+
+- (void)getMoreData{
+    WS(weakSelf);
+    [self reloadData:^{
+        [weakSelf reloadNewsTableViewData];
     }];
 }
 
@@ -73,6 +85,15 @@
         [_newsTableView registerClass:[NewsCollectionViewCell class] forCellReuseIdentifier:kNewsViewControllerCellIdentifier];
         _newsTableView.delegate = self;
         _newsTableView.dataSource = self;
+        
+        MJRefreshNormalHeader *normalHeader = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateNewdata)];
+        
+        _newsTableView.mj_header = normalHeader;
+        
+        MJRefreshAutoNormalFooter *normalFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)];
+        [normalFooter setTitle:@"上拉加载更多" forState:MJRefreshStateRefreshing];
+        _newsTableView.mj_footer = normalFooter;
+        
     }
     return _newsTableView;
 }
