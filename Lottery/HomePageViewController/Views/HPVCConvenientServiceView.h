@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class LottoryConvenientServiceModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol HPVCConvenientServiceViewDelegate <NSObject>
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HPVCConvenientServiceView : UIView
 @property (nonatomic, weak) id <HPVCConvenientServiceViewDelegate> delegate;
 
-- (void)refreshView;
+- (void)reloadConvenientServiceView:(NSArray<LottoryConvenientServiceModel *> *)datas;
 @end
 
 NS_ASSUME_NONNULL_END

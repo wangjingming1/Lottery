@@ -27,6 +27,13 @@
 
 - (void)setParams:(NSDictionary *)params{
     [super setParams:params];
+    if ([params objectForKey:@"y"]){
+        CGFloat offsetY = [params[@"y"] floatValue];
+        CGRect frame = self.view.bounds;
+        frame.origin.y += offsetY;
+        frame.size.height += -offsetY;
+        self.webView.frame = frame;
+    }
     self.urlStr = [self.params objectForKey:@"url"];
     [self reloadWebView];
 }
@@ -52,8 +59,6 @@
         config.preferences = preference;
     
         CGRect frame = self.view.bounds;
-        frame.origin.y -= 40;
-        frame.size.height += 40;
         _webView = [[WKWebView alloc] initWithFrame:frame configuration:config];
     }
     return _webView;

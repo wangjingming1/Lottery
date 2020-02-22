@@ -23,7 +23,9 @@
 #import "ProvinceListViewController.h"
 #import "UIViewController+Cloudox.h"
 
+#import "HomePageDownloadManager.h"
 #import "WebViewController.h"
+#import "MJRefresh.h"
 
 #define kConvenientServiceViewShadowColor kUIColorFromRGB10(230, 230, 230)
 
@@ -57,6 +59,8 @@
     [self setNavTitleBar];
     [self reloadNavBarLeftTitle];
     [self setUI];
+    
+    [self reloadNewData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -84,6 +88,8 @@
     [self initConvenientServiceView];
     [self initLotteryWinningListView];
     [self initNewListView];
+    
+    [self initRefreshViews];
 }
 
 - (void)reloadNavBarLeftTitle{
@@ -110,6 +116,8 @@
     CGFloat headerViewH = 150;
     HPVCHeaderView *headerView = [[HPVCHeaderView alloc] init];
     [self.scrollView addSubview:headerView];
+    headerView.delegate = self;
+    
     [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(0);
         make.width.mas_equalTo(self.view);
@@ -121,7 +129,6 @@
     [self.view layoutIfNeeded];
     NSArray *colors = @[[UIColor redColor], [UIColor blueColor], [UIColor clearColor]];
     [headerView setGradationColor:colors startPoint:CGPointMake(0.5, 0.0) endPoint:CGPointMake(0.5, 1.0)];
-    [headerView reloadBannerView];
     
     self.headerView = headerView;
 }
@@ -140,7 +147,6 @@
     [csView setShadowAndColor:kConvenientServiceViewShadowColor];
     
     self.convenientServiceView = csView;
-    [self.convenientServiceView refreshView];
 }
 
 - (void)initLotteryWinningListView{
@@ -156,7 +162,6 @@
     [winningListVie setShadowAndColor:kConvenientServiceViewShadowColor];
     
     self.winningListView = winningListVie;
-    [self.winningListView refreshView];
 }
 
 - (void)initNewListView{
@@ -172,7 +177,31 @@
     
     [newsListView setShadowAndColor:kConvenientServiceViewShadowColor];
     self.newsListView = newsListView;
-    [self.newsListView refreshView];
+}
+
+- (void)initRefreshViews{
+    [self addRefreshHearderView:@selector(reloadNewData)];
+}
+
+- (void)reloadNewData{
+    WS(weakSelf);
+    [HomePageDownloadManager homePageDownloadData:^(NSDictionary * _Nonnull datas) {
+        [weakSelf refreshHomePageView:datas];
+    }];
+}
+
+- (void)refreshHomePageView:(NSDictionary *)datas{
+    NSArray *banners = [datas objectForKey:@"banners"];
+    NSArray *convenientServices = [datas objectForKey:@"convenientServices"];
+    NSArray *winnings = [datas objectForKey:@"winnings"];
+    NSArray *news = [datas objectForKey:@"news"];
+    
+    [self.headerView reloadBannerView:banners];
+    [self.convenientServiceView reloadConvenientServiceView:convenientServices];
+    [self.winningListView reloadWinningListView:winnings];
+    [self.newsListView reloadNewListView:news];
+    
+    [self.scrollView.mj_header endRefreshing];
 }
 
 - (void)navBarLeftButtonClick:(UIButton *)leftButton{

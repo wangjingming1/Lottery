@@ -14,8 +14,8 @@
 #import "NewsDownloadManager.h"
 #import "GlobalDefines.h"
 #import "WebViewController.h"
-#import "MJRefresh.h"
-
+#import "LotteryRefreshHeaderView.h"
+#import "LotteryRefreshFooterView.h"
 
 #define kNewsViewControllerCellIdentifier   @"NewsViewControllerCellIdentifier"
 
@@ -86,11 +86,11 @@
         _newsTableView.delegate = self;
         _newsTableView.dataSource = self;
         
-        MJRefreshNormalHeader *normalHeader = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(updateNewdata)];
+        LotteryRefreshHeaderView *normalHeader = [LotteryRefreshHeaderView headerWithRefreshingTarget:self refreshingAction:@selector(updateNewdata)];
         
         _newsTableView.mj_header = normalHeader;
         
-        MJRefreshAutoNormalFooter *normalFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)];
+        LotteryRefreshFooterView *normalFooter = [LotteryRefreshFooterView footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)];
         [normalFooter setTitle:@"上拉加载更多" forState:MJRefreshStateRefreshing];
         _newsTableView.mj_footer = normalFooter;
         
@@ -147,6 +147,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
     params[@"url"] = ((LottoryNewsModel *)self.newsListArray[indexPath.row]).newsUrl;
     params[@"leftTitle"] = @"资讯详情";
+    params[@"y"] = @"-40";
     [super pushViewController:[WebViewController class] params:params];
 }
 /*

@@ -64,20 +64,9 @@
     }];
 }
 
-- (void)refreshView{
-    WS(weakSelf);
-    [self reloadData:^{
-        [weakSelf reloadView];
-    }];
-}
-
-- (void)reloadData:(void (^)(void))finsh{
-    NSInteger begin = 0, count = 10;
-    WS(weakSelf);
-    [NewsDownloadManager newsDownloadBegin:begin count:count finsh:^(NSArray *news) {
-        [weakSelf setModelArray:news];
-        if (finsh) finsh();
-    }];
+- (void)reloadNewListView:(NSArray<LottoryNewsModel *> *)datas{
+    [self setModelArray:datas];
+    [self reloadView];
 }
 
 - (void)reloadView{
@@ -171,6 +160,7 @@
         } else if ([tap.view isKindOfClass:[NewsCollectionViewCell class]]){
             params[@"url"] = ((NewsCollectionViewCell *)tap.view).model.newsUrl;
             params[@"leftTitle"] = @"资讯详情";
+            params[@"y"] = @"-40";
             [self.delegate pushViewController:[WebViewController class] params:params];
         }
     }

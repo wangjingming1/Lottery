@@ -9,7 +9,6 @@
 #import "HPVCConvenientServiceView.h"
 #import "UIImageView+AddImage.h"
 #import "UIView+Color.h"
-#import <vector>
 #import "Masonry.h"
 #import "GlobalDefines.h"
 
@@ -18,31 +17,26 @@
 #import "TrendChartViewController.h"
 #import "ImitationLotteryViewController.h"
 
+#import "LottoryConvenientServiceModel.h"
+
 /**便捷服务一行4个按钮*/
 #define kLineCount 4
 
-typedef NS_ENUM(NSInteger, ConvenientItemType){
-    ConvenientItem_Calculator = 1100,
-    ConvenientItem_LotteryStation,
-    ConvenientItem_TrendChart,
-    ConvenientItem_ImitationLottery,
-    
-    ConvenientItem_None,
-};
+static NSInteger ConvenientServiceViewTag = 100;
 
 @interface HPVCConvenientServiceView()
 @property (nonatomic, strong) UIView *backView;
+@property (nonatomic, strong) NSArray *modelArray;
+@property (nonatomic, strong) NSMutableArray *subViewItemTypeVecs;
 @end
 
 @implementation HPVCConvenientServiceView
-{
-    std::vector<std::vector<NSInteger>> _subViewItemTypeVecs;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _subViewItemTypeVecs = [@[] mutableCopy];
         [self setUI];
     }
     return self;
@@ -55,43 +49,37 @@ typedef NS_ENUM(NSInteger, ConvenientItemType){
     }];
 }
 
-- (void)refreshView{
-    WS(weakSelf);
-    [self reloadData:^{
-        [weakSelf reloadView];
-    }];
-}
-
-- (void)reloadData:(void(^)(void))finsh{
-    _subViewItemTypeVecs.clear();
+- (void)reloadConvenientServiceView:(NSArray<LottoryConvenientServiceModel *> *)datas{
+    [self setModelArray:datas];
     
-    NSInteger item = ConvenientItem_Calculator;
-    std::vector<NSInteger> subViewItemTypeVec;
-    while (item < ConvenientItem_None) {
-        subViewItemTypeVec.push_back(item++);
-        if (subViewItemTypeVec.size() == kLineCount){
-            _subViewItemTypeVecs.push_back(subViewItemTypeVec);
-            subViewItemTypeVec.clear();
+    [_subViewItemTypeVecs removeAllObjects];
+    
+    NSMutableArray *tmpArray = [@[] mutableCopy];
+    for (LottoryConvenientServiceModel *model in datas){
+        [tmpArray addObject:model];
+        if (tmpArray.count == kLineCount || model == [datas lastObject]){
+            [_subViewItemTypeVecs addObject:[tmpArray copy]];
+            [tmpArray removeAllObjects];
         }
     }
-//    _subViewItemTypeVecs.push_back({ConvenientItem_TrendChart, ConvenientItem_ImitationLottery});
-    
-    if (finsh) finsh();
+    [self reloadView];
 }
 
 - (void)reloadView{
     [self.backView.superview respondsToSelector:@selector(removeFromSuperview)];
-    
-    NSString *imageName = [self convenientItemTypeToString:ConvenientItem_None - 1 byType:@"imageName"];
-    UIImage *iconImage = [UIImage imageNamed:imageName];
-    
+    if (!self.modelArray || self.modelArray.count == 0) return;
+    LottoryConvenientServiceModel *firstModel = [self.modelArray firstObject];
+    UIImage *iconImage = [UIImage imageNamed:firstModel.image];
     CGFloat leadSpacing = 20, tailSpacing = 20;
     CGFloat itemPadding = 10;
     CGFloat labelHeight = 20;
     CGFloat itemLength = iconImage.size.height + labelHeight + itemPadding*2;
     UIView *lastView;
+    
+    //存储每一行view数组(itemTypeViewArray)
     NSMutableArray <NSArray *>*allItemTypeViewArray = [[NSMutableArray alloc] initWithCapacity:0];
-    for (std::vector<NSInteger> itemTypeVec : _subViewItemTypeVecs){
+    for (NSArray *models in _subViewItemTypeVecs){
+        //每一行的view数组
         NSMutableArray *itemTypeViewArray = [[NSMutableArray alloc] initWithCapacity:0];
         UIView *itemBackView = [[UIView alloc] init];
         [self.backView addSubview:itemBackView];
@@ -104,8 +92,8 @@ typedef NS_ENUM(NSInteger, ConvenientItemType){
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(itemLength);
         }];
-        for (NSInteger type : itemTypeVec){
-            [itemTypeViewArray addObject:[self createConvenientItemView:type padding:itemPadding labelHeight:labelHeight parentView:itemBackView]];
+        for (LottoryConvenientServiceModel *model in models){
+            [itemTypeViewArray addObject:[self createConvenientItemView:model padding:itemPadding labelHeight:labelHeight parentView:itemBackView]];
         }
         if (itemTypeViewArray.count == kLineCount){
             [itemTypeViewArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:itemLength leadSpacing:leadSpacing tailSpacing:tailSpacing];
@@ -134,9 +122,9 @@ typedef NS_ENUM(NSInteger, ConvenientItemType){
     }
 }
 
-- (UIView *)createConvenientItemView:(NSInteger)itemType padding:(CGFloat)padding labelHeight:(CGFloat)labelHeight parentView:(UIView *)parentView{
+- (UIView *)createConvenientItemView:(LottoryConvenientServiceModel *)model padding:(CGFloat)padding labelHeight:(CGFloat)labelHeight parentView:(UIView *)parentView{
     UIView *view = [[UIView alloc] init];
-    view.tag = itemType;
+    view.tag = ConvenientServiceViewTag + [self.modelArray indexOfObject:model];
     [parentView addSubview:view];
     
     UIImageView *imageView = [[UIImageView alloc] init];
@@ -145,7 +133,7 @@ typedef NS_ENUM(NSInteger, ConvenientItemType){
         make.left.top.mas_equalTo(padding);
         make.right.mas_equalTo(-padding);
     }];
-    NSString *imageName = [self convenientItemTypeToString:itemType byType:@"imageName"];
+    NSString *imageName = model.image;
     [imageView setImageWithName:imageName];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     
@@ -157,7 +145,7 @@ typedef NS_ENUM(NSInteger, ConvenientItemType){
         make.height.mas_equalTo(labelHeight);
         make.bottom.mas_equalTo(-padding);
     }];
-    NSString *name = [self convenientItemTypeToString:itemType byType:@"name"];
+    NSString *name = model.title;
     nameLab.text = name;
     nameLab.numberOfLines = 1;
     nameLab.font = [UIFont systemFontOfSize:kSystemFontOfSize];
@@ -171,62 +159,15 @@ typedef NS_ENUM(NSInteger, ConvenientItemType){
     return view;
 }
 
-- (NSString *)convenientItemTypeToString:(NSInteger)itemType byType:(NSString *)type{
-    switch (itemType) {
-        case ConvenientItem_Calculator:{
-            if ([type isEqualToString:@"name"]){
-                return @"算奖工具";
-            } else if ([type isEqualToString:@"imageName"]){
-                return @"calculator";
-            } else if ([type isEqualToString:@"class"]){
-                return NSStringFromClass([CalculatorViewController class]);// @"CalculatorViewController";
-            }
-            break;
-        }
-        case ConvenientItem_LotteryStation:{
-            if ([type isEqualToString:@"name"]){
-                return @"附近彩站";
-            } else if ([type isEqualToString:@"imageName"]){
-                return @"lotteryStation";
-            } else if ([type isEqualToString:@"class"]){
-                return NSStringFromClass([LotteryStationViewController class]);//@"LotteryStationViewController";
-            }
-            break;
-        }
-        case ConvenientItem_TrendChart:{
-            if ([type isEqualToString:@"name"]){
-                return @"走势图";
-            } else if ([type isEqualToString:@"imageName"]){
-                return @"trendChart";
-            } else if ([type isEqualToString:@"class"]){
-                return NSStringFromClass([TrendChartViewController class]);//@"TrendChartViewController";
-            }
-            break;
-        }//62，132，247
-        case ConvenientItem_ImitationLottery:{
-            if ([type isEqualToString:@"name"]){
-                return @"模拟购彩";
-            } else if ([type isEqualToString:@"imageName"]){
-                return @"imitationLottery";
-            } else if ([type isEqualToString:@"class"]){
-                return NSStringFromClass([ImitationLotteryViewController class]);//@"ImitationLotteryViewController";
-            }
-            break;
-        }
-        default:
-            return @"";
-    }
-    return @"";
-}
-
 - (void)tapAcyion:(UITapGestureRecognizer *)tap{
     if (self.delegate && [self.delegate respondsToSelector:@selector(pushViewController:params:)]){
-        NSInteger tag = tap.view.tag;
-        NSString *leftTitle = [self convenientItemTypeToString:tag byType:@"name"];
+        NSInteger count = tap.view.tag - ConvenientServiceViewTag;
+        LottoryConvenientServiceModel *model = self.modelArray[count];
+        NSString *leftTitle = model.title;
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
         params[@"leftTitle"] = leftTitle;
         
-        NSString *vcClass = [self convenientItemTypeToString:tag byType:@"class"];
+        NSString *vcClass = model.className;
         [self.delegate pushViewController:NSClassFromString(vcClass) params:params];
     }
 }

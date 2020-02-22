@@ -297,7 +297,7 @@
      如果代理属性能够响应协议方法方法
      才会通过代理属性 调用协议方法
      */
-    if ([self.delegate respondsToSelector:@selector(selectImage:currentImage:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectImage:currentImage:)]) {
         /**
          通过代理属性 调用协议方法
          currentImage:当前的图片时第几张

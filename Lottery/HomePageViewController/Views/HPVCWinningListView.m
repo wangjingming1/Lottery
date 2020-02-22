@@ -38,21 +38,9 @@
     }];
 }
 
-- (void)refreshView{
-    WS(weakSelf);
-    [self reloadData:^{
-        [weakSelf reloadView];
-    }];
-}
-
-- (void)reloadData:(void(^)(void))finsh{
-    NSArray *lottoryKindArray = @[@"daletou", @"shuangseqiu"];
-    NSInteger begin = 0, count = 1;
-    WS(weakSelf);
-    [LottoryDownloadManager lottoryDownload:begin count:count identifiers:lottoryKindArray finsh:^(NSArray * _Nonnull lottorys) {
-        [weakSelf setModelArray:lottorys];
-        if (finsh) finsh();
-    }];
+- (void)reloadWinningListView:(NSArray<LottoryWinningModel *> *)datas {
+    [self setModelArray:datas];
+    [self reloadView];
 }
 
 - (void)reloadView{

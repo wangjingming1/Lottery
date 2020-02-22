@@ -9,13 +9,15 @@
 #import "LotteryPastPeriodViewController.h"
 
 @interface LotteryPastPeriodViewController ()
-
+@property (nonatomic, copy) NSString *identifier;
 @end
 
 @implementation LotteryPastPeriodViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.identifier = [self.params objectForKey:@"identifier"];
+    
     // Do any additional setup after loading the view.
 }
 

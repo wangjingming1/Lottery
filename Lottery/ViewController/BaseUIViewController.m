@@ -12,6 +12,7 @@
 #import "Masonry.h"
 #import "UIViewController+Cloudox.h"
 #import "UINavigationController+Cloudox.h"
+#import "LotteryRefreshHeaderView.h"
 
 #define kBackgroundColor    kUIColorFromRGB10(250, 250, 250)
 
@@ -93,6 +94,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)addRefreshHearderView:(SEL)refreshingAction{
+    LotteryRefreshHeaderView *normalHeader = [LotteryRefreshHeaderView headerWithRefreshingTarget:self refreshingAction:refreshingAction];
+    self.scrollView.mj_header = normalHeader;
+}
+
 - (void)pushViewController:(Class)vcClass params:(NSDictionary *)params{
     NSLog(@"className:%@", vcClass);
     UIViewController *vc = [[vcClass alloc] init];
@@ -126,7 +132,11 @@
         _scrollView = [[UIScrollView alloc] init];
         [self.view addSubview:_scrollView];
         //设置scrollViewd内容不由系统自动调整(子视图不考虑导航栏跟状态栏，直接到顶)
-        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        if (@available(iOS 11.0, *)) {
+            _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
         
         CGFloat tabbarH = [self getTabbarHeight];
         [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {

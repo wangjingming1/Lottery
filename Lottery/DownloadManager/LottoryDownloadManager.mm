@@ -53,6 +53,7 @@
     NSString *name = [LottoryWinningModel identifierToString:identifier type:@"name"];
     for (NSInteger i = begin; i < begin + number; i++){
         LottoryWinningModel *model = [[LottoryWinningModel alloc] init];
+        model.identifier = identifier;
         model.icon = icon;
         model.kindName = name;
         model.issueNumber = [LottoryDownloadManager getIssueNumber:i];

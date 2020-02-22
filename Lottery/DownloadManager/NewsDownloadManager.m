@@ -38,12 +38,7 @@
     NSInteger i = begin;
     while (count > 0) {
         NSDictionary *dict = datas[i++%datas.count];
-        LottoryNewsModel *model = [[LottoryNewsModel alloc] init];
-        model.informationSources = [dict objectForKey:@"informationSources"];
-        model.time = [dict objectForKey:@"time"];
-        model.title = [dict objectForKey:@"title"];
-        model.imageUrl = [dict objectForKey:@"imageUrl"];
-        model.newsUrl = [dict objectForKey:@"url"];
+        LottoryNewsModel *model = [[LottoryNewsModel alloc] initWithDict:dict];
         [array addObject:model];
         count--;
     }

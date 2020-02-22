@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 @class LotteryBannerView;
+@class LottoryBannerModel;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol HPVCHeaderViewDelegate <NSObject>
+@optional
+- (void)pushViewController:(Class)vcClass params:(NSDictionary *)params;
+@end
+
 @interface HPVCHeaderView : UIView
+@property (nonatomic, weak) id<HPVCHeaderViewDelegate> delegate;
 @property (nonatomic, weak) LotteryBannerView *bannerView;
-- (void)reloadBannerView;
+- (void)reloadBannerView:(NSArray<LottoryBannerModel *> *)datas;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -31,6 +31,12 @@
 		E883BFA823FD53F600948334 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8F5163C23B4710E005F3147 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E883BFA923FD53FE00948334 /* MJRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8E206C323BDC3C30072A144 /* MJRefresh.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		E883BFAA23FD53FE00948334 /* MJRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E8E206C323BDC3C30072A144 /* MJRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E89F76FC23FFE22B00F83C05 /* LotteryRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E89F76FB23FFE22B00F83C05 /* LotteryRefreshHeaderView.m */; };
+		E89F76FF23FFE31400F83C05 /* LotteryRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E89F76FE23FFE31400F83C05 /* LotteryRefreshFooterView.m */; };
+		E89F77022401097600F83C05 /* HomePageDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E89F77012401097600F83C05 /* HomePageDownloadManager.m */; };
+		E89F770424010D5C00F83C05 /* homePage.json in Resources */ = {isa = PBXBuildFile; fileRef = E89F770324010D5B00F83C05 /* homePage.json */; };
+		E89F770A24011BCA00F83C05 /* LottoryBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E89F770924011BCA00F83C05 /* LottoryBannerModel.m */; };
+		E89F770D24011BD700F83C05 /* LottoryConvenientServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E89F770C24011BD700F83C05 /* LottoryConvenientServiceModel.m */; };
 		E8A6665523C1C68C009F3F32 /* LottoryWinningModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8A6665423C1C68C009F3F32 /* LottoryWinningModel.mm */; };
 		E8CF485823B3CFDD0081BE1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485723B3CFDD0081BE1F /* AppDelegate.m */; };
 		E8CF485B23B3CFDD0081BE1F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485A23B3CFDD0081BE1F /* SceneDelegate.m */; };
@@ -54,7 +60,7 @@
 		E8E44A6323C600E800FDDC56 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A6223C600E700FDDC56 /* NewsViewController.m */; };
 		E8E44A6623C6016600FDDC56 /* NewsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A6523C6016600FDDC56 /* NewsCollectionViewCell.m */; };
 		E8E44A6923C61A5600FDDC56 /* HPVCNewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E44A6823C61A5600FDDC56 /* HPVCNewsListView.m */; };
-		E8E501E423BF6146009777E7 /* HPVCConvenientServiceView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.mm */; };
+		E8E501E423BF6146009777E7 /* HPVCConvenientServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.m */; };
 		E8FC025023BC5E1900CB1FCA /* LotteryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC024F23BC5E1900CB1FCA /* LotteryNavigationController.m */; };
 		E8FC025D23BC769900CB1FCA /* GamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC025C23BC769900CB1FCA /* GamesViewController.m */; };
 /* End PBXBuildFile section */
@@ -129,6 +135,17 @@
 		E853DED923BF35C2004686BB /* UIImageView+AddImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AddImage.m"; sourceTree = "<group>"; };
 		E877B2B223B4C4D9003D13E5 /* BaseUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUIViewController.h; sourceTree = "<group>"; };
 		E877B2B323B4C4D9003D13E5 /* BaseUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUIViewController.m; sourceTree = "<group>"; };
+		E89F76FA23FFE22B00F83C05 /* LotteryRefreshHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryRefreshHeaderView.h; sourceTree = "<group>"; };
+		E89F76FB23FFE22B00F83C05 /* LotteryRefreshHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryRefreshHeaderView.m; sourceTree = "<group>"; };
+		E89F76FD23FFE31400F83C05 /* LotteryRefreshFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryRefreshFooterView.h; sourceTree = "<group>"; };
+		E89F76FE23FFE31400F83C05 /* LotteryRefreshFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryRefreshFooterView.m; sourceTree = "<group>"; };
+		E89F77002401097600F83C05 /* HomePageDownloadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageDownloadManager.h; sourceTree = "<group>"; };
+		E89F77012401097600F83C05 /* HomePageDownloadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageDownloadManager.m; sourceTree = "<group>"; };
+		E89F770324010D5B00F83C05 /* homePage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = homePage.json; sourceTree = "<group>"; };
+		E89F770824011BCA00F83C05 /* LottoryBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LottoryBannerModel.h; sourceTree = "<group>"; };
+		E89F770924011BCA00F83C05 /* LottoryBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LottoryBannerModel.m; sourceTree = "<group>"; };
+		E89F770B24011BD700F83C05 /* LottoryConvenientServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LottoryConvenientServiceModel.h; sourceTree = "<group>"; };
+		E89F770C24011BD700F83C05 /* LottoryConvenientServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LottoryConvenientServiceModel.m; sourceTree = "<group>"; };
 		E8A6665323C1C68C009F3F32 /* LottoryWinningModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LottoryWinningModel.h; sourceTree = "<group>"; };
 		E8A6665423C1C68C009F3F32 /* LottoryWinningModel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LottoryWinningModel.mm; sourceTree = "<group>"; };
 		E8CF485323B3CFDD0081BE1F /* 欢乐彩票.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "欢乐彩票.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,7 +195,7 @@
 		E8E44A6723C61A5600FDDC56 /* HPVCNewsListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPVCNewsListView.h; sourceTree = "<group>"; };
 		E8E44A6823C61A5600FDDC56 /* HPVCNewsListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPVCNewsListView.m; sourceTree = "<group>"; };
 		E8E501E223BF6146009777E7 /* HPVCConvenientServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPVCConvenientServiceView.h; sourceTree = "<group>"; };
-		E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HPVCConvenientServiceView.mm; sourceTree = "<group>"; };
+		E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPVCConvenientServiceView.m; sourceTree = "<group>"; };
 		E8F5163C23B4710E005F3147 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8FC024E23BC5E1900CB1FCA /* LotteryNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryNavigationController.h; sourceTree = "<group>"; };
 		E8FC024F23BC5E1900CB1FCA /* LotteryNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryNavigationController.m; sourceTree = "<group>"; };
@@ -271,6 +288,8 @@
 			children = (
 				E81ECF8B23D2F8C100647D0E /* HttpManager.h */,
 				E81ECF8C23D2F8C100647D0E /* HttpManager.m */,
+				E89F77002401097600F83C05 /* HomePageDownloadManager.h */,
+				E89F77012401097600F83C05 /* HomePageDownloadManager.m */,
 				E81ECF8823D2F6DF00647D0E /* NewsDownloadManager.h */,
 				E81ECF8923D2F6DF00647D0E /* NewsDownloadManager.m */,
 				E81ECF8E23D2FA9C00647D0E /* LottoryDownloadManager.h */,
@@ -307,7 +326,7 @@
 				E8E206CF23BDE3410072A144 /* HPVCHeaderView.h */,
 				E8E206D023BDE3410072A144 /* HPVCHeaderView.m */,
 				E8E501E223BF6146009777E7 /* HPVCConvenientServiceView.h */,
-				E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.mm */,
+				E8E501E323BF6146009777E7 /* HPVCConvenientServiceView.m */,
 				E8E44A5B23C225F100FDDC56 /* HPVCWinningListView.h */,
 				E8E44A5C23C225F100FDDC56 /* HPVCWinningListView.m */,
 				E8E44A6723C61A5600FDDC56 /* HPVCNewsListView.h */,
@@ -319,6 +338,10 @@
 		E84E5B4123C1C56C008D3C9A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E89F770824011BCA00F83C05 /* LottoryBannerModel.h */,
+				E89F770924011BCA00F83C05 /* LottoryBannerModel.m */,
+				E89F770B24011BD700F83C05 /* LottoryConvenientServiceModel.h */,
+				E89F770C24011BD700F83C05 /* LottoryConvenientServiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +355,25 @@
 				E877B2B323B4C4D9003D13E5 /* BaseUIViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E89F76F923FFE1CD00F83C05 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E81ECF7B23CF5C7500647D0E /* UITableView+HYBCacheHeight.h */,
+				E81ECF7C23CF5C7500647D0E /* UITableView+HYBCacheHeight.m */,
+				E81ECF7E23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.h */,
+				E81ECF7D23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m */,
+				E8E2070C23BE150A0072A144 /* UIView+Color.h */,
+				E8E2070D23BE150A0072A144 /* UIView+Color.m */,
+				E853DED823BF35C2004686BB /* UIImageView+AddImage.h */,
+				E853DED923BF35C2004686BB /* UIImageView+AddImage.m */,
+				E81ECF7823CA26DB00647D0E /* UINavigationController+Cloudox.h */,
+				E81ECF7523CA26DB00647D0E /* UINavigationController+Cloudox.m */,
+				E81ECF7623CA26DB00647D0E /* UIViewController+Cloudox.h */,
+				E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		E8A6665E23C1EA1D009F3F32 /* views */ = {
@@ -380,8 +422,10 @@
 			children = (
 				E81ECF8723D2F64400647D0E /* DownloadManager */,
 				E81ECF6823C7843500647D0E /* res.json */,
+				E89F770324010D5B00F83C05 /* homePage.json */,
 				E8FC027823BCF38900CB1FCA /* GlobalDefines.h */,
 				E8E2070523BE013E0072A144 /* BaseUI */,
+				E89F76F923FFE1CD00F83C05 /* Category */,
 				E8FC024D23BC5DC500CB1FCA /* LorreryNavigationController */,
 				E8024FDC23B4789F00DC035C /* LotteryTabBarVC */,
 				E877B2AE23B4C2AB003D13E5 /* ViewController */,
@@ -426,20 +470,12 @@
 		E8E2070523BE013E0072A144 /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
-				E81ECF7B23CF5C7500647D0E /* UITableView+HYBCacheHeight.h */,
-				E81ECF7C23CF5C7500647D0E /* UITableView+HYBCacheHeight.m */,
-				E81ECF7E23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.h */,
-				E81ECF7D23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m */,
 				E8E2070223BDEDCF0072A144 /* LotteryBannerView.h */,
 				E8E2070323BDEDCF0072A144 /* LotteryBannerView.m */,
-				E8E2070C23BE150A0072A144 /* UIView+Color.h */,
-				E8E2070D23BE150A0072A144 /* UIView+Color.m */,
-				E853DED823BF35C2004686BB /* UIImageView+AddImage.h */,
-				E853DED923BF35C2004686BB /* UIImageView+AddImage.m */,
-				E81ECF7823CA26DB00647D0E /* UINavigationController+Cloudox.h */,
-				E81ECF7523CA26DB00647D0E /* UINavigationController+Cloudox.m */,
-				E81ECF7623CA26DB00647D0E /* UIViewController+Cloudox.h */,
-				E81ECF7723CA26DB00647D0E /* UIViewController+Cloudox.m */,
+				E89F76FA23FFE22B00F83C05 /* LotteryRefreshHeaderView.h */,
+				E89F76FB23FFE22B00F83C05 /* LotteryRefreshHeaderView.m */,
+				E89F76FD23FFE31400F83C05 /* LotteryRefreshFooterView.h */,
+				E89F76FE23FFE31400F83C05 /* LotteryRefreshFooterView.m */,
 			);
 			path = BaseUI;
 			sourceTree = "<group>";
@@ -578,6 +614,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E89F770424010D5C00F83C05 /* homePage.json in Resources */,
 				E8CF486623B3CFDE0081BE1F /* LaunchScreen.storyboard in Resources */,
 				E8CF486323B3CFDE0081BE1F /* Assets.xcassets in Resources */,
 				E81ECF6923C7843600647D0E /* res.json in Resources */,
@@ -628,8 +665,10 @@
 			files = (
 				E8E44A6023C4F10300FDDC56 /* ProvinceListViewController.m in Sources */,
 				E81ECF7F23CF5C7600647D0E /* UITableView+HYBCacheHeight.m in Sources */,
+				E89F770D24011BD700F83C05 /* LottoryConvenientServiceModel.m in Sources */,
 				E8024FEB23B4A2C500DC035C /* HomePageViewController.m in Sources */,
 				E8E206CE23BDD5F90072A144 /* BaseCollectionViewCell.m in Sources */,
+				E89F76FC23FFE22B00F83C05 /* LotteryRefreshHeaderView.m in Sources */,
 				E81ECF8A23D2F6DF00647D0E /* NewsDownloadManager.m in Sources */,
 				E8E44A6923C61A5600FDDC56 /* HPVCNewsListView.m in Sources */,
 				E81ECF6C23C7848100647D0E /* LottoryNewsModel.m in Sources */,
@@ -638,18 +677,21 @@
 				E853DEDA23BF35C2004686BB /* UIImageView+AddImage.m in Sources */,
 				E8E44A6323C600E800FDDC56 /* NewsViewController.m in Sources */,
 				E8FC025023BC5E1900CB1FCA /* LotteryNavigationController.m in Sources */,
-				E8E501E423BF6146009777E7 /* HPVCConvenientServiceView.mm in Sources */,
+				E89F77022401097600F83C05 /* HomePageDownloadManager.m in Sources */,
+				E8E501E423BF6146009777E7 /* HPVCConvenientServiceView.m in Sources */,
 				E8FC025D23BC769900CB1FCA /* GamesViewController.m in Sources */,
 				E81ECF7923CA26DC00647D0E /* UINavigationController+Cloudox.m in Sources */,
 				E84E5B2B23BF8802008D3C9A /* CalculatorViewController.m in Sources */,
 				E81ECF7323C9A3A300647D0E /* WebViewController.m in Sources */,
 				E8E44A6623C6016600FDDC56 /* NewsCollectionViewCell.m in Sources */,
 				E8E44A5123C1F5A900FDDC56 /* LotteryStationViewController.m in Sources */,
+				E89F770A24011BCA00F83C05 /* LottoryBannerModel.m in Sources */,
 				E84E5B4023C1C3AD008D3C9A /* LSVCLotteryWinningView.m in Sources */,
 				E81ECF8D23D2F8C100647D0E /* HttpManager.m in Sources */,
 				E8E2070423BDEDCF0072A144 /* LotteryBannerView.m in Sources */,
 				E8A6665523C1C68C009F3F32 /* LottoryWinningModel.mm in Sources */,
 				E8CF485823B3CFDD0081BE1F /* AppDelegate.m in Sources */,
+				E89F76FF23FFE31400F83C05 /* LotteryRefreshFooterView.m in Sources */,
 				E8CF486923B3CFDE0081BE1F /* main.m in Sources */,
 				E8024FE323B4A1AA00DC035C /* MineViewController.m in Sources */,
 				E8E44A5723C1F5E800FDDC56 /* ImitationLotteryViewController.m in Sources */,
@@ -774,7 +816,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
 				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
-				PRODUCT_NAME = Lottery;
+				PRODUCT_NAME = "欢乐彩票";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -828,7 +870,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
 				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
-				PRODUCT_NAME = Lottery;
+				PRODUCT_NAME = "欢乐彩票";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -857,7 +899,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
 				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
 				PRODUCT_NAME = "欢乐彩票";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -887,7 +929,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.Lottery;
 				PRODUCT_MODULE_NAME = com.wangjingming.Lottery;
 				PRODUCT_NAME = "欢乐彩票";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -907,6 +949,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.LotteryTests;
+				PRODUCT_MODULE_NAME = com.wangjingming.LotteryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lottery.app/Lottery";
@@ -926,6 +969,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.LotteryTests;
+				PRODUCT_MODULE_NAME = com.wangjingming.LotteryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lottery.app/Lottery";
@@ -943,6 +987,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.LotteryUITests;
+				PRODUCT_MODULE_NAME = com.wangjingming.LotteryUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Lottery;
@@ -960,6 +1005,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangjingming.LotteryUITests;
+				PRODUCT_MODULE_NAME = com.wangjingming.LotteryUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Lottery;

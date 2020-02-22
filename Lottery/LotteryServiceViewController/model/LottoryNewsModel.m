@@ -22,4 +22,14 @@
     }
     return self;
 }
+
+- (instancetype)initWithDict:(NSDictionary *)dict{
+    self = [self init];
+    self.informationSources = [dict objectForKey:@"informationSources"];
+    self.time = [dict objectForKey:@"time"];
+    self.title = [dict objectForKey:@"title"];
+    self.imageUrl = [dict objectForKey:@"imageUrl"];
+    self.newsUrl = [dict objectForKey:@"url"];
+    return self;
+}
 @end
