@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class LotteryBannerView;
-@class LottoryBannerModel;
+@class LotteryBannerModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol HPVCHeaderViewDelegate <NSObject>
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HPVCHeaderView : UIView
 @property (nonatomic, weak) id<HPVCHeaderViewDelegate> delegate;
 @property (nonatomic, weak) LotteryBannerView *bannerView;
-- (void)reloadBannerView:(NSArray<LottoryBannerModel *> *)datas;
+- (void)reloadBannerView:(NSArray<LotteryBannerModel *> *)datas;
 @end
 
 NS_ASSUME_NONNULL_END

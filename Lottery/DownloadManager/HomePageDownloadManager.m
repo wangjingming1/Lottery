@@ -11,12 +11,12 @@
 #import "HttpManager.h"
 #import "GlobalDefines.h"
 
-#import "LottoryDownloadManager.h"
+#import "LotteryDownloadManager.h"
 
-#import "LottoryBannerModel.h"
-#import "LottoryConvenientServiceModel.h"
-#import "LottoryWinningModel.h"
-#import "LottoryNewsModel.h"
+#import "LotteryBannerModel.h"
+#import "LotteryConvenientServiceModel.h"
+#import "LotteryWinningModel.h"
+#import "LotteryNewsModel.h"
 
 @implementation HomePageDownloadManager
 
@@ -50,58 +50,58 @@
         NSMutableDictionary *datas = [@{} mutableCopy];
         HomePageDownloadManager *manager = [[HomePageDownloadManager alloc] init];
         datas[@"banners"] = [manager getBannerModels:banners];
-        datas[@"convenientServices"] = [manager getLottoryConvenientServiceModels:convenientServices];
-        datas[@"winnings"] = [manager getLottoryWinningModels:winnings];
-        datas[@"news"] = [manager getLottoryNewsModels:news];
+        datas[@"convenientServices"] = [manager getLotteryConvenientServiceModels:convenientServices];
+        datas[@"winnings"] = [manager getLotteryWinningModels:winnings];
+        datas[@"news"] = [manager getLotteryNewsModels:news];
         return datas;
     }
     return @{};
 }
 
-- (NSArray <LottoryBannerModel *> *)getBannerModels:(NSArray *)datas{
+- (NSArray <LotteryBannerModel *> *)getBannerModels:(NSArray *)datas{
     NSMutableArray *array = [@[] mutableCopy];
     for (NSDictionary *dict in datas){
-        LottoryBannerModel *model = [[LottoryBannerModel alloc] initWithDict:dict];
+        LotteryBannerModel *model = [LotteryBannerModel yy_modelWithDictionary:dict];
         [array addObject:model];
     }
     return array;
 }
 
-- (NSArray <LottoryConvenientServiceModel *> *)getLottoryConvenientServiceModels:(NSArray *)datas{
+- (NSArray <LotteryConvenientServiceModel *> *)getLotteryConvenientServiceModels:(NSArray *)datas{
     NSMutableArray *array = [@[] mutableCopy];
     for (NSDictionary *dict in datas){
-        LottoryConvenientServiceModel *model = [[LottoryConvenientServiceModel alloc] initWithDict:dict];
+        LotteryConvenientServiceModel *model = [[LotteryConvenientServiceModel alloc] initWithDict:dict];
         [array addObject:model];
     }
     return array;
 }
 
-- (NSArray <LottoryWinningModel *> *)getLottoryWinningModels:(NSArray *)datas{
+- (NSArray <LotteryWinningModel *> *)getLotteryWinningModels:(NSArray *)datas{
     NSMutableArray *array = [@[] mutableCopy];
     for (NSDictionary *dict in datas){
         NSString *identifier = [dict objectForKey:@"identifier"];
-        NSString *lottoryDataJson = [dict objectForKey:@"lottoryData"];
-        LottoryWinningModel *model;
-        if ([lottoryDataJson isEqualToString:@"test"]){
-            NSArray *array = [LottoryDownloadManager lottoryWinningModelRandomizedByIdentifier:identifier begin:0 number:1];
+        NSString *lotteryDataJson = [dict objectForKey:@"lotteryData"];
+        LotteryWinningModel *model;
+        if ([lotteryDataJson isEqualToString:@"test"]){
+            NSArray *array = [LotteryDownloadManager lotteryWinningModelRandomizedByIdentifier:identifier begin:0 count:1];
             model = [array firstObject];
         } else {
-            NSData *jsonData = [lottoryDataJson dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *jsonData = [lotteryDataJson dataUsingEncoding:NSUTF8StringEncoding];
             NSError *err;
-            NSDictionary *lottoryDataDict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+            NSDictionary *lotteryDataDict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
             
-            model = [[LottoryWinningModel alloc] initWithDict:lottoryDataDict];
+            model = [[LotteryWinningModel alloc] initWithDict:lotteryDataDict];
         }
-        model.identifier = identifier;
+    
         [array addObject:model];
     }
     return array;
 }
 
-- (NSArray <LottoryNewsModel *> *)getLottoryNewsModels:(NSArray *)datas{
+- (NSArray <LotteryNewsModel *> *)getLotteryNewsModels:(NSArray *)datas{
     NSMutableArray *array = [@[] mutableCopy];
     for (NSDictionary *dict in datas){
-        LottoryNewsModel *model = [[LottoryNewsModel alloc] initWithDict:dict];
+        LotteryNewsModel *model = [[LotteryNewsModel alloc] initWithDict:dict];
         [array addObject:model];
     }
     return array;

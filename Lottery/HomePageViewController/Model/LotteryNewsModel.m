@@ -1,14 +1,14 @@
 //
-//  LottoryNewsModel.m
+//  LotteryNewsModel.m
 //  Lottery
 //
 //  Created by wangjingming on 2020/1/9.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
 
-#import "LottoryNewsModel.h"
+#import "LotteryNewsModel.h"
 
-@implementation LottoryNewsModel
+@implementation LotteryNewsModel
 
 - (instancetype)init
 {

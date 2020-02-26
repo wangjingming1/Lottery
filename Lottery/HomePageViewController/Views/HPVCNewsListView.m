@@ -11,7 +11,7 @@
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"
 #import "GlobalDefines.h"
 #import "Masonry.h"
-#import "LottoryNewsModel.h"
+#import "LotteryNewsModel.h"
 
 #import "WebViewController.h"
 #import "NewsViewController.h"
@@ -64,7 +64,7 @@
     }];
 }
 
-- (void)reloadNewListView:(NSArray<LottoryNewsModel *> *)datas{
+- (void)reloadNewListView:(NSArray<LotteryNewsModel *> *)datas{
     [self setModelArray:datas];
     [self reloadView];
 }
@@ -72,7 +72,7 @@
 - (void)reloadView{
     [self.newsView.superview respondsToSelector:@selector(removeFromSuperview)];
     UIView *lastView;
-    for (LottoryNewsModel *model in self.modelArray){
+    for (LotteryNewsModel *model in self.modelArray){
         NewsCollectionViewCell *view = [[NewsCollectionViewCell alloc] init];
         [view setFrame:CGRectMake(0, 0, SCREEN_WIDTH - kPadding10*2, 44)];
         view.model = model;

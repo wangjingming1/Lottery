@@ -10,7 +10,7 @@
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"
 #import "Masonry.h"
 #import "GlobalDefines.h"
-#import "LottoryNewsModel.h"
+#import "LotteryNewsModel.h"
 #import "UIImageView+AddImage.h"
 
 #define kNCVCellTitleLabelFontSize      kSystemFontOfSize+3
@@ -75,12 +75,12 @@
     }];
 }
 
-- (void)setModel:(LottoryNewsModel *)model{
+- (void)setModel:(LotteryNewsModel *)model{
     _model = model;
     [self reloadViewByModel:model];
 }
 
-- (void)reloadViewByModel:(LottoryNewsModel *)model{
+- (void)reloadViewByModel:(LotteryNewsModel *)model{
     self.titleLabel.text = model.title;
     self.informationSourcesLabel.text = model.informationSources;
     self.timeLabel.text = model.time;

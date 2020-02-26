@@ -12,7 +12,7 @@
 #import "GlobalDefines.h"
 #import "Masonry.h"
 #import "WebViewController.h"
-#import "LottoryBannerModel.h"
+#import "LotteryBannerModel.h"
 
 @interface HPVCHeaderView()<LotteryBannerViewDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
@@ -73,7 +73,7 @@
 //        }
 //    }
     NSMutableArray *images = [@[] mutableCopy];
-    for (LottoryBannerModel *model in self.modelArray){
+    for (LotteryBannerModel *model in self.modelArray){
         [images addObject:model.image];
     }
     [self.bannerView setImageArray:images];
@@ -84,7 +84,7 @@
     if (!self.modelArray || self.modelArray.count <= currentImage) return;
     if (!_delegate || ![_delegate respondsToSelector:@selector(pushViewController:params:)]) return;
     
-    LottoryBannerModel *model = self.modelArray[currentImage];
+    LotteryBannerModel *model = self.modelArray[currentImage];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
     params[@"leftTitle"] = @"赛事中心";
     params[@"url"] = model.url;

@@ -10,10 +10,10 @@
 #import "GlobalDefines.h"
 #import "Masonry.h"
 
-#import "LottoryWinningModel.h"
+#import "LotteryWinningModel.h"
 #import "LSVCLotteryWinningView.h"
 
-#import "LottoryDownloadManager.h"
+#import "LotteryDownloadManager.h"
 
 @interface HPVCWinningListView()<LSVCLotteryWinningViewDelegate>
 @property (nonatomic, strong) UIView *backView;
@@ -38,7 +38,7 @@
     }];
 }
 
-- (void)reloadWinningListView:(NSArray<LottoryWinningModel *> *)datas {
+- (void)reloadWinningListView:(NSArray<LotteryWinningModel *> *)datas {
     [self setModelArray:datas];
     [self reloadView];
 }
@@ -47,7 +47,7 @@
     [self.backView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     UIView *lastView;
-    for (LottoryWinningModel *model in self.modelArray){
+    for (LotteryWinningModel *model in self.modelArray){
         LSVCLotteryWinningView *view = [[LSVCLotteryWinningView alloc] initWithModel:model];
         [view.issueNumberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(view.kindNameLabel.mas_right).offset(kPadding10);

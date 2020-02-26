@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class LottoryNewsModel;
+@class LotteryNewsModel;
 NS_ASSUME_NONNULL_BEGIN
 @protocol HPVCNewListViewDelegate <NSObject>
 @optional
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HPVCNewsListView : UIView
 @property (nonatomic, weak) id <HPVCNewListViewDelegate> delegate;
 
-- (void)reloadNewListView:(NSArray<LottoryNewsModel *> *)datas;
+- (void)reloadNewListView:(NSArray<LotteryNewsModel *> *)datas;
 @end
 
 NS_ASSUME_NONNULL_END

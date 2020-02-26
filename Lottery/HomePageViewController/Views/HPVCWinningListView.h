@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class LottoryWinningModel;
+@class LotteryWinningModel;
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol HPVCWinningListViewDelegate <NSObject>
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HPVCWinningListView : UIView
 @property (nonatomic, weak) id <HPVCWinningListViewDelegate> delegate;
 
-- (void)reloadWinningListView:(NSArray<LottoryWinningModel *> *)datas;
+- (void)reloadWinningListView:(NSArray<LotteryWinningModel *> *)datas;
 @end
 
 NS_ASSUME_NONNULL_END

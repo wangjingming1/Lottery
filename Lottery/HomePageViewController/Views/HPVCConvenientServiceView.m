@@ -17,7 +17,7 @@
 #import "TrendChartViewController.h"
 #import "ImitationLotteryViewController.h"
 
-#import "LottoryConvenientServiceModel.h"
+#import "LotteryConvenientServiceModel.h"
 
 /**便捷服务一行4个按钮*/
 #define kLineCount 4
@@ -49,13 +49,13 @@ static NSInteger ConvenientServiceViewTag = 100;
     }];
 }
 
-- (void)reloadConvenientServiceView:(NSArray<LottoryConvenientServiceModel *> *)datas{
+- (void)reloadConvenientServiceView:(NSArray<LotteryConvenientServiceModel *> *)datas{
     [self setModelArray:datas];
     
     [_subViewItemTypeVecs removeAllObjects];
     
     NSMutableArray *tmpArray = [@[] mutableCopy];
-    for (LottoryConvenientServiceModel *model in datas){
+    for (LotteryConvenientServiceModel *model in datas){
         [tmpArray addObject:model];
         if (tmpArray.count == kLineCount || model == [datas lastObject]){
             [_subViewItemTypeVecs addObject:[tmpArray copy]];
@@ -68,7 +68,7 @@ static NSInteger ConvenientServiceViewTag = 100;
 - (void)reloadView{
     [self.backView.superview respondsToSelector:@selector(removeFromSuperview)];
     if (!self.modelArray || self.modelArray.count == 0) return;
-    LottoryConvenientServiceModel *firstModel = [self.modelArray firstObject];
+    LotteryConvenientServiceModel *firstModel = [self.modelArray firstObject];
     UIImage *iconImage = [UIImage imageNamed:firstModel.image];
     CGFloat leadSpacing = 20, tailSpacing = 20;
     CGFloat itemPadding = 10;
@@ -92,7 +92,7 @@ static NSInteger ConvenientServiceViewTag = 100;
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(itemLength);
         }];
-        for (LottoryConvenientServiceModel *model in models){
+        for (LotteryConvenientServiceModel *model in models){
             [itemTypeViewArray addObject:[self createConvenientItemView:model padding:itemPadding labelHeight:labelHeight parentView:itemBackView]];
         }
         if (itemTypeViewArray.count == kLineCount){
@@ -122,7 +122,7 @@ static NSInteger ConvenientServiceViewTag = 100;
     }
 }
 
-- (UIView *)createConvenientItemView:(LottoryConvenientServiceModel *)model padding:(CGFloat)padding labelHeight:(CGFloat)labelHeight parentView:(UIView *)parentView{
+- (UIView *)createConvenientItemView:(LotteryConvenientServiceModel *)model padding:(CGFloat)padding labelHeight:(CGFloat)labelHeight parentView:(UIView *)parentView{
     UIView *view = [[UIView alloc] init];
     view.tag = ConvenientServiceViewTag + [self.modelArray indexOfObject:model];
     [parentView addSubview:view];
@@ -162,7 +162,7 @@ static NSInteger ConvenientServiceViewTag = 100;
 - (void)tapAcyion:(UITapGestureRecognizer *)tap{
     if (self.delegate && [self.delegate respondsToSelector:@selector(pushViewController:params:)]){
         NSInteger count = tap.view.tag - ConvenientServiceViewTag;
-        LottoryConvenientServiceModel *model = self.modelArray[count];
+        LotteryConvenientServiceModel *model = self.modelArray[count];
         NSString *leftTitle = model.title;
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
         params[@"leftTitle"] = leftTitle;

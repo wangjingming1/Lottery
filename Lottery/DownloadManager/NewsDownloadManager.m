@@ -7,7 +7,7 @@
 //
 
 #import "NewsDownloadManager.h"
-#import "LottoryNewsModel.h"
+#import "LotteryNewsModel.h"
 #import "HttpManager.h"
 
 @implementation NewsDownloadManager
@@ -15,7 +15,7 @@
 + (void)newsDownloadBegin:(NSInteger)begin count:(NSInteger)count finsh:(void (^)(NSArray *news))finsh {
     
 #ifdef kTEST
-    NSArray *array = [NewsDownloadManager geTestLottoryNewsModelArray:begin count:count];
+    NSArray *array = [NewsDownloadManager geTestLotteryNewsModelArray:begin count:count];
     if (finsh){
         finsh(array);
     }
@@ -24,7 +24,7 @@
 }
 
 #pragma mark - test
-+ (NSArray *)geTestLottoryNewsModelArray:(NSInteger)begin count:(NSInteger)count{
++ (NSArray *)geTestLotteryNewsModelArray:(NSInteger)begin count:(NSInteger)count{
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res" ofType:@"json"];
     
@@ -38,7 +38,7 @@
     NSInteger i = begin;
     while (count > 0) {
         NSDictionary *dict = datas[i++%datas.count];
-        LottoryNewsModel *model = [[LottoryNewsModel alloc] initWithDict:dict];
+        LotteryNewsModel *model = [[LotteryNewsModel alloc] initWithDict:dict];
         [array addObject:model];
         count--;
     }

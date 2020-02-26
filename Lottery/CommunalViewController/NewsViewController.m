@@ -10,7 +10,7 @@
 #import "NewsCollectionViewCell.h"
 #import "Masonry.h"
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"
-#import "LottoryNewsModel.h"
+#import "LotteryNewsModel.h"
 #import "NewsDownloadManager.h"
 #import "GlobalDefines.h"
 #import "WebViewController.h"
@@ -106,7 +106,7 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    LottoryNewsModel *model = [[LottoryNewsModel alloc] init];
+    LotteryNewsModel *model = [[LotteryNewsModel alloc] init];
     if (indexPath.row < self.newsListArray.count) {
         model = [self.newsListArray objectAtIndex:indexPath.row];
     }
@@ -116,7 +116,7 @@
 
 
 - (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    LottoryNewsModel *model = [[LottoryNewsModel alloc] init];
+    LotteryNewsModel *model = [[LotteryNewsModel alloc] init];
     if (indexPath.row < self.newsListArray.count) {
         model = [self.newsListArray objectAtIndex:indexPath.row];
     }
@@ -145,7 +145,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
-    params[@"url"] = ((LottoryNewsModel *)self.newsListArray[indexPath.row]).newsUrl;
+    params[@"url"] = ((LotteryNewsModel *)self.newsListArray[indexPath.row]).newsUrl;
     params[@"leftTitle"] = @"资讯详情";
     params[@"y"] = @"-40";
     [super pushViewController:[WebViewController class] params:params];

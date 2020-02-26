@@ -1,14 +1,15 @@
 //
-//  LottoryWinningModel.m
+//  LotteryWinningModel.m
 //  Lottery
 //
 //  Created by wangjingming on 2020/1/5.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
 
-#import "LottoryWinningModel.h"
+#import "LotteryWinningModel.h"
+#import "LotteryKindName.h"
 
-@implementation LottoryWinningModel
+@implementation LotteryWinningModel
 
 - (instancetype)init
 {
@@ -47,36 +48,58 @@
 
 - (void)setIcon:(NSString *)icon{
     if ([icon isEqualToString:@""]){
-        icon = [LottoryWinningModel identifierToString:self.identifier type:@"icon"];
+        icon = [LotteryWinningModel identifierToString:self.identifier type:@"icon"];
     }
     _icon = icon;
 }
 
 #pragma mark - test
 + (NSString *)identifierToString:(NSString *)identifier type:(NSString *)type{
-    if ([identifier isEqualToString:@"shuangseqiu"]){
+    if (kLotteryIsShuangseqiu(identifier)){
         if ([type isEqualToString:@"icon"]) return @"shuangseqiu";
         if ([type isEqualToString:@"name"]) return @"双色球";
-    } else if ([identifier isEqualToString:@"daletou"]){
+    } else if (kLotteryIsDaletou(identifier)){
         if ([type isEqualToString:@"icon"]) return @"daletou";
         if ([type isEqualToString:@"name"]) return @"超级大乐透";
-    } else if ([identifier isEqualToString:@"fucai3d"]){
+    } else if (kLotteryIsFucai3d(identifier)){
         if ([type isEqualToString:@"icon"]) return @"3d";
         if ([type isEqualToString:@"name"]) return @"福彩3D";
-    } else if ([identifier isEqualToString:@"pailie3"]){
+    } else if (kLotteryIsPailie3(identifier)){
         if ([type isEqualToString:@"icon"]) return @"pailie3";
         if ([type isEqualToString:@"name"]) return @"排列3";
-    } else if ([identifier isEqualToString:@"pailie5"]){
+    } else if (kLotteryIsPailie5(identifier)){
         if ([type isEqualToString:@"icon"]) return @"pailie5";
         if ([type isEqualToString:@"name"]) return @"排列5";
-    } else if ([identifier isEqualToString:@"qixingcai"]){
+    } else if (kLotteryIsQixingcai(identifier)){
         if ([type isEqualToString:@"icon"]) return @"qixingcai";
         if ([type isEqualToString:@"name"]) return @"七星彩";
-    } else if ([identifier isEqualToString:@"qilecai"]){
+    } else if (kLotteryIsQilecai(identifier)){
         if ([type isEqualToString:@"icon"]) return @"qilecai";
         if ([type isEqualToString:@"name"]) return @"七乐彩";
     }
     return @"";
 }
 
+@end
+
+@implementation LotteryPrizeModel
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.level = @"";
+        self.number = @"";
+        self.bonus = @"";
+    }
+    return self;
+}
+
+- (instancetype)initWithDict:(NSDictionary *)dict {
+    self = [self init];
+    if (self){
+        
+    }
+    return self;
+}
 @end

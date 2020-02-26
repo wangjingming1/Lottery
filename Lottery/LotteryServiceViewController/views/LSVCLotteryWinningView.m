@@ -7,12 +7,13 @@
 //
 
 #import "LSVCLotteryWinningView.h"
-#import "LottoryWinningModel.h"
+#import "LotteryWinningModel.h"
 #import "GlobalDefines.h"
 #import "Masonry.h"
 #import "UIImageView+AddImage.h"
 
 #import "LotteryPastPeriodViewController.h"
+#import "LotteryPracticalMethod.h"
 
 /**彩票种类字号*/
 #define kLotteryWinningViewKindNameLabelSize    17
@@ -34,7 +35,7 @@
 @end
 
 @implementation LSVCLotteryWinningView
-- (instancetype)initWithModel:(LottoryWinningModel *)model
+- (instancetype)initWithModel:(LotteryWinningModel *)model
 {
     self = [super init];
     if (self) {
@@ -122,13 +123,21 @@
     }];
 }
 
-- (void)setModel:(LottoryWinningModel *)model{
+- (void)setModel:(LotteryWinningModel *)model{
     _model = model;
     [self.iconView setImageWithName:self.model.icon];
     self.kindNameLabel.text = self.model.kindName;
     self.issueNumberLabel.text = self.model.issueNumber;
-    self.dateLabel.text = self.model.date;
-    self.jackpotLabel.text = [NSString stringWithFormat:@"奖池 %@亿", self.model.jackpot];
+    NSDateFormatter *originFormatter = [[NSDateFormatter alloc]init];
+    [originFormatter setDateFormat:@"yyyy.MM.dd"];
+    NSDate *date = [originFormatter dateFromString:model.date];
+    
+    NSDateFormatter *otherFormatter = [[NSDateFormatter alloc]init];
+    [otherFormatter setDateFormat:@"MM.dd"];
+    NSString *dateStr = [otherFormatter stringFromDate:date];
+    NSString *weakday = [LotteryPracticalMethod weekdayStringWithDate:date];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@（%@）", dateStr, weakday];
+    self.jackpotLabel.text = [LotteryPracticalMethod getMaxUnitText:[self.model.jackpot longLongValue] withPrecisionNum:2];
     
     [self reloadBallView:self.radBallView ballColor:@"radBall" ballStr:self.model.radBall];
     [self reloadBallView:self.blueBallView ballColor:@"blueBall" ballStr:self.model.blueBall];

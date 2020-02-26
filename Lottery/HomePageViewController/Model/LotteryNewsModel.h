@@ -1,5 +1,5 @@
 //
-//  LottoryNewsModel.h
+//  LotteryNewsModel.h
 //  Lottery
 //
 //  Created by wangjingming on 2020/1/9.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LottoryNewsModel : NSObject
+@interface LotteryNewsModel : NSObject
 /**新闻来源*/
 @property (nonatomic, copy) NSString *informationSources;
 /**发布时间*/

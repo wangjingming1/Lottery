@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LottoryWinningModel;
+@class LotteryWinningModel;
 
 @protocol LSVCLotteryWinningViewDelegate <NSObject>
 @optional
@@ -38,9 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *testNumberLabel;
 
 /**数据model*/
-@property (nonatomic, strong) LottoryWinningModel *model;
+@property (nonatomic, strong) LotteryWinningModel *model;
 @property (nonatomic, weak) id<LSVCLotteryWinningViewDelegate> delegate;
-- (instancetype)initWithModel:(LottoryWinningModel *)model;
+- (instancetype)initWithModel:(LotteryWinningModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

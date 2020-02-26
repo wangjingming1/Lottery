@@ -1,5 +1,5 @@
 //
-//  LottoryConvenientServiceModel.h
+//  LotteryBannerModel.h
 //  Lottery
 //
 //  Created by wangjingming on 2020/2/22.
@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YYModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LottoryConvenientServiceModel : NSObject
-@property (nonatomic, copy) NSString *title;
+@interface LotteryBannerModel : NSObject
 @property (nonatomic, copy) NSString *image;
-@property (nonatomic, copy) NSString *className;
+@property (nonatomic, copy) NSString *url;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 @end

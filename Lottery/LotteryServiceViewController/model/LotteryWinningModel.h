@@ -1,5 +1,5 @@
 //
-//  LottoryWinningModel.h
+//  LotteryWinningModel.h
 //  Lottery
 //  彩种及信息
 //  Created by wangjingming on 2020/1/5.
@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LottoryWinningModel : NSObject
+@class LotteryPrizeModel;
+
+@interface LotteryWinningModel : NSObject
 /**彩票标示码*/
 @property (nonatomic, copy) NSString *identifier;
 /**彩票种类*/
@@ -32,9 +34,21 @@ NS_ASSUME_NONNULL_BEGIN
 /**试机号*/
 @property (nonatomic, copy) NSString *testNumber;
 
+@property (nonatomic, strong) NSArray <LotteryPrizeModel *> *prizeArray;
+
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 + (NSString *)identifierToString:(NSString *)identifier type:(NSString *)type;
 @end
 
+
+@interface LotteryPrizeModel : NSObject
+/**奖级*/
+@property (nonatomic, copy) NSString *level;
+/**中奖注数*/
+@property (nonatomic, copy) NSString *number;
+/**单注奖金*/
+@property (nonatomic, copy) NSString *bonus;
+- (instancetype)initWithDict:(NSDictionary *)dict;
+@end
 NS_ASSUME_NONNULL_END

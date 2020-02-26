@@ -13,7 +13,7 @@
 
 #import "LotteryBannerView.h"
 #import "LSVCLotteryWinningView.h"
-#import "LottoryWinningModel.h"
+#import "LotteryWinningModel.h"
 
 #import "HPVCHeaderView.h"
 #import "HPVCConvenientServiceView.h"

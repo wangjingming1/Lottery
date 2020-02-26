@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LottoryNewsModel;
+@class LotteryNewsModel;
 @interface NewsCollectionViewCell : UITableViewCell
-@property (nonatomic, strong) LottoryNewsModel *model;
+@property (nonatomic, strong) LotteryNewsModel *model;
 @end
 
 NS_ASSUME_NONNULL_END
