@@ -45,43 +45,16 @@
 
 - (void)reloadView{
     [self.backView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    UIView *lastView;
+    LSVCLotteryWinningView *lastView;
     for (LotteryWinningModel *model in self.modelArray){
-        LSVCLotteryWinningView *view = [[LSVCLotteryWinningView alloc] initWithModel:model];
-        [view.issueNumberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(view.kindNameLabel.mas_right).offset(kPadding10);
-            make.centerY.mas_equalTo(view.kindNameLabel);
-        }];
-        [view.kindNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-kPadding10);
-        }];
-        [view.jackpotLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(view.kindNameLabel);
-            make.right.mas_equalTo(view.jackpotLabel.superview).offset(-kPadding10);
-        }];
-        [view.rightArrowView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-kPadding10);
-            make.centerY.mas_equalTo(view.radBallView);
-        }];
+        LSVCLotteryWinningView *view = [[LSVCLotteryWinningView alloc] initWithStyle:LSVCLotteryWinningViewStyle_HomePage];
         view.delegate = self;
         [self.backView addSubview:view];
-        if (lastView){
-            UIView *lineView = [[UIView alloc] init];
-            lineView.backgroundColor = kUIColorFromRGB10(193, 194, 195);
-            [self.backView addSubview:lineView];
-            [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(kPadding15);
-                make.right.mas_equalTo(-kPadding15);
-                make.top.mas_equalTo(lastView.mas_bottom).mas_equalTo(kPadding10);
-                make.height.mas_equalTo(1);
-            }];
-            
-        }
+        [view setModel:model];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             if (lastView){
-                make.top.mas_equalTo(lastView.mas_bottom).offset(kPadding10);
+                make.top.mas_equalTo(lastView.mas_bottom);
             } else {
                 make.top.mas_equalTo(0);
             }
@@ -92,6 +65,7 @@
         [lastView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(0);
         }];
+        lastView.backLineView.hidden = YES;
     }
     
     if ([self.delegate respondsToSelector:@selector(reloadViewFinish:)]){

@@ -1,7 +1,7 @@
 //
 //  LotteryNewsModel.h
 //  Lottery
-//
+//  新闻数据
 //  Created by wangjingming on 2020/1/9.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //

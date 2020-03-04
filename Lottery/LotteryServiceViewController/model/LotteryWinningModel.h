@@ -34,6 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**试机号*/
 @property (nonatomic, copy) NSString *testNumber;
 
+/**开奖时间*/
+@property (nonatomic, copy) NSString *lotteryTime;
+/**界面使用，表示当前view是否显示中奖列表*/
+@property (nonatomic) BOOL showPrizeView;
+
 @property (nonatomic, strong) NSArray <LotteryPrizeModel *> *prizeArray;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;

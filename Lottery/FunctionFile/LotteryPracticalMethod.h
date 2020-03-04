@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**将number转换成以亿为单位*/
 + (double)hundredMillion:(long long)number;
 /**
- 将number转成最大单位(暂时只支持 1万-9999万，1亿到9999亿)
+ 将number转成最大单位(暂时只支持 1万-9999万，1亿到9999亿，万不保留小数)
  保留precision位小数
  */
 + (NSString *)getMaxUnitText:(long long)number withPrecisionNum:(NSInteger)precision;

@@ -1,7 +1,7 @@
 //
 //  HPVCNewsListView.h
 //  Lottery
-//
+//  首页展示的新闻视图
 //  Created by wangjingming on 2020/1/8.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //

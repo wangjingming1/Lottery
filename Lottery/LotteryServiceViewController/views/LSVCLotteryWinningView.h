@@ -11,6 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 @class LotteryWinningModel;
 
+typedef NS_ENUM(NSInteger, LSVCLotteryWinningViewStyle) {
+    LSVCLotteryWinningViewStyle_HomePage,
+    LSVCLotteryWinningViewStyle_LotteryPastPeriod,
+    LSVCLotteryWinningViewStyle_LotteryService,
+};
+
 @protocol LSVCLotteryWinningViewDelegate <NSObject>
 @optional
 - (void)pushViewController:(Class)vcClass params:(NSDictionary *)params;
@@ -37,10 +43,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**试机号*/
 @property (nonatomic, strong) UILabel *testNumberLabel;
 
+/**红蓝球底部的线*/
+@property (nonatomic, strong) UIView *ballBackLineView;
+
+/**界面底部的线*/
+@property (nonatomic, strong) UIView *backLineView;
 /**数据model*/
 @property (nonatomic, strong) LotteryWinningModel *model;
 @property (nonatomic, weak) id<LSVCLotteryWinningViewDelegate> delegate;
-- (instancetype)initWithModel:(LotteryWinningModel *)model;
+
+@property (nonatomic) LSVCLotteryWinningViewStyle style;
+- (instancetype)initWithStyle:(LSVCLotteryWinningViewStyle)style;
 @end
 
 NS_ASSUME_NONNULL_END

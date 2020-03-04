@@ -8,6 +8,7 @@
 
 #import "LotteryDownloadManager.h"
 #import "LotteryKindName.h"
+#import "GlobalDefines.h"
 
 #import "HttpManager.h"
 
@@ -17,15 +18,15 @@
 
 @implementation LotteryDownloadManager
 
-+ (void)lotteryDownload:(NSInteger)begin count:(NSInteger)count identifiers:(NSArray *)identifiers finsh:(void (^)(NSArray *lotterys))finsh {
++ (void)lotteryDownload:(NSInteger)begin count:(NSInteger)count identifiers:(NSArray *)identifiers finsh:(void (^)(NSDictionary <NSString *, NSArray *> *lotteryDict))finsh {
+    NSMutableDictionary *lotteryDict = [@{} mutableCopy];
 #ifdef kTEST
-    NSMutableArray *lotterys = [[NSMutableArray alloc] initWithCapacity:0];
     for (NSString *ide in identifiers){
         NSArray *array = [LotteryDownloadManager lotteryWinningModelRandomizedByIdentifier:ide begin:begin count:count];
-        [lotterys addObjectsFromArray:array];
+        lotteryDict[ide] = array;
     }
     if (finsh){
-        finsh(lotterys);
+        finsh(lotteryDict);
     }
 #else
     NSString *url = @"";
@@ -46,6 +47,17 @@
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
         LotteryWinningModel *model = [[LotteryWinningModel alloc] initWithDict:dic];
         [array addObject:model];
+        for (NSString *ide in [dic allKeys]){
+            NSMutableArray *lotteryArray = [@[] mutableCopy];
+            for (NSDictionary *lotteryDict in lotteryArray){
+                LotteryWinningModel *model = [[LotteryWinningModel alloc] initWithDict:lotteryDict];
+                [lotteryArray addObject:model];
+            }
+            lotteryDict[ide] = lotteryArray;
+        }
+        if (finsh){
+            finsh(lotteryDict);
+        }
     }];
 #endif
 }
@@ -76,9 +88,10 @@
             model.identifier = identifier;
             model.icon = icon;
             model.kindName = name;
-            model.issueNumber = [LotteryDownloadManager getIssueNumber:i];
+            model.issueNumber = [LotteryDownloadManager getIssueNumber:i+begin dateStr:dateArray[i]];
             model.date = dateArray[i];
             model.testNumber = [LotteryDownloadManager getTestNumber:identifier];
+            model.lotteryTime = playRulesModel.lotteryShowTime;
             //设置中奖号码
             [LotteryDownloadManager setLotteryWinningModelSalesAndBall:model playRulesModel:playRulesModel];
             //设置奖级信息
@@ -112,9 +125,9 @@
     NSInteger i = 0;
     //符合开奖日期的时间数量
     NSInteger dayCount = 0;
-    while (1) {
-        NSTimeInterval days = -(24 * 60 * 60 * i);  // 一天一共有多少秒
+    do {
         //往前推i天的时间
+        NSTimeInterval days = -(24 * 60 * 60 * i);  // (24 * 60 * 60)表示一天一共有多少秒
         NSDate *appointDate = [currentDate dateByAddingTimeInterval:days];
         NSString *weekdata = [LotteryPracticalMethod weekdayStringWithDate:appointDate];
         //判断是否是开奖日期(如大乐透是每周一、三、六 20:30开奖)
@@ -133,7 +146,7 @@
                     }
                 }
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateFormat:@"yyyy.MM.dd"];
+                [formatter setDateFormat:kDefaultDateFormat];
                 //获取当前时间日期展示字符串 如：05.23
                 NSString *appointDateStr = [formatter stringFromDate:appointDate];
                 [dateArray addObject:appointDateStr];
@@ -143,8 +156,7 @@
             }
             dayCount++;
         }
-        i++;
-    }
+    } while (++i);
     return dateArray;
 }
 
@@ -156,7 +168,7 @@
         sales = 300000000 + arc4random_uniform(200000000);//3亿，2亿
         jackpot = sales + 100000000 + arc4random_uniform(500000000);//1亿，5亿
     } else if (kLotteryIsDaletou(identifier)){
-        sales = 100000000 + arc4random_uniform(300000000);//1亿，4亿
+        sales = 100000000 + arc4random_uniform(400000000);//1亿，4亿
         jackpot = sales + 100000000 + arc4random_uniform(1000000000);//1亿，10亿
     } else if (kLotteryIsFucai3d(identifier)){
         sales = 50000000 + arc4random_uniform(1000000);//5千万，1百万
@@ -224,7 +236,10 @@
                     maxBonus = [[dict objectForKey:@"maxBonus"] doubleValue];
                 }
                 double percentage = [[dict objectForKey:@"percentage"] doubleValue];
-                long long bonus = (surplusSales*percentage)/[prizeModel.number integerValue];
+                long long bonus = 0;
+                if ([prizeModel.number integerValue] > 0){
+                    bonus = (surplusSales*percentage)/[prizeModel.number integerValue];
+                }
                 if (bonus > maxBonus){
                     bonus = maxBonus;
                 }
@@ -236,35 +251,6 @@
         if (floatSalesArray.count == 0) break;
     }
     model.prizeArray = prizeModels;
-//    if (kLotteryIsShuangseqiu(identifier)){
-//        /*
-//         一等奖(奖金总额10%，单注最多1000W，中奖注数0-20)，二等奖(奖金为总额3%，中奖注数70-500)，三等奖(单注奖金3000，中奖注数500-3000)，
-//         四等奖(单注奖金200，中奖注数4w-15w)，五等奖(单注奖金10，中奖注数90w-200w)，六等奖(单注奖金5，中奖注数700w-2500w)
-//         */
-//    } else if (kLotteryIsDaletou(identifier)){
-//        /*
-//         一等奖(奖金总额10%，单注最多1000W，中奖注数0-20)，二等奖(奖金为总额3%，中奖注数50-200)，三等奖(单注奖金10000，中奖注数100-500)，
-//         四等奖(单注奖金3000，中奖注数300-1400)，五等奖(单注奖金300，中奖注数9000-3w)，六等奖(单注奖金200，中奖注数1w5-4w)，
-//         七等奖(单注奖金100，中奖注数2w-7w)，八等奖(单注奖金15，中奖注数40w-100w)，九等奖(单注奖金5，中奖注数500w-1000w)
-//         */
-//    } else if (kLotteryIsFucai3d(identifier)){
-//        //直选(单注奖金1040)，组选三(单注奖金346)，组选六(单注奖金173) (中奖注数2000-15000，中奖号码有两个相则同组六位0，否则组三为0)
-//    } else if (kLotteryIsPailie3(identifier)){
-//        //直选(单注奖金1040)，组选三(单注奖金346)，组选六(单注奖金173) (中奖注数2000-15000，中奖号码有两个相同则组六位0，否则组三为0)
-//    } else if (kLotteryIsPailie5(identifier)){
-//        //直选(单注奖金10w，中奖注数10-150)
-//    } else if (kLotteryIsQixingcai(identifier)){
-//        /*
-//         一等奖(奖金总额30%，最多500W，中奖注数0-10)，二等奖(奖金为总额3%，中奖注数0-50)，三等奖(单注奖金1800，中奖注数100-200)，四等奖（单注奖金300，中奖注数1000-3000）
-//         五等奖(单注奖金20，中奖注数20000-40000)，六等奖(单注奖金5，中奖注数20w-50w)
-//        */
-//    } else if (kLotteryIsQilecai(identifier)){
-//        /*
-//         一等奖(奖金总额30%，最多500W，中奖注数0-5)，二等奖(奖金为总额3%，中奖注数0-50)，三等奖(奖金为总额6%，中奖注数100-400)，
-//         四等奖(单注奖金200，中奖注数400-1500)，五等奖(单注奖金50，中奖注数5000-15000)，六等奖(单注奖金10，中奖注数8000-23000)，
-//         七等奖(单注奖金5，中奖注数6w-15w)
-//         */
-//    }
 }
 
 + (NSString *)getTestNumber:(NSString *)identifier{
@@ -281,45 +267,61 @@
     return @"";
 }
 
-+ (NSString *)getIssueNumber:(NSInteger)number{
++ (NSString *)getIssueNumber:(NSInteger)number dateStr:(NSString *)dateStr{
     number = number + 1;
+    NSDateFormatter *originFormatter = [[NSDateFormatter alloc] init];
+    [originFormatter setDateFormat:kDefaultDateFormat];
+    NSDate *date = [originFormatter dateFromString:dateStr];
+    
+    [originFormatter setDateFormat:@"yyyy"];
+    NSString *year = [originFormatter stringFromDate:date];
     if (number > 0 && number < 10){
-        return [NSString stringWithFormat:@"2000%ld期", number];
+        return [NSString stringWithFormat:@"%@00%ld期", year, number];
     }
     if (number >= 10 && number < 100){
-        return [NSString stringWithFormat:@"200%ld期", number];
+        return [NSString stringWithFormat:@"%@0%ld期", year, number];
     }
-    return [NSString stringWithFormat:@"20%ld期", number];
+    return [NSString stringWithFormat:@"%@%ld期", year, number];
 }
 
 + (NSString *)getRandomBallByMaxNumber:(NSInteger)maxNumber minNumber:(NSInteger)minNumber maxCount:(NSInteger)maxCount allowDuplicate:(BOOL)allowDuplicate isSort:(BOOL)isSort{
-    NSMutableSet *set = [NSMutableSet setWithCapacity:maxCount];
+    NSMutableArray *array = [@[] mutableCopy];
+    //相关规则的maxCount是指模拟选号允许选择的数量, 如果为0并且最大最小值不为0的话，暂时给你一个球吧
+    if (minNumber + maxNumber > 0 && maxCount == 0){
+        maxCount = 1;
+    }
     if (allowDuplicate){
-        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
         while (array.count < maxCount) {
             NSInteger value = arc4random() % (maxNumber - minNumber + 1) + minNumber;
             [array addObject:[NSNumber numberWithInteger:value]];
         }
-        set = [NSMutableSet setWithArray:array];
     } else {
+        NSMutableSet *set = [NSMutableSet setWithCapacity:maxCount];
         while (set.count < maxCount) {
             NSInteger value = arc4random() % (maxNumber - minNumber + 1) + minNumber;
             [set addObject:[NSNumber numberWithInteger:value]];
         }
+        array = [[set allObjects] mutableCopy];
     }
-    NSArray *sortSetArray = [set allObjects];
     if (isSort){
-        NSArray *sortDesc = @[[[NSSortDescriptor alloc] initWithKey:nil ascending:YES]];
-        sortSetArray = [set sortedArrayUsingDescriptors:sortDesc];
+        for (int i = 0; i < array.count; i++) {
+            for (int j = 0; j < array.count - i-1; j++) {
+                if ([array[j] intValue] > [array[j + 1] intValue]) {
+                    int tmp = [array[j] intValue];
+                    array[j] = array[j + 1];
+                    array[j + 1] = [NSNumber numberWithInt:tmp];
+                }
+            }
+        }
     }
     NSString *ballStr = @"";
-    for (NSUInteger i = 0; i < sortSetArray.count; i++){
+    for (NSUInteger i = 0; i < array.count; i++){
         if (i != 0){
             ballStr = [ballStr stringByAppendingString:@","];
         }
-        NSInteger number =  [sortSetArray[i] integerValue];
+        NSInteger number =  [array[i] integerValue];
         NSString *numberStr = [NSString stringWithFormat:@"%ld", number];
-        if (number < 10){
+        if (number < 10 && maxNumber >= 10){
             numberStr = [NSString stringWithFormat:@"0%@", numberStr];
         }
         ballStr = [ballStr stringByAppendingString:numberStr];

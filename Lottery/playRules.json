@@ -24,7 +24,7 @@
                         {"rad":"6","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
-                        "bonus":"0.75,100000000",
+                        "bonus":"0.75,10000000",
                         "lotteryNumber":"0,20"
                     }
                 },
@@ -84,7 +84,7 @@
                     ],
                     "testbonus":{
                         "bonus":"5",
-                        "lotteryNumber":"7000000,2500000"
+                        "lotteryNumber":"7000000,25000000"
                     }
                 }
             ]
@@ -113,7 +113,7 @@
                         {"rad":"5","blue":"2","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
-                        "bonus":"0.75,100000000",
+                        "bonus":"0.75,10000000",
                         "lotteryNumber":"0,20"
                     }
                 },

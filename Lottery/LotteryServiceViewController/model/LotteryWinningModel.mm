@@ -25,6 +25,8 @@
         self.radBall = @"";
         self.blueBall = @"";
         self.testNumber = @"";
+        self.showPrizeView = NO;
+        self.prizeArray = @[];
     }
     return self;
 }

@@ -27,9 +27,7 @@
 #import "WebViewController.h"
 #import "MJRefresh.h"
 
-#define kConvenientServiceViewShadowColor kUIColorFromRGB10(230, 230, 230)
-
-@interface HomePageViewController ()<UINavigationControllerDelegate, UIScrollViewDelegate, HPVCConvenientServiceViewDelegate, HPVCWinningListViewDelegate, HPVCNewListViewDelegate>
+@interface HomePageViewController ()<UINavigationControllerDelegate, UIScrollViewDelegate, HPVCHeaderViewDelegate, HPVCConvenientServiceViewDelegate, HPVCWinningListViewDelegate, HPVCNewListViewDelegate>
 @property (nonatomic, weak) HPVCHeaderView *headerView;
 @property (nonatomic, weak) HPVCConvenientServiceView *convenientServiceView;
 @property (nonatomic, weak) HPVCWinningListView *winningListView;
@@ -75,6 +73,7 @@
 
 - (void)setNavTitleBar{
     [self changeBarImageViewAlpha:self.scrollView.contentOffset.y];
+    kImportantReminder(@"导航栏透明及黑边")
     //设置导航栏背景图片为一个空的image，这样就透明了(设成nil就显示出来了)
 //    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     //去掉透明后导航栏下边的黑边(设成nil就显示出来了)
@@ -84,6 +83,12 @@
 }
 
 - (void)setUI{
+    kImportantReminder(@"设置scrollView内容不由系统自动调整(不考虑导航栏跟状态栏，直接到顶)")
+    if (@available(iOS 11.0, *)) {
+        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+    }
     [self initHeaderView];
     [self initConvenientServiceView];
     [self initLotteryWinningListView];
@@ -144,7 +149,7 @@
         make.width.mas_equalTo(weakSelf.view).offset(-kPadding20);
         make.top.mas_equalTo(weakSelf.headerView.mas_bottom).offset(kPadding10);
     }];
-    [csView setShadowAndColor:kConvenientServiceViewShadowColor];
+    [csView setShadowAndColor:kShadowColor];
     
     self.convenientServiceView = csView;
 }
@@ -159,7 +164,7 @@
         make.left.width.mas_equalTo(weakSelf.convenientServiceView);
         make.top.mas_equalTo(weakSelf.convenientServiceView.mas_bottom).offset(kPadding10);
     }];
-    [winningListVie setShadowAndColor:kConvenientServiceViewShadowColor];
+    [winningListVie setShadowAndColor:kShadowColor];
     
     self.winningListView = winningListVie;
 }
@@ -175,12 +180,12 @@
         make.top.mas_equalTo(weakSelf.winningListView.mas_bottom).offset(kPadding10);
     }];
     
-    [newsListView setShadowAndColor:kConvenientServiceViewShadowColor];
+    [newsListView setShadowAndColor:kShadowColor];
     self.newsListView = newsListView;
 }
 
 - (void)initRefreshViews{
-    [self addRefreshHearderView:@selector(reloadNewData)];
+    [self addRefreshHearderView:@selector(reloadNewData) otherScrollView:self.scrollView];
 }
 
 - (void)reloadNewData{

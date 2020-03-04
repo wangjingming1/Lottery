@@ -24,9 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)navBarLeftButtonImage;
 - (UIButton *)createNavBarLeftButton;
+
 - (void)navBarLeftButtonClick:(UIButton *)leftButton;
 
-- (void)addRefreshHearderView:(SEL)refreshingAction;
+- (void)addRefreshHearderView:(SEL)refreshingAction otherScrollView:(UIScrollView *)otherScrollView;
+- (void)addRefreshFooterView:(SEL)refreshingAction otherScrollView:(UIScrollView *)otherScrollView;
 
 - (void)pushViewController:(Class)vcClass params:(NSDictionary *)params;
 @end

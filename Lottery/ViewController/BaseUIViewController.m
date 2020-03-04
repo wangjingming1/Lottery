@@ -12,9 +12,9 @@
 #import "Masonry.h"
 #import "UIViewController+Cloudox.h"
 #import "UINavigationController+Cloudox.h"
-#import "LotteryRefreshHeaderView.h"
 
-#define kBackgroundColor    kUIColorFromRGB10(250, 250, 250)
+#import "LotteryRefreshHeaderView.h"
+#import "LotteryRefreshFooterView.h"
 
 @interface BaseUIViewController ()<UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
@@ -35,7 +35,11 @@
 
 - (CGFloat)getTabbarHeight{
     //Tabbar高度
-    return self.tabBarController.tabBar.bounds.size.height;
+    if (self.hidesBottomBarWhenPushed){
+        return 0;
+    } else {
+        return self.tabBarController.tabBar.bounds.size.height;
+    }
 }
 
 - (CGFloat)getCurrentAlpha{
@@ -94,9 +98,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)addRefreshHearderView:(SEL)refreshingAction{
+- (void)addRefreshHearderView:(SEL)refreshingAction otherScrollView:(UIScrollView *)otherScrollView{
     LotteryRefreshHeaderView *normalHeader = [LotteryRefreshHeaderView headerWithRefreshingTarget:self refreshingAction:refreshingAction];
-    self.scrollView.mj_header = normalHeader;
+    otherScrollView.mj_header = normalHeader;
+}
+
+- (void)addRefreshFooterView:(SEL)refreshingAction otherScrollView:(UIScrollView *)otherScrollView{
+    LotteryRefreshFooterView *normalFooter = [LotteryRefreshFooterView footerWithRefreshingTarget:self refreshingAction:refreshingAction];
+    [normalFooter setTitle:@"上拉加载更多" forState:MJRefreshStateRefreshing];
+    otherScrollView.mj_footer = normalFooter;
 }
 
 - (void)pushViewController:(Class)vcClass params:(NSDictionary *)params{
@@ -112,16 +122,17 @@
 
 - (UIView *)backgroundView{
     if (!_backgroundView) {
-        CGFloat navigationbarHeight = [self getNavigationbarHeight];
-        CGFloat tabbarH = [self getTabbarHeight];
-        
         _backgroundView = [[UIView alloc] init];
         [self.view addSubview:_backgroundView];
-        
         [_backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(navigationbarHeight);
-            make.bottom.mas_equalTo(-tabbarH);
+            if (@available(iOS 11.0, *)) {
+                make.left.mas_equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+                make.right.mas_equalTo(self.view.mas_safeAreaLayoutGuideRight);
+                make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop);
+                make.bottom.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            } else {
+                make.edges.mas_equalTo(0);
+            }
         }];
     }
     return _backgroundView;
@@ -131,12 +142,6 @@
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
         [self.view addSubview:_scrollView];
-        //设置scrollViewd内容不由系统自动调整(子视图不考虑导航栏跟状态栏，直接到顶)
-        if (@available(iOS 11.0, *)) {
-            _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        } else {
-            // Fallback on earlier versions
-        }
         
         CGFloat tabbarH = [self getTabbarHeight];
         [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -38,15 +38,16 @@
     }
     NSString *unit = @"";
     double other = number;
-    //生成format格式
-    NSString *format = [NSString stringWithFormat:@"%%.%ldf",(long)precision];
     if (number < 100000000){
         unit = @"万";
+        precision = 0;
         other = [LotteryPracticalMethod tenThousand:number];
     } else {
         unit = @"亿";
         other = [LotteryPracticalMethod hundredMillion:number];
     }
+    //生成format格式
+    NSString *format = [NSString stringWithFormat:@"%%.%ldf",(long)precision];
     NSString *otherValue = [NSString stringWithFormat:format, other];
     return [NSString stringWithFormat:@"%@%@", otherValue, unit];
 }

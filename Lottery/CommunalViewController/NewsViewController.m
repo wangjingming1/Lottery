@@ -6,6 +6,8 @@
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
 
+#import <MJRefresh/MJRefresh.h>
+
 #import "NewsViewController.h"
 #import "NewsCollectionViewCell.h"
 #import "Masonry.h"
@@ -14,8 +16,6 @@
 #import "NewsDownloadManager.h"
 #import "GlobalDefines.h"
 #import "WebViewController.h"
-#import "LotteryRefreshHeaderView.h"
-#import "LotteryRefreshFooterView.h"
 
 #define kNewsViewControllerCellIdentifier   @"NewsViewControllerCellIdentifier"
 
@@ -86,14 +86,8 @@
         _newsTableView.delegate = self;
         _newsTableView.dataSource = self;
         
-        LotteryRefreshHeaderView *normalHeader = [LotteryRefreshHeaderView headerWithRefreshingTarget:self refreshingAction:@selector(updateNewdata)];
-        
-        _newsTableView.mj_header = normalHeader;
-        
-        LotteryRefreshFooterView *normalFooter = [LotteryRefreshFooterView footerWithRefreshingTarget:self refreshingAction:@selector(getMoreData)];
-        [normalFooter setTitle:@"上拉加载更多" forState:MJRefreshStateRefreshing];
-        _newsTableView.mj_footer = normalFooter;
-        
+        [self addRefreshHearderView:@selector(updateNewdata) otherScrollView:_newsTableView];
+        [self addRefreshFooterView:@selector(getMoreData) otherScrollView:_newsTableView];
     }
     return _newsTableView;
 }

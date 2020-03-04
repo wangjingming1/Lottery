@@ -66,7 +66,7 @@ static NSInteger ConvenientServiceViewTag = 100;
 }
 
 - (void)reloadView{
-    [self.backView.superview respondsToSelector:@selector(removeFromSuperview)];
+    [self.backView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (!self.modelArray || self.modelArray.count == 0) return;
     LotteryConvenientServiceModel *firstModel = [self.modelArray firstObject];
     UIImage *iconImage = [UIImage imageNamed:firstModel.image];

@@ -70,7 +70,7 @@
 }
 
 - (void)reloadView{
-    [self.newsView.superview respondsToSelector:@selector(removeFromSuperview)];
+    [self.newsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     UIView *lastView;
     for (LotteryNewsModel *model in self.modelArray){
         NewsCollectionViewCell *view = [[NewsCollectionViewCell alloc] init];

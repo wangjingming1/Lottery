@@ -1,7 +1,7 @@
 //
 //  LotteryRefreshHeaderView.h
 //  Lottery
-//
+//  自定义的下拉刷新界面
 //  Created by wangjingming on 2020/2/21.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //

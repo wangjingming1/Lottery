@@ -33,10 +33,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        CGRect frame = self.frame;
-        //这里由于tableviewCell的size始终默认为CGSizeMake(320, 44),只有界面显示后才会更新为正确的宽度,所以这里给了屏幕宽度为默认值
-        frame.size.width = SCREEN_WIDTH;
-        self.frame = frame;
         [self setUI];
     }
     return self;

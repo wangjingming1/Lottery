@@ -46,32 +46,11 @@
 }
 
 - (void)reloadBannerView:(NSArray *)datas{
-    [self setModelArray:datas];
-    [self downloadBannerImages];
+    self.modelArray = datas;
+    [self reloadBannerImages];
 }
 
-- (void)downloadBannerImages{
-////    NSDictionary *params = @{};
-////    NSString *url = @"";
-////    [[AFHTTPSessionManager manager] GET:url parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-////
-////    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-////
-////    }];
-//
-//    NSLog(@"%@", kDocumentsPath);
-//    NSMutableArray *images = [@[@"banner_1", @"banner_2", @"banner_3"] mutableCopy];
-//    NSString *documentsPath = kDocumentsPath;
-//    NSString *bannerPath = [NSString stringWithFormat:@"%@/homePage/banner", documentsPath];
-//    for (NSString *str in images){
-//        UIImage *image = [UIImage imageNamed:str];
-//        if (!image) continue;
-//        NSString *filePath = [NSString stringWithFormat:@"%@/%@.png", bannerPath, str];
-//        BOOL result = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES]; // 保存成功会返回YES
-//        if (result == YES) {
-//            NSLog(@"保存成功");
-//        }
-//    }
+- (void)reloadBannerImages{
     NSMutableArray *images = [@[] mutableCopy];
     for (LotteryBannerModel *model in self.modelArray){
         [images addObject:model.image];
