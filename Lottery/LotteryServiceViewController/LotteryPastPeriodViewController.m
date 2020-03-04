@@ -98,7 +98,7 @@
     WS(weakSelf);
     [LotteryDownloadManager lotteryDownload:begin count:count identifiers:@[self.identifier] finsh:^(NSDictionary<NSString *,NSArray *> * _Nonnull lotteryDict) {
         [weakSelf.lotteryWinningListArray addObjectsFromArray:lotteryDict[weakSelf.identifier]];
-        if (weakSelf.lotteryWinningListArray.count){
+        if (begin == 0 && weakSelf.lotteryWinningListArray.count > 1){
             ((LotteryWinningModel *)weakSelf.lotteryWinningListArray[0]).showPrizeView = YES;
         }
         if (finsh) finsh();
@@ -129,7 +129,7 @@
          这个预估值建议设高点，过低会导致tableview过多的预估一页能显示的cell个数，
          导致频繁加载及计算cell高度，在Masonry下会明显卡顿
          */
-        _lotteryTableView.estimatedRowHeight = 1000;
+        _lotteryTableView.estimatedRowHeight = 500;
         _lotteryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线样式
         _lotteryTableView.rowHeight = UITableViewAutomaticDimension;
         [_lotteryTableView registerClass:[LotteryPastPeriodTableViewCell class] forCellReuseIdentifier:kLotteryViewControllerCellIdentifier];

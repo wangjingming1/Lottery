@@ -325,7 +325,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     if (self.style == LSVCLotteryWinningViewStyle_LotteryService){
         self.toolsBar.identifier = self.model.identifier;
     }
-    if (self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod){
+    if (self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod && self.model.showPrizeView){
         self.bonusListView.model = self.model;
     }
     [self.bonusListView mas_remakeConstraints:^(MASConstraintMaker *make) {

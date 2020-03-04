@@ -87,9 +87,11 @@
 - (NSMutableAttributedString *)getAttributeString:(NSString *)text radStr:(NSString *)radStr {
     NSRange radRange = [text rangeOfString:radStr];
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:text];
-    [attriStr addAttribute:NSBaselineOffsetAttributeName value:@0 range:NSMakeRange(radRange.location, radRange.length)];
-    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:NSMakeRange(0, radRange.location)];
-    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:17] range:NSMakeRange(radRange.location, radRange.length)];
+    
+    [attriStr addAttribute:NSBaselineOffsetAttributeName value:@0 range:NSMakeRange(radRange.location, radRange.length-1)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize] range:NSMakeRange(0, radRange.location)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize + 7] range:NSMakeRange(radRange.location, radRange.length-1)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize] range:NSMakeRange(radRange.location+radRange.length-1, 1)];
     [attriStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(radRange.location,  radRange.length)];
     
     return attriStr;
@@ -151,6 +153,9 @@
     for (int i = 0; i < prizeArray.count; i++) {
         LotteryPrizeModel *model = prizeArray[i];
         UIView *prizeView = [self createPrizeSubView:model];
+        if (i == 0){
+            prizeView.backgroundColor = kUIColorFromRGB10(245, 245, 245);
+        }
         prizeView.layer.borderWidth = 1;
         prizeView.layer.borderColor = kDividingLineColor.CGColor;
         [self.levelView addSubview:prizeView];
