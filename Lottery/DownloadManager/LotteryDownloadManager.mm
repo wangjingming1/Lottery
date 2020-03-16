@@ -167,11 +167,11 @@
     long long sales = 0;
     long long jackpot = 0;
     if (kLotteryIsShuangseqiu(identifier)){
-        sales = 300000000 + arc4random_uniform(600000000);//3亿，6亿
-        jackpot = sales + 100000000 + arc4random_uniform(500000000);//1亿，5亿
+        sales = 200000000 + arc4random_uniform(300000000);//2亿，3亿
+        jackpot = sales + 100000000 + arc4random_uniform(200000000);//1亿，2亿
     } else if (kLotteryIsDaletou(identifier)){
-        sales = 600000000 + arc4random_uniform(1000000000);//6亿，10亿
-        jackpot = sales + 100000000 + arc4random_uniform(1000000000);//1亿，10亿
+        sales = 200000000 + arc4random_uniform(200000000);//2亿，2亿
+        jackpot = sales + 1000000000 + arc4random_uniform(500000000);//10亿，5亿
     } else if (kLotteryIsFucai3d(identifier)){
         sales = 50000000 + arc4random_uniform(1000000);//5千万，1百万
         model.testNumber = [LotteryDownloadManager getTestNumber:identifier];
@@ -199,7 +199,7 @@
     NSMutableArray <LotteryPrizeModel *> *prizeModels = [@[] mutableCopy];
     double percentage = [playRulesModel.percentage doubleValue];
     //可用奖金总额
-    double sales = [model.sales doubleValue]*percentage;
+    double sales = [model.sales doubleValue]*percentage + [model.jackpot doubleValue]*0.1;
     //去掉固定奖剩余奖金总额
     double surplusSales = sales;
     //奖级的奖金为浮动奖金数组

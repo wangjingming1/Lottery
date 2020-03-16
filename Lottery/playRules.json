@@ -38,7 +38,7 @@
                         {"red":"6","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
-                        "bonus":"0.25",
+                        "bonus":"0.25,324515",
                         "lotteryNumber":"70,500"
                     }
                 },
@@ -131,7 +131,7 @@
                     ],
                     "testbonus":{
                         "bonus":"0.25",
-                        "lotteryNumber":"50,200"
+                        "lotteryNumber":"100,300"
                     }
                 },
                 {
@@ -142,7 +142,7 @@
                     ],
                     "testbonus":{
                         "bonus":"10000",
-                        "lotteryNumber":"100,500"
+                        "lotteryNumber":"300,800"
                     }
                 },
                 {
@@ -153,7 +153,7 @@
                     ],
                     "testbonus":{
                         "bonus":"3000",
-                        "lotteryNumber":"300,1400"
+                        "lotteryNumber":"500,1400"
                     }
                 },
                 {

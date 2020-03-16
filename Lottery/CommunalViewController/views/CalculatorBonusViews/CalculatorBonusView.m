@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 @interface CalculatorBonusView()
 @property (nonatomic, strong) UILabel *issueNumberLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) LotteryWinningModel *curModel;
 @property (nonatomic, strong) UIView *ballView;
 
 @property (nonatomic, strong) UIButton *calculatorBtn;
