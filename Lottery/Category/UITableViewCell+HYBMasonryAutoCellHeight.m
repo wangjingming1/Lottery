@@ -122,7 +122,8 @@ const void *s_hyb_bottomOffsetToCellKey = "hyb_bottomOffsetToCellKey";
     [self layoutIfNeeded];//在当前runloop中立即重新布局
     
     CGFloat rowHeight = 0.0;
-    
+    CGRect frame = self.hyb_lastViewInCell.frame;
+    CGFloat offset = self.hyb_bottomOffsetToCell;
     if (self.hyb_lastViewInCell) {
         rowHeight = self.hyb_lastViewInCell.frame.size.height + self.hyb_lastViewInCell.frame.origin.y;
     } else {

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LotteryDownloadManager : NSObject
-+ (void)lotteryDownload:(NSInteger)begin count:(NSInteger)count identifiers:(NSArray *)identifiers finsh:(void (^)(NSDictionary <NSString *, NSArray *> *lotteryDict))finsh;
++ (void)lotteryDownload:(NSInteger)begin count:(NSInteger)count identifiers:(NSArray *)identifiers finsh:(void (^)(NSDictionary <NSString *, NSArray <LotteryWinningModel *> *> *lotteryDict))finsh;
 
 
 #pragma mark - test

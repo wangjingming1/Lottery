@@ -12,7 +12,7 @@
 #import "Masonry.h"
 #import "GlobalDefines.h"
 
-#import "CalculatorViewController.h"
+#import "CalculatorBonusViewController.h"
 #import "LotteryStationViewController.h"
 #import "TrendChartViewController.h"
 #import "ImitationLotteryViewController.h"

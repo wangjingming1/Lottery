@@ -1,7 +1,7 @@
 //
 //  LotteryPracticalMethod.h
 //  Lottery
-//  单位转换
+//
 //  Created by wangjingming on 2020/2/25.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*! 生成一个number位的随机数*/
 + (NSString *)arc4random:(int)number;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

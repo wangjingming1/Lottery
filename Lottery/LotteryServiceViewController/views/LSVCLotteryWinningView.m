@@ -11,10 +11,10 @@
 #import "GlobalDefines.h"
 #import "Masonry.h"
 #import "UIImageView+AddImage.h"
+#import "LSVCBallImageView.h"
 
 #import "LotteryBonusListView.h"
 #import "LotteryBottomToolsbar.h"
-#import "LotteryPastPeriodViewController.h"
 #import "LotteryPracticalMethod.h"
 
 /**彩票种类字号*/
@@ -36,12 +36,15 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
 @property (nonatomic, strong) UIView *radBallRightLineView;
 
 /**工具栏(走势图，算奖工具)*/
-@property (nonatomic, strong) LotteryBottomToolsbar *toolsBar;
+@property (nonatomic, strong) LotteryBottomToolsbar *toolsBar;//CalculatorBonusViewController
 /**奖金奖级列表*/
 @property (nonatomic, strong) LotteryBonusListView *bonusListView;
 @end
 
 @implementation LSVCLotteryWinningView
+{
+    MASConstraint *_bonusListViewHeight;
+}
 
 - (instancetype)init
 {
@@ -147,6 +150,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     [self.bonusListView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.backView.mas_bottom);
+        _bonusListViewHeight = make.height.mas_equalTo(0);
     }];
     
     [self.toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -161,6 +165,8 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         make.height.mas_equalTo(1);
         make.bottom.mas_equalTo(0);
     }];
+    //bonusListViewHeight在只有需要的时候才装载
+    [_bonusListViewHeight uninstall];
 }
 
 - (void)setStyle:(LSVCLotteryWinningViewStyle)style{
@@ -295,16 +301,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     [self.iconView setImageWithName:self.model.icon];
     self.kindNameLabel.text = self.model.kindName;
     self.issueNumberLabel.text = self.model.issueNumber;
-    NSDateFormatter *originFormatter = [[NSDateFormatter alloc]init];
-    [originFormatter setDateFormat:kDefaultDateFormat];
-    NSDate *date = [originFormatter dateFromString:model.date];
-    
-    NSDateFormatter *otherFormatter = [[NSDateFormatter alloc]init];
-    [otherFormatter setDateFormat:@"MM.dd"];
-    NSString *dateStr = [otherFormatter stringFromDate:date];
-    NSString *weakday = [LotteryPracticalMethod weekdayStringWithDate:date];
-    self.dateLabel.text = [NSString stringWithFormat:@"%@（%@）", dateStr, weakday];
-    
+    self.dateLabel.text = [model dateToGeneralFormat];
     long long jackpot = [self.model.jackpot longLongValue];
     if (jackpot == 0){
         self.jackpotLabel.text = @"";
@@ -313,8 +310,8 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     }
     
     [self reloadRightArrowViewImage];
-    [self reloadBallView:self.radBallView ballColor:@"radBall" ballStr:self.model.radBall];
-    [self reloadBallView:self.blueBallView ballColor:@"blueBall" ballStr:self.model.blueBall];
+    [self reloadBallView:self.radBallView ballStyle:LSVCBallStyle_radBall ballStr:self.model.radBall];
+    [self reloadBallView:self.blueBallView ballStyle:LSVCBallStyle_blueBall ballStr:self.model.blueBall];
     [self.radBallRightLineView mas_updateConstraints:^(MASConstraintMaker *make) {
         if ([self.model.blueBall isEqualToString:@""]){
             make.width.mas_equalTo(0);
@@ -327,16 +324,10 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     }
     if (self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod && self.model.showPrizeView){
         self.bonusListView.model = self.model;
+        [_bonusListViewHeight uninstall];
+    } else {
+        [_bonusListViewHeight install];
     }
-    [self.bonusListView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.backView.mas_bottom);
-        if (self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod && self.model.showPrizeView){
-            
-        } else {
-            make.height.mas_equalTo(0);
-        }
-    }];
     [self.ballBackLineView mas_updateConstraints:^(MASConstraintMaker *make) {
         if (self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod && self.model.showPrizeView){
             make.left.mas_equalTo(kPadding20);
@@ -366,22 +357,16 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     }
 }
 
-- (void)reloadBallView:(UIView *)ballView ballColor:(NSString *)ballColor ballStr:(NSString *)ballStr{
+- (void)reloadBallView:(UIView *)ballView ballStyle:(LSVCBallStyle)ballStyle ballStr:(NSString *)ballStr{
     [ballView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     NSArray *radBallArray = [ballStr componentsSeparatedByString:@","];
     if (radBallArray.count && ![radBallArray.firstObject isEqualToString:@""]){
         UIView *lastView;
         for (NSString *radBall in radBallArray){
-            UIImageView *imageView = [[UIImageView alloc] init];
-            [ballView addSubview:imageView];
-            [imageView setImageWithName:ballColor];
-            UILabel *label = [[UILabel alloc] init];
-            label.font = [UIFont boldSystemFontOfSize:kLotteryWinningViewBallLabelSize];
-            label.textColor = [UIColor whiteColor];
-            [imageView addSubview:label];
-            label.text = radBall;
-            
-            [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            LSVCBallImageView *ballImageView = [[LSVCBallImageView alloc] initWithBallStyle:ballStyle ballTitle:radBall];
+            [ballImageView setBallTitleLabelFontSize:kLotteryWinningViewBallLabelSize];
+            [ballView addSubview:ballImageView];
+            [ballImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (lastView){
                     make.left.mas_equalTo(lastView.mas_right).offset(kPadding10);
                 } else {
@@ -389,10 +374,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
                 }
                 make.top.bottom.mas_equalTo(0);
             }];
-            [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.mas_equalTo(imageView);
-            }];
-            lastView = imageView;
+            lastView = ballImageView;
         }
         if (lastView){
             [lastView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -544,13 +526,24 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
         params[@"leftTitle"] = self.model.kindName;
         params[@"identifier"] = self.model.identifier;
-        [self.delegate pushViewController:[LotteryPastPeriodViewController class] params:params];
+        [self.delegate pushViewController:NSClassFromString(@"LotteryPastPeriodViewController") params:params];
     }
 }
 
 #pragma mark - LotteryBottomToolsbarDelegate
 - (void)lotteryBottomToolsbar:(LotteryBottomToolsbar *)toolsbar selectTools:(LotteryBottomTools)tools{
     NSLog(@"lotteryBottomToolsbar");
+    NSMutableDictionary *params = [@{} mutableCopy];
+    params[@"identifier"] = self.model.identifier;
+    NSString *classStr = @"";
+    if (tools == LotteryBottomTools_trendchart){
+        classStr = @"TrendChartViewController";
+        params[@"leftTitle"] = kLocalizedString(@"走势图");
+    } else if (tools == LotteryBottomTools_calculator){
+        classStr = @"CalculatorBonusViewController";
+        params[@"leftTitle"] = kLocalizedString(@"算奖工具");
+    }
+    [self.delegate pushViewController:NSClassFromString(classStr) params:params];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

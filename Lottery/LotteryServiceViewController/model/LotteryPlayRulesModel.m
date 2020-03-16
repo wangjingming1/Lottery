@@ -16,6 +16,7 @@
     model.lotteryShowTime = [dict objectForKey:@"lotteryTimeStr"];
     model.lotteryTime = [dict objectForKey:@"lotteryTime"];
     model.percentage = [dict objectForKey:@"percentage"];
+    model.multipleBets = [dict objectForKey:@"multipleBets"];
     //----------------------------------------------------手动分割线
     NSArray <NSDictionary *> *prizeInfoArray = [dict objectForKey:@"lotteryPrize"];
     NSMutableArray <LotteryPrizeInfoModel *> *prizeInfoModelArray = [@[] mutableCopy];
@@ -29,6 +30,7 @@
     NSDictionary *radBullRules = [dict objectForKey:@"radBall"];
     model.radBullSame = [[radBullRules objectForKey:@"same"] boolValue];
     model.radBullCount = [[radBullRules objectForKey:@"count"] integerValue];
+    model.radBullMultipleMaxCount = [[radBullRules objectForKey:@"multipleMaxCount"] integerValue];
     NSString *radBullRangeStr = [radBullRules objectForKey:@"scope"];
     NSArray *radBullRangeArray = [radBullRangeStr componentsSeparatedByString:@","];
     if (radBullRangeArray.count == 2){
@@ -39,6 +41,7 @@
     NSDictionary *blueBullRules = [dict objectForKey:@"blueBall"];
     model.blueBullSame = [[blueBullRules objectForKey:@"same"] boolValue];
     model.blueBullCount = [[blueBullRules objectForKey:@"count"] integerValue];
+    model.blueBullMultipleMaxCount = [[blueBullRules objectForKey:@"multipleMaxCount"] integerValue];
     NSString *blueBullRangeStr = [blueBullRules objectForKey:@"scope"];
     NSArray *blueBullRangeArray = [blueBullRangeStr componentsSeparatedByString:@","];
     if (blueBullRangeArray.count == 2){

@@ -11,7 +11,6 @@
 #import "AFNetworking.h"
 #import "GlobalDefines.h"
 #import "Masonry.h"
-#import "WebViewController.h"
 #import "LotteryBannerModel.h"
 
 @interface HPVCHeaderView()<LotteryBannerViewDelegate>
@@ -67,7 +66,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
     params[@"leftTitle"] = @"赛事中心";
     params[@"url"] = model.url;
-    [self.delegate pushViewController:[WebViewController class] params:params];
+    [self.delegate pushViewController:NSClassFromString(@"WebViewController") params:params];
 }
 
 /*

@@ -130,7 +130,7 @@
          导致频繁加载及计算cell高度，在Masonry下会明显卡顿
          */
         _lotteryTableView.estimatedRowHeight = 500;
-        _lotteryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线样式
+        _lotteryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//不使用分割线样式
         _lotteryTableView.rowHeight = UITableViewAutomaticDimension;
         [_lotteryTableView registerClass:[LotteryPastPeriodTableViewCell class] forCellReuseIdentifier:kLotteryViewControllerCellIdentifier];
         _lotteryTableView.delegate = self;
@@ -200,6 +200,17 @@
 #pragma mark -
 - (void)lotteryBottomToolsbar:(LotteryBottomToolsbar *)toolsbar selectTools:(LotteryBottomTools)tools{
     NSLog(@"lotteryBottomToolsbar");
+    NSMutableDictionary *params = [@{} mutableCopy];
+    params[@"identifier"] = self.identifier;
+    NSString *classStr = @"";
+    if (tools == LotteryBottomTools_trendchart){
+        classStr = @"TrendChartViewController";
+        params[@"leftTitle"] = kLocalizedString(@"走势图");
+    } else if (tools == LotteryBottomTools_calculator){
+        classStr = @"CalculatorBonusViewController";
+        params[@"leftTitle"] = kLocalizedString(@"算奖工具");
+    }
+    [self pushViewController:NSClassFromString(classStr) params:params];
 }
 /*
 #pragma mark - Navigation

@@ -46,7 +46,11 @@
 
 /**系统默认字号*/
 #define kSystemFontOfSize                   [UIFont systemFontSize]
+/**小提示文字大小*/
+#define kSubTipsFontOfSize                  12
 
+/**浅灰色*/
+#define kLightGreyColor                     kUIColorFromRGB10(230, 230, 230)
 /**默认文字颜色(选中)*/
 #define kTintTextColor                      kUIColorFromRGB16(0xd81e06)
 /**默认文字颜色*/
@@ -56,8 +60,11 @@
 /**小标题文本颜色*/
 #define kSubtitleTintTextColor              kUIColorFromRGB10(165, 166, 167)
 
+/**小提示文本颜色*/
+#define kSubTipsTintTextColor              kLightGreyColor
+
 /**阴影颜色*/
-#define kShadowColor kUIColorFromRGB10(230, 230, 230)
+#define kShadowColor kLightGreyColor
 
 //屏幕宽和高
 #define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width

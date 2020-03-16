@@ -32,7 +32,7 @@
     [self.lotteryWinningView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(0);
         make.width.mas_equalTo(self.mas_width);
-        kImportantReminder(@"cell使用Masonry布局的话，不要通过子视图来撑cell，由外面来计算，尽量减少加载时系统计算量")
+        kImportantReminder(@"cell使用Masonry布局的话，不要通过子视图来撑cell，由外面来计算，尽量减少系统计算量，否则界面越复杂滑动时越卡顿")
         //这里不能由子视图来撑cell, 由外面自己算
 //        make.bottom.mas_equalTo(0);
     }];

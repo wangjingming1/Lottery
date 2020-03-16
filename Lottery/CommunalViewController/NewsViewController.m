@@ -80,7 +80,7 @@
     if (!_newsTableView){
         _newsTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
         _newsTableView.estimatedRowHeight = 44;
-        _newsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线样式
+        _newsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//不使用分割线样式
         _newsTableView.rowHeight = UITableViewAutomaticDimension;
         [_newsTableView registerClass:[NewsCollectionViewCell class] forCellReuseIdentifier:kNewsViewControllerCellIdentifier];
         _newsTableView.delegate = self;
@@ -142,7 +142,7 @@
     params[@"url"] = ((LotteryNewsModel *)self.newsListArray[indexPath.row]).newsUrl;
     params[@"leftTitle"] = @"资讯详情";
     params[@"y"] = @"-40";
-    [super pushViewController:[WebViewController class] params:params];
+    [super pushViewController:NSClassFromString(@"WebViewController") params:params];
 }
 /*
 #pragma mark - Navigation

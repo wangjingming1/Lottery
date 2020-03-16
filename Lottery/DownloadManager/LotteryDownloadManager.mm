@@ -18,7 +18,7 @@
 
 @implementation LotteryDownloadManager
 
-+ (void)lotteryDownload:(NSInteger)begin count:(NSInteger)count identifiers:(NSArray *)identifiers finsh:(void (^)(NSDictionary <NSString *, NSArray *> *lotteryDict))finsh {
++ (void)lotteryDownload:(NSInteger)begin count:(NSInteger)count identifiers:(NSArray *)identifiers finsh:(void (^)(NSDictionary <NSString *, NSArray <LotteryWinningModel *>*> *lotteryDict))finsh {
     NSMutableDictionary *lotteryDict = [@{} mutableCopy];
 #ifdef kTEST
     for (NSString *ide in identifiers){
@@ -92,6 +92,8 @@
             model.date = dateArray[i];
             model.testNumber = [LotteryDownloadManager getTestNumber:identifier];
             model.lotteryTime = playRulesModel.lotteryShowTime;
+            model.playRulesModel = playRulesModel;
+            model.newest = (begin == 0 && i == 0);
             //设置中奖号码
             [LotteryDownloadManager setLotteryWinningModelSalesAndBall:model playRulesModel:playRulesModel];
             //设置奖级信息
@@ -165,10 +167,10 @@
     long long sales = 0;
     long long jackpot = 0;
     if (kLotteryIsShuangseqiu(identifier)){
-        sales = 300000000 + arc4random_uniform(200000000);//3亿，2亿
+        sales = 300000000 + arc4random_uniform(600000000);//3亿，6亿
         jackpot = sales + 100000000 + arc4random_uniform(500000000);//1亿，5亿
     } else if (kLotteryIsDaletou(identifier)){
-        sales = 100000000 + arc4random_uniform(400000000);//1亿，4亿
+        sales = 600000000 + arc4random_uniform(1000000000);//6亿，10亿
         jackpot = sales + 100000000 + arc4random_uniform(1000000000);//1亿，10亿
     } else if (kLotteryIsFucai3d(identifier)){
         sales = 50000000 + arc4random_uniform(1000000);//5千万，1百万
@@ -231,7 +233,7 @@
         if (![prizeModel.bonus isEqualToString:@""]) continue;
         for (NSDictionary *dict in floatSalesArray){
             if ([prizeModel.level isEqualToString:[dict objectForKey:@"level"]]){
-                double maxBonus = 1e16;
+                double maxBonus = 1e8;
                 if ([dict objectForKey:@"maxBonus"]){
                     maxBonus = [[dict objectForKey:@"maxBonus"] doubleValue];
                 }
@@ -240,7 +242,7 @@
                 if ([prizeModel.number integerValue] > 0){
                     bonus = (surplusSales*percentage)/[prizeModel.number integerValue];
                 }
-                if (bonus > maxBonus){
+                if (bonus < 0 || bonus > maxBonus){
                     bonus = maxBonus;
                 }
                 prizeModel.bonus = [NSString stringWithFormat:@"%lld", bonus];

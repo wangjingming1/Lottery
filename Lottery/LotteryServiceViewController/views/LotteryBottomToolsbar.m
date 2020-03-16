@@ -34,10 +34,10 @@
     [self addSubview:self.calculatorButton];
     
     [self.trendchartButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(kPadding10);
+        make.top.mas_equalTo(0);
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(self);
-        make.bottom.mas_equalTo(-kPadding10);
+        make.bottom.mas_equalTo(-0);
     }];
     
     [self.calculatorButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,10 +96,11 @@
         [_trendchartButton setTitleColor:kUIColorFromRGB10(78,132,239) forState:UIControlStateNormal];
         [_trendchartButton setImage:[UIImage imageNamed:@"trendChart"] forState:UIControlStateNormal];
         [_trendchartButton setImage:[UIImage imageNamed:@"trendChart"] forState:UIControlStateHighlighted];
-        [_trendchartButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kPadding10/2)];
-        [_trendchartButton setTitleEdgeInsets:UIEdgeInsetsMake(0, kPadding10/2, 0, 0)];
+        [_trendchartButton setImageEdgeInsets:UIEdgeInsetsMake(kPadding10/2, 0, kPadding10/2, kPadding10/2)];
+        [_trendchartButton setTitleEdgeInsets:UIEdgeInsetsMake(kPadding10/2, kPadding10/2, kPadding10/2, 0)];
         [_trendchartButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
         _trendchartButton.tag = LotteryBottomTools_trendchart;
+        [_trendchartButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         _trendchartButton.layer.masksToBounds = YES;
     }
     return _trendchartButton;
@@ -112,10 +113,11 @@
         [_calculatorButton setTitleColor:kUIColorFromRGB10(78,132,239) forState:UIControlStateNormal];
         [_calculatorButton setImage:[UIImage imageNamed:@"calculator"] forState:UIControlStateNormal];
         [_calculatorButton setImage:[UIImage imageNamed:@"calculator"] forState:UIControlStateHighlighted];
-        [_calculatorButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kPadding10/2)];
-        [_calculatorButton setTitleEdgeInsets:UIEdgeInsetsMake(0, kPadding10/2, 0, 0)];
+        [_calculatorButton setImageEdgeInsets:UIEdgeInsetsMake(kPadding10/2, 0, kPadding10/2, kPadding10/2)];
+        [_calculatorButton setTitleEdgeInsets:UIEdgeInsetsMake(kPadding10/2, kPadding10/2, kPadding10/2, 0)];
         [_calculatorButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
         _calculatorButton.tag = LotteryBottomTools_calculator;
+        [_calculatorButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         _calculatorButton.layer.masksToBounds = YES;
     }
     return _calculatorButton;

@@ -6,7 +6,7 @@
                 {"image":"https://tradeimg.500.com/upimages/wap/img/20200219105515445.jpg","url":"https://live.m.500.com/center/footballmatch/63/schedule?render=local"},
                 ],
             "convenientServices":[
-                {"title":"算奖工具","image":"calculator","className":"CalculatorViewController"},
+                {"title":"算奖工具","image":"calculator","className":"CalculatorBonusViewController"},
                 {"title":"附近","image":"lotteryStation","className":"LotteryStationViewController"},
                 {"title":"走势图","image":"trendChart","className":"TrendChartViewController"},
                 {"title":"模拟购彩","image":"imitationLottery","className":"ImitationLotteryViewController"},

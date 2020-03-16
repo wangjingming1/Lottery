@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class LotteryBottomToolsbar;
 
 typedef NS_ENUM(NSInteger, LotteryBottomTools) {
-    LotteryBottomTools_trendchart,
-    LotteryBottomTools_calculator,
+    LotteryBottomTools_trendchart,  //走势图
+    LotteryBottomTools_calculator,  //算奖工具
 };
 
 @protocol LotteryBottomToolsbarDelegate <NSObject>

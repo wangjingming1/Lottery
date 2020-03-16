@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSRange radBullRange;
 /**红球数量*/
 @property (nonatomic) NSInteger radBullCount;
+/**复式选球红色最大选取数量*/
+@property (nonatomic) NSInteger radBullMultipleMaxCount;
 
 /**蓝球是否允许重复*/
 @property (nonatomic) BOOL blueBullSame;
@@ -42,7 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSRange blueBullRange;
 /**蓝球数量*/
 @property (nonatomic) NSInteger blueBullCount;
+/**复式选球蓝色最大选取数量*/
+@property (nonatomic) NSInteger blueBullMultipleMaxCount;
 
+/**是否画允许复式投注*/
+@property (nonatomic) BOOL multipleBets;
 /**ps：测试用奖金占销售额的百分比*/
 @property (nonatomic, copy) NSString *percentage;
 + (LotteryPlayRulesModel *)initLotteryPlayRulesModelWithDict:(NSDictionary *)dict;

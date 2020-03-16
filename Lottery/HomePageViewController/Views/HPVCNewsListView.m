@@ -13,9 +13,6 @@
 #import "Masonry.h"
 #import "LotteryNewsModel.h"
 
-#import "WebViewController.h"
-#import "NewsViewController.h"
-
 #import "NewsDownloadManager.h"
 
 #define kHeadLabelFontSize      (kSystemFontOfSize + 5)
@@ -156,12 +153,12 @@
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:0];
         if (tap.view == _footLabel){
             params[@"leftTitle"] = @"彩票资讯";
-            [self.delegate pushViewController:[NewsViewController class] params:params];
+            [self.delegate pushViewController:NSClassFromString(@"NewsViewController") params:params];
         } else if ([tap.view isKindOfClass:[NewsCollectionViewCell class]]){
             params[@"url"] = ((NewsCollectionViewCell *)tap.view).model.newsUrl;
             params[@"leftTitle"] = @"资讯详情";
             params[@"y"] = @"-40";
-            [self.delegate pushViewController:[WebViewController class] params:params];
+            [self.delegate pushViewController:NSClassFromString(@"WebViewController") params:params];
         }
     }
 }

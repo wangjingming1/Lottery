@@ -5,13 +5,16 @@
             "radBall":{
                 "scope":"1,33",
                 "same":"0",
-                "count":"6"
+                "count":"6",
+                "multipleMaxCount":"20"
             },
             "blueBall":{
                 "scope":"1,16",
                 "same":"0",
-                "count":"1"
+                "count":"1",
+                "multipleMaxCount":"16"
             },
+            "multipleBets":"1",
             "sortOrder":"1",
             "lotteryTimeStr":"每周二、四、日 21:15开奖",
             "lotteryTime":"2,4,7,21:15",
@@ -94,13 +97,16 @@
             "radBall":{
                 "scope":"1,35",
                 "same":"0",
-                "count":"5"
+                "count":"5",
+                "multipleMaxCount":"35"
             },
             "blueBall":{
                 "scope":"1,12",
                 "same":"0",
-                "count":"2"
+                "count":"2",
+                "multipleMaxCount":"12"
             },
+            "multipleBets":"1",
             "sortOrder":"1",
             "lotteryTimeStr":"每周一、三、六 20:30开奖",
             "lotteryTime":"1,3,6,20:30",
@@ -199,8 +205,8 @@
                     "level":"九等奖",
                     "bonus":"5",
                     "winningRules":[
-                        {"rad":"1","blue":"2","consistency":"0","sameNumber":"0"},
                         {"rad":"3","blue":"0","consistency":"0","sameNumber":"0"},
+                        {"rad":"1","blue":"2","consistency":"0","sameNumber":"0"},
                         {"rad":"2","blue":"1","consistency":"0","sameNumber":"0"},
                         {"rad":"0","blue":"2","consistency":"0","sameNumber":"0"}
                     ],
@@ -216,8 +222,10 @@
             "radBall":{
                 "scope":"0,9",
                 "same":"1",
-                "count":"3"
+                "count":"3",
+                "multipleMaxCount":"0"
             },
+            "multipleBets":"0",
             "blueBall":{},
             "sortOrder":"0",
             "lotteryTimeStr":"每天 21:15开奖",
@@ -264,8 +272,10 @@
             "radBall":{
                 "scope":"0,9",
                 "same":"1",
-                "count":"3"
+                "count":"3",
+                "multipleMaxCount":"0"
             },
+            "multipleBets":"0",
             "blueBall":{},
             "sortOrder":"0",
             "lotteryTimeStr":"每天 20:30开奖",
@@ -312,8 +322,10 @@
             "radBall":{
                 "scope":"0,9",
                 "same":"1",
-                "count":"5"
+                "count":"5",
+                "multipleMaxCount":"0"
             },
+            "multipleBets":"0",
             "blueBall":{},
             "sortOrder":"0",
             "lotteryTimeStr":"每天 20:30开奖",
@@ -338,8 +350,10 @@
             "radBall":{
                 "scope":"0,9",
                 "same":"1",
-                "count":"7"
+                "count":"7",
+                "multipleMaxCount":"0"
             },
+            "multipleBets":"0",
             "blueBall":{},
             "sortOrder":"0",
             "lotteryTimeStr":"每周二、五、日 20:30开奖",
@@ -419,12 +433,15 @@
             "radBall":{
                 "scope":"1,30",
                 "same":"0",
-                "count":"7"
+                "count":"7",
+                "multipleMaxCount":"0"
             },
+            "multipleBets":"0",
             "blueBall":{
                 "scope":"1,30",
                 "same":"0",
-                "cont":"0"
+                "cont":"0",
+                "multipleMaxCount":"0"
             },
             "sortOrder":"1",
             "lotteryTimeStr":"每周二、五、日 20:30开奖",

@@ -33,6 +33,10 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        CGRect frame = self.frame;
+        kImportantReminder(@"这里由于tableviewCell的size始终默认为CGSizeMake(320, 44),只有界面显示后才会更新为正确的宽度(layoutSubviews方法h中可以获取真实frame),所以这里给了屏幕宽度为默认值")
+        frame.size.width = SCREEN_WIDTH;
+        self.frame = frame;
         [self setUI];
     }
     return self;
@@ -83,9 +87,6 @@
     self.thumbnailImageView.image = nil;
     [self.thumbnailImageView setImageWithName:model.imageUrl];
     
-    //默认不使用centerY约束
-    [_thumbnailImageViewCenterY uninstall];
-    
     [self setNeedsLayout];//设置重新布局标记
     [self layoutIfNeeded];//在当前runloop中立即重新布局
     
@@ -97,10 +98,11 @@
     if (CGRectGetHeight(titleLabelFrame) + kPadding10 > CGRectGetHeight(thumbnailImageViewFrame)){
         self.hyb_bottomOffsetToCell = kPadding15*2 + CGRectGetHeight(informationSourcesLabelFrame);
         [_thumbnailImageViewCenterY install];
-        self.hyb_lastViewsInCell = @[self.titleLabel];
+        self.hyb_lastViewInCell = self.titleLabel;
     } else {
+        [_thumbnailImageViewCenterY uninstall];
         self.hyb_bottomOffsetToCell = kPadding15;
-        self.hyb_lastViewsInCell = @[self.thumbnailImageView];
+        self.hyb_lastViewInCell = self.thumbnailImageView;
     }
 }
 

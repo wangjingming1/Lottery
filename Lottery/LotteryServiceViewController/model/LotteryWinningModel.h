@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class LotteryPrizeModel;
+@class LotteryPlayRulesModel;
 
 @interface LotteryWinningModel : NSObject
 /**彩票标示码*/
@@ -33,17 +34,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *blueBall;
 /**试机号*/
 @property (nonatomic, copy) NSString *testNumber;
-
 /**开奖时间*/
 @property (nonatomic, copy) NSString *lotteryTime;
+
+/**是否是最新一期*/
+@property (nonatomic) BOOL newest;
+
 /**界面使用，表示当前view是否显示中奖列表*/
 @property (nonatomic) BOOL showPrizeView;
 
+/**规则相关*/
+@property (nonatomic, strong) LotteryPlayRulesModel *playRulesModel;
+
+/**奖级及中奖注数*/
 @property (nonatomic, strong) NSArray <LotteryPrizeModel *> *prizeArray;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 + (NSString *)identifierToString:(NSString *)identifier type:(NSString *)type;
+
+- (NSString *)dateToGeneralFormat;
+
+- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRadCount:(NSString *)selectRadCount selectBlueCount:(NSString *)selectBlueCount guessRadCount:(NSString *)guessRadCount guessBlueCount:(NSString *)guessBlueCount;
 @end
 
 
