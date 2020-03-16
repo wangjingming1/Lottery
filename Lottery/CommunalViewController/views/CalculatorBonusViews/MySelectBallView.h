@@ -19,10 +19,10 @@ typedef NS_ENUM(NSInteger, MySelectBallViewStyle) {
 
 @interface MySelectBallView : UIView
 @property (nonatomic, copy) void(^cancelBlock)(void);
-@property (nonatomic, copy) void(^finishBlock)(NSString *radCount, NSString *blueCount);
+@property (nonatomic, copy) void(^finishBlock)(NSString *redCount, NSString *blueCount);
 @property (nonatomic, strong) LotteryWinningModel *model;
 - (instancetype)initWithStyle:(MySelectBallViewStyle)style;
-- (void)setOldRadCount:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount;
+- (void)setOldRedCount:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount;
 - (void)setSafeAreaLayoutGuideBottom:(MASViewAttribute *)bottom;
 @end
 

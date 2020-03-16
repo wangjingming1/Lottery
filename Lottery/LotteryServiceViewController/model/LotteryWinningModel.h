@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**奖池*/
 @property (nonatomic, copy) NSString *jackpot;
 /**红球*/
-@property (nonatomic, copy) NSString *radBall;
+@property (nonatomic, copy) NSString *redBall;
 /**篮球*/
 @property (nonatomic, copy) NSString *blueBall;
 /**试机号*/
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)dateToGeneralFormat;
 
-- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRadCount:(NSString *)selectRadCount selectBlueCount:(NSString *)selectBlueCount guessRadCount:(NSString *)guessRadCount guessBlueCount:(NSString *)guessBlueCount;
+- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRedCount:(NSString *)selectRedCount selectBlueCount:(NSString *)selectBlueCount guessRedCount:(NSString *)guessRedCount guessBlueCount:(NSString *)guessBlueCount;
 @end
 
 

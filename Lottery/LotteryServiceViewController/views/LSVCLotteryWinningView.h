@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, LSVCLotteryWinningViewStyle) {
 /**奖池*/
 @property (nonatomic, strong) UILabel *jackpotLabel;
 /**红球*/
-@property (nonatomic, strong) UIView *radBallView;
+@property (nonatomic, strong) UIView *redBallView;
 /**篮球*/
 @property (nonatomic, strong) UIView *blueBallView;
 /**右侧箭头*/

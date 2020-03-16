@@ -27,14 +27,14 @@
     model.prizeInfoArray = prizeInfoModelArray;
 
     //----------------------------------------------------手动分割线
-    NSDictionary *radBullRules = [dict objectForKey:@"radBall"];
-    model.radBullSame = [[radBullRules objectForKey:@"same"] boolValue];
-    model.radBullCount = [[radBullRules objectForKey:@"count"] integerValue];
-    model.radBullMultipleMaxCount = [[radBullRules objectForKey:@"multipleMaxCount"] integerValue];
-    NSString *radBullRangeStr = [radBullRules objectForKey:@"scope"];
-    NSArray *radBullRangeArray = [radBullRangeStr componentsSeparatedByString:@","];
-    if (radBullRangeArray.count == 2){
-        model.radBullRange = NSMakeRange([radBullRangeArray.firstObject integerValue], [radBullRangeArray.lastObject integerValue]);
+    NSDictionary *redBullRules = [dict objectForKey:@"redBall"];
+    model.redBullSame = [[redBullRules objectForKey:@"same"] boolValue];
+    model.redBullCount = [[redBullRules objectForKey:@"count"] integerValue];
+    model.redBullMultipleMaxCount = [[redBullRules objectForKey:@"multipleMaxCount"] integerValue];
+    NSString *redBullRangeStr = [redBullRules objectForKey:@"scope"];
+    NSArray *redBullRangeArray = [redBullRangeStr componentsSeparatedByString:@","];
+    if (redBullRangeArray.count == 2){
+        model.redBullRange = NSMakeRange([redBullRangeArray.firstObject integerValue], [redBullRangeArray.lastObject integerValue]);
     }
     
     //----------------------------------------------------手动分割线
@@ -84,7 +84,7 @@
 
 + (LotteryWinningRulesModel *)initLotteryWinningRulesModelWithDict:(NSDictionary *)dict{
     LotteryWinningRulesModel *model = [[LotteryWinningRulesModel alloc] init];
-    model.radBullSameCount = [[dict objectForKey:@"rad"] integerValue];
+    model.redBullSameCount = [[dict objectForKey:@"red"] integerValue];
     model.blueBullSameCount = [[dict objectForKey:@"blue"] integerValue];
     model.consistency = [[dict objectForKey:@"consistency"] boolValue];
     return model;

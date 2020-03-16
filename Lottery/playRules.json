@@ -2,7 +2,7 @@
     "data":{
         "shuangseqiu":{
             "title":"双色球",
-            "radBall":{
+            "redBall":{
                 "scope":"1,33",
                 "same":"0",
                 "count":"6",
@@ -24,7 +24,7 @@
                     "level":"一等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"6","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"6","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.75,10000000",
@@ -35,7 +35,7 @@
                     "level":"二等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"6","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"6","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.25",
@@ -46,7 +46,7 @@
                     "level":"三等奖",
                     "bonus":"3000",
                     "winningRules":[
-                        {"rad":"5","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"5","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"3000",
@@ -57,8 +57,8 @@
                     "level":"四等奖",
                     "bonus":"200",
                     "winningRules":[
-                        {"rad":"4","blue":"1","consistency":"0","sameNumber":"0"},
-                        {"rad":"5","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"1","consistency":"0","sameNumber":"0"},
+                        {"red":"5","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"200",
@@ -69,8 +69,8 @@
                     "level":"五等奖",
                     "bonus":"10",
                     "winningRules":[
-                        {"rad":"4","blue":"0","consistency":"0","sameNumber":"0"},
-                        {"rad":"3","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"0","consistency":"0","sameNumber":"0"},
+                        {"red":"3","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"10",
@@ -81,9 +81,9 @@
                     "level":"六等奖",
                     "bonus":"5",
                     "winningRules":[
-                        {"rad":"2","blue":"1","consistency":"0","sameNumber":"0"},
-                        {"rad":"1","blue":"1","consistency":"0","sameNumber":"0"},
-                        {"rad":"0","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"2","blue":"1","consistency":"0","sameNumber":"0"},
+                        {"red":"1","blue":"1","consistency":"0","sameNumber":"0"},
+                        {"red":"0","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"5",
@@ -94,7 +94,7 @@
         },
         "daletou":{
             "title":"超级大乐透",
-            "radBall":{
+            "redBall":{
                 "scope":"1,35",
                 "same":"0",
                 "count":"5",
@@ -116,7 +116,7 @@
                     "level":"一等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"5","blue":"2","consistency":"0","sameNumber":"0"}
+                        {"red":"5","blue":"2","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.75,10000000",
@@ -127,7 +127,7 @@
                     "level":"二等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"5","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"5","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.25",
@@ -138,7 +138,7 @@
                     "level":"三等奖",
                     "bonus":"10000",
                     "winningRules":[
-                        {"rad":"5","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"5","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"10000",
@@ -149,7 +149,7 @@
                     "level":"四等奖",
                     "bonus":"3000",
                     "winningRules":[
-                        {"rad":"4","blue":"2","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"2","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"3000",
@@ -160,7 +160,7 @@
                     "level":"五等奖",
                     "bonus":"300",
                     "winningRules":[
-                        {"rad":"4","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"300",
@@ -171,7 +171,7 @@
                     "level":"六等奖",
                     "bonus":"200",
                     "winningRules":[
-                        {"rad":"3","blue":"2","consistency":"0","sameNumber":"0"}
+                        {"red":"3","blue":"2","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"200",
@@ -182,7 +182,7 @@
                     "level":"七等奖",
                     "bonus":"100",
                     "winningRules":[
-                        {"rad":"4","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"100",
@@ -193,8 +193,8 @@
                     "level":"八等奖",
                     "bonus":"15",
                     "winningRules":[
-                        {"rad":"2","blue":"2","consistency":"0","sameNumber":"0"},
-                        {"rad":"3","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"2","blue":"2","consistency":"0","sameNumber":"0"},
+                        {"red":"3","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"15",
@@ -205,10 +205,10 @@
                     "level":"九等奖",
                     "bonus":"5",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"0","sameNumber":"0"},
-                        {"rad":"1","blue":"2","consistency":"0","sameNumber":"0"},
-                        {"rad":"2","blue":"1","consistency":"0","sameNumber":"0"},
-                        {"rad":"0","blue":"2","consistency":"0","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"0","sameNumber":"0"},
+                        {"red":"1","blue":"2","consistency":"0","sameNumber":"0"},
+                        {"red":"2","blue":"1","consistency":"0","sameNumber":"0"},
+                        {"red":"0","blue":"2","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"5",
@@ -219,7 +219,7 @@
         },
         "fucai3d":{
             "title":"福彩3D",
-            "radBall":{
+            "redBall":{
                 "scope":"0,9",
                 "same":"1",
                 "count":"3",
@@ -236,7 +236,7 @@
                     "level":"单选",
                     "bonus":"1040",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"1","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"1040",
@@ -247,7 +247,7 @@
                     "level":"组选三",
                     "bonus":"346",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"0","sameNumber":"2"}
+                        {"red":"3","blue":"0","consistency":"0","sameNumber":"2"}
                     ],
                     "testbonus":{
                         "bonus":"346",
@@ -258,7 +258,7 @@
                     "level":"组选六",
                     "bonus":"173",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"173",
@@ -269,7 +269,7 @@
         },
         "pailie3":{
             "title":"排列三",
-            "radBall":{
+            "redBall":{
                 "scope":"0,9",
                 "same":"1",
                 "count":"3",
@@ -286,7 +286,7 @@
                     "level":"直选",
                     "bonus":"1040",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"1","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"1040",
@@ -297,7 +297,7 @@
                     "level":"组选三",
                     "bonus":"346",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"0","sameNumber":"2"}
+                        {"red":"3","blue":"0","consistency":"0","sameNumber":"2"}
                     ],
                     "testbonus":{
                         "bonus":"346",
@@ -308,7 +308,7 @@
                     "level":"组选六",
                     "bonus":"173",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"173",
@@ -319,7 +319,7 @@
         },
         "pailie5":{
             "title":"排列五",
-            "radBall":{
+            "redBall":{
                 "scope":"0,9",
                 "same":"1",
                 "count":"5",
@@ -336,7 +336,7 @@
                     "level":"直选",
                     "bonus":"100000",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"1","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"100000",
@@ -347,7 +347,7 @@
         },
         "qixingcai":{
             "title":"七星彩",
-            "radBall":{
+            "redBall":{
                 "scope":"0,9",
                 "same":"1",
                 "count":"7",
@@ -364,7 +364,7 @@
                     "level":"一等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"7","blue":"0","consistency":"1","sameNumber":"0"}
+                        {"red":"7","blue":"0","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.75,5000000",
@@ -375,7 +375,7 @@
                     "level":"二等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"6","blue":"0","consistency":"1","sameNumber":"0"}
+                        {"red":"6","blue":"0","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.25",
@@ -386,7 +386,7 @@
                     "level":"三等奖",
                     "bonus":"1800",
                     "winningRules":[
-                        {"rad":"5","blue":"1","consistency":"1","sameNumber":"0"}
+                        {"red":"5","blue":"1","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"1800",
@@ -397,7 +397,7 @@
                     "level":"四等奖",
                     "bonus":"300",
                     "winningRules":[
-                        {"rad":"4","blue":"1","consistency":"1","sameNumber":"0"}
+                        {"red":"4","blue":"1","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"300",
@@ -408,7 +408,7 @@
                     "level":"五等奖",
                     "bonus":"20",
                     "winningRules":[
-                        {"rad":"3","blue":"0","consistency":"1","sameNumber":"0"}
+                        {"red":"3","blue":"0","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"20",
@@ -419,7 +419,7 @@
                     "level":"六等奖",
                     "bonus":"5",
                     "winningRules":[
-                        {"rad":"2","blue":"1","consistency":"1","sameNumber":"0"}
+                        {"red":"2","blue":"1","consistency":"1","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"5",
@@ -430,7 +430,7 @@
         },
         "qilecai":{
             "title":"七乐彩",
-            "radBall":{
+            "redBall":{
                 "scope":"1,30",
                 "same":"0",
                 "count":"7",
@@ -452,7 +452,7 @@
                     "level":"一等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"7","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"7","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.7,5000000",
@@ -463,7 +463,7 @@
                     "level":"二等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"6","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"6","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.2",
@@ -474,7 +474,7 @@
                     "level":"三等奖",
                     "bonus":"",
                     "winningRules":[
-                        {"rad":"6","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"6","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"0.1",
@@ -485,7 +485,7 @@
                     "level":"四等奖",
                     "bonus":"200",
                     "winningRules":[
-                        {"rad":"5","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"5","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"200",
@@ -496,7 +496,7 @@
                     "level":"五等奖",
                     "bonus":"50",
                     "winningRules":[
-                        {"rad":"5","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"5","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"50",
@@ -507,7 +507,7 @@
                     "level":"六等奖",
                     "bonus":"10",
                     "winningRules":[
-                        {"rad":"4","blue":"1","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"1","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"10",
@@ -518,7 +518,7 @@
                     "level":"七等奖",
                     "bonus":"5",
                     "winningRules":[
-                        {"rad":"4","blue":"0","consistency":"0","sameNumber":"0"}
+                        {"red":"4","blue":"0","consistency":"0","sameNumber":"0"}
                     ],
                     "testbonus":{
                         "bonus":"5",

@@ -78,21 +78,21 @@
     
     NSString *salesText = [NSString stringWithFormat:@"%@：%@", kLocalizedString(@"本期销量(元)"), sales];
     NSString *jackpotText = [NSString stringWithFormat:@"%@：%@", kLocalizedString(@"奖池累积(元)"), jackpot];
-    self.salesLabel.attributedText = [self getAttributeString:salesText radStr:sales];
-    self.jackpotLabel.attributedText = [self getAttributeString:jackpotText radStr:jackpot];
+    self.salesLabel.attributedText = [self getAttributeString:salesText redStr:sales];
+    self.jackpotLabel.attributedText = [self getAttributeString:jackpotText redStr:jackpot];
     
     [self reloadLevelView];
 }
 
-- (NSMutableAttributedString *)getAttributeString:(NSString *)text radStr:(NSString *)radStr {
-    NSRange radRange = [text rangeOfString:radStr];
+- (NSMutableAttributedString *)getAttributeString:(NSString *)text redStr:(NSString *)redStr {
+    NSRange redRange = [text rangeOfString:redStr];
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:text];
     
-    [attriStr addAttribute:NSBaselineOffsetAttributeName value:@0 range:NSMakeRange(radRange.location, radRange.length-1)];
-    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize] range:NSMakeRange(0, radRange.location)];
-    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize + 7] range:NSMakeRange(radRange.location, radRange.length-1)];
-    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize] range:NSMakeRange(radRange.location+radRange.length-1, 1)];
-    [attriStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(radRange.location,  radRange.length)];
+    [attriStr addAttribute:NSBaselineOffsetAttributeName value:@0 range:NSMakeRange(redRange.location, redRange.length-1)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize] range:NSMakeRange(0, redRange.location)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize + 7] range:NSMakeRange(redRange.location, redRange.length-1)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:kLotteryBonusListViewFontSize] range:NSMakeRange(redRange.location+redRange.length-1, 1)];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(redRange.location,  redRange.length)];
     
     return attriStr;
 }

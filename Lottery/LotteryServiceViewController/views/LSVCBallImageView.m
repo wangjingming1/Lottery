@@ -13,8 +13,8 @@
 
 @implementation LSVCBallImageView
 + (UIImage *)getImage:(LSVCBallStyle)style{
-    if (style == LSVCBallStyle_radBall){
-        return [UIImage imageNamed:@"radBall"];
+    if (style == LSVCBallStyle_redBall){
+        return [UIImage imageNamed:@"redBall"];
     } else if (style == LSVCBallStyle_blueBall){
         return [UIImage imageNamed:@"blueBall"];
     }
@@ -22,7 +22,7 @@
 }
 
 + (UIColor *)getColor:(LSVCBallStyle)style{
-    if (style == LSVCBallStyle_radBall){
+    if (style == LSVCBallStyle_redBall){
         return kUIColorFromRGB10(207, 112, 86);
     } else if (style == LSVCBallStyle_blueBall){
         return kUIColorFromRGB10(110, 152, 240);
@@ -54,8 +54,8 @@
 
 - (void)setBallStyle:(LSVCBallStyle)ballStyle{
     _ballStyle = ballStyle;
-    if (ballStyle == LSVCBallStyle_radBall){
-        [self setImageWithName:@"radBall"];
+    if (ballStyle == LSVCBallStyle_redBall){
+        [self setImageWithName:@"redBall"];
     } else if (ballStyle == LSVCBallStyle_blueBall){
         [self setImageWithName:@"blueBall"];
     } else {

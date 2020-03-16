@@ -221,7 +221,7 @@
 - (UIImageView *)selectImgV{
     if (!_selectImgV){
         _selectImgV = [[UIImageView alloc] init];
-        _selectImgV.image = [UIImage imageNamed:@"duihaoRad"];
+        _selectImgV.image = [UIImage imageNamed:@"duihaoRed"];
         _selectImgV.hidden = YES;
     }
     return _selectImgV;

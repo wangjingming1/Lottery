@@ -19,9 +19,9 @@
 #import "BonusView.h"
 
 typedef NS_ENUM(NSInteger, SubBallTag){
-    SubBall_radTag = 1000,
+    SubBall_redTag = 1000,
     SubBall_blueTag = 2000,
-    SubBall_radBallCountTag = 3000,
+    SubBall_redBallCountTag = 3000,
     SubBall_blueBallCountTag = 4000
 };
 
@@ -100,17 +100,17 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     
     [self reloadBallView:model];
     
-    [self reloadMyBallView:self.mySelectBallView radCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.radBullCount] blueCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.blueBullCount]];
-    [self reloadMyBallView:self.myTargetBallView radCount:@"0" blueCount:@"0"];
+    [self reloadMyBallView:self.mySelectBallView redCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.redBullCount] blueCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.blueBullCount]];
+    [self reloadMyBallView:self.myTargetBallView redCount:@"0" blueCount:@"0"];
     [self removeBonusView];
 }
 
 - (void)reloadBallView:(LotteryWinningModel *)model{
-    NSArray *radBallArray = [model.radBall componentsSeparatedByString:@","];
+    NSArray *redBallArray = [model.redBall componentsSeparatedByString:@","];
     NSArray *blueBallArray = [model.blueBall componentsSeparatedByString:@","];
     [self.ballView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    [self createSubBallLabel:radBallArray ballStyle:LSVCBallStyle_radBall tag:SubBall_radTag];
+    [self createSubBallLabel:redBallArray ballStyle:LSVCBallStyle_redBall tag:SubBall_redTag];
     [self createSubBallLabel:blueBallArray ballStyle:LSVCBallStyle_blueBall tag:SubBall_blueTag];
     
     [self.ballView.subviews mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:5 leadSpacing:0 tailSpacing:0];
@@ -120,11 +120,11 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     }];
 }
 
-- (void)reloadMyBallView:(UIView *)myBall radBallCount:(NSString *)radBallCount blueBallCount:(NSString *)blueBallCount{
-    UILabel *radBallCountLabel = [myBall viewWithTag:SubBall_radBallCountTag];
+- (void)reloadMyBallView:(UIView *)myBall redBallCount:(NSString *)redBallCount blueBallCount:(NSString *)blueBallCount{
+    UILabel *redBallCountLabel = [myBall viewWithTag:SubBall_redBallCountTag];
     UILabel *blueBallCountLabel = [myBall viewWithTag:SubBall_blueBallCountTag];
     
-    [radBallCountLabel setText:radBallCount];
+    [redBallCountLabel setText:redBallCount];
     [blueBallCountLabel setText:blueBallCount];
 }
 
@@ -133,23 +133,23 @@ typedef NS_ENUM(NSInteger, SubBallTag){
         NSString *ballStr = ballArray[i];
         LSVCBallImageView *ballImageView = [[LSVCBallImageView alloc] initWithBallStyle:ballStyle ballTitle:ballStr];
         [ballImageView setBallTitleLabelFontSize:14];
-        ballImageView.tag = SubBall_radTag + i;
+        ballImageView.tag = SubBall_redTag + i;
         [self.ballView addSubview:ballImageView];
     }
 }
 
-- (UIView *)createMyBallView:(NSString *)title defRadBallCount:(NSString *)defRadBallCount defBlueBallCount:(NSString *)defBlueBallCount{
+- (UIView *)createMyBallView:(NSString *)title defRedBallCount:(NSString *)defRedBallCount defBlueBallCount:(NSString *)defBlueBallCount{
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor whiteColor];
     UILabel *titleLabel = [self createLabel:title fontSize:_subLabelFontSize];
         
-    UIView *radBallView = [[UIView alloc] init];
-    LSVCBallImageView *radBallImageView = [[LSVCBallImageView alloc] init];
-    radBallImageView.ballStyle = LSVCBallStyle_radBall;
-    UILabel *radBallLabel = [self createLabel:kLocalizedString(@"红球") fontSize:_subLabelFontSize];
-    UILabel *radBallCountLabel = [self createLabel:defRadBallCount fontSize:_subLabelFontSize];
-    radBallCountLabel.textColor = [radBallImageView getColor];
-    UILabel *radBallUnitLabel = [self createLabel:kLocalizedString(@"个") fontSize:_subLabelFontSize];
+    UIView *redBallView = [[UIView alloc] init];
+    LSVCBallImageView *redBallImageView = [[LSVCBallImageView alloc] init];
+    redBallImageView.ballStyle = LSVCBallStyle_redBall;
+    UILabel *redBallLabel = [self createLabel:kLocalizedString(@"红球") fontSize:_subLabelFontSize];
+    UILabel *redBallCountLabel = [self createLabel:defRedBallCount fontSize:_subLabelFontSize];
+    redBallCountLabel.textColor = [redBallImageView getColor];
+    UILabel *redBallUnitLabel = [self createLabel:kLocalizedString(@"个") fontSize:_subLabelFontSize];
     
     UIView *blueBallView = [[UIView alloc] init];
     LSVCBallImageView *blueBallImageView = [[LSVCBallImageView alloc] init];
@@ -165,13 +165,13 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     lineView.backgroundColor = kUIColorFromRGB10(200, 200, 200);
     
     [view addSubview:titleLabel];
-    [view addSubview:radBallView];
+    [view addSubview:redBallView];
     [view addSubview:blueBallView];
     
-    [radBallView addSubview:radBallImageView];
-    [radBallView addSubview:radBallLabel];
-    [radBallView addSubview:radBallCountLabel];
-    [radBallView addSubview:radBallUnitLabel];
+    [redBallView addSubview:redBallImageView];
+    [redBallView addSubview:redBallLabel];
+    [redBallView addSubview:redBallCountLabel];
+    [redBallView addSubview:redBallUnitLabel];
     
     [blueBallView addSubview:blueBallImageView];
     [blueBallView addSubview:blueBallLabel];
@@ -180,46 +180,46 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     [view addSubview:rightArrowView];
     [view addSubview:lineView];
     
-    radBallCountLabel.tag = SubBall_radBallCountTag;
+    redBallCountLabel.tag = SubBall_redBallCountTag;
     blueBallCountLabel.tag = SubBall_blueBallCountTag;
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(kPadding10);
     }];
-    [radBallView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [redBallView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.top.mas_equalTo(titleLabel.mas_bottom);
         make.width.mas_equalTo(view.mas_width).multipliedBy(1/3.0);
     }];
     [blueBallView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(radBallView.mas_right);
-        make.top.mas_equalTo(radBallView);
+        make.left.mas_equalTo(redBallView.mas_right);
+        make.top.mas_equalTo(redBallView);
         make.width.mas_equalTo(view.mas_width).multipliedBy(1/3.0);
         make.bottom.mas_equalTo(0);
     }];
-    [radBallImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [redBallImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding10);
         make.top.mas_equalTo(kPadding15);
         make.size.mas_equalTo(CGSizeMake(20, 20));
         make.bottom.mas_equalTo(-kPadding15);
     }];
-    [radBallLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(radBallImageView.mas_right).offset(kPadding10);
-        make.centerY.mas_equalTo(radBallImageView);
+    [redBallLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(redBallImageView.mas_right).offset(kPadding10);
+        make.centerY.mas_equalTo(redBallImageView);
     }];
-    [radBallCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(radBallLabel.mas_right).offset(kPadding10/2);
-        make.centerY.mas_equalTo(radBallImageView);
+    [redBallCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(redBallLabel.mas_right).offset(kPadding10/2);
+        make.centerY.mas_equalTo(redBallImageView);
     }];
-    [radBallUnitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(radBallCountLabel.mas_right).offset(1);
-        make.centerY.mas_equalTo(radBallImageView);
+    [redBallUnitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(redBallCountLabel.mas_right).offset(1);
+        make.centerY.mas_equalTo(redBallImageView);
     }];
     
     [blueBallImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding10);
         make.top.mas_equalTo(kPadding15);
-        make.size.mas_equalTo(radBallImageView);
+        make.size.mas_equalTo(redBallImageView);
         make.bottom.mas_equalTo(-kPadding15);
     }];
     [blueBallLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -246,14 +246,14 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     return view;
 }
 
-- (void)reloadMyBallView:(UIView *)myBallView radCount:(NSString *)radCount blueCount:(NSString *)blueCount{
-    UILabel *radBallCountLabel = [myBallView viewWithTag:SubBall_radBallCountTag];
+- (void)reloadMyBallView:(UIView *)myBallView redCount:(NSString *)redCount blueCount:(NSString *)blueCount{
+    UILabel *redBallCountLabel = [myBallView viewWithTag:SubBall_redBallCountTag];
     UILabel *blueBallCountLabel = [myBallView viewWithTag:SubBall_blueBallCountTag];
-    [radBallCountLabel setText:radCount];
+    [redBallCountLabel setText:redCount];
     [blueBallCountLabel setText:blueCount];
 
     if (myBallView == self.myTargetBallView){
-        self.calculatorBtn.enabled = !([radCount isEqualToString:@"0"] && [blueCount isEqualToString:@"0"]);
+        self.calculatorBtn.enabled = !([redCount isEqualToString:@"0"] && [blueCount isEqualToString:@"0"]);
         [self removeBonusView];
     }
 }
@@ -275,13 +275,13 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 
 - (void)calculatorButtonClick:(UIButton *)button{
     NSLog(@"计算奖金click");
-    NSString *selectRadCount = ((UILabel *)[self.mySelectBallView viewWithTag:SubBall_radBallCountTag]).text;
+    NSString *selectRedCount = ((UILabel *)[self.mySelectBallView viewWithTag:SubBall_redBallCountTag]).text;
     NSString *selectBlueCount = ((UILabel *)[self.mySelectBallView viewWithTag:SubBall_blueBallCountTag]).text;
     
-    NSString *guessRadCount = ((UILabel *)[self.myTargetBallView viewWithTag:SubBall_radBallCountTag]).text;
+    NSString *guessRedCount = ((UILabel *)[self.myTargetBallView viewWithTag:SubBall_redBallCountTag]).text;
     NSString *guessBlueCount = ((UILabel *)[self.myTargetBallView viewWithTag:SubBall_blueBallCountTag]).text;
     
-    NSArray <LotteryPrizeModel *> *array = [self.model calculatorPrizeArrayWithSelectRadCount:selectRadCount selectBlueCount:selectBlueCount guessRadCount:guessRadCount guessBlueCount:guessBlueCount];
+    NSArray <LotteryPrizeModel *> *array = [self.model calculatorPrizeArrayWithSelectRedCount:selectRedCount selectBlueCount:selectBlueCount guessRedCount:guessRedCount guessBlueCount:guessBlueCount];
     [self createBonusView:array];
 }
 
@@ -292,16 +292,16 @@ typedef NS_ENUM(NSInteger, SubBallTag){
             weakSelf.model = newModel;
         }];
     } else if (tapGesture.view == self.mySelectBallView && [self.delegate respondsToSelector:@selector(calculatorBonusView:showMySelectBallSelector:oldBlueCount:result:)]){
-        UILabel *radBallCountLabel = [tapGesture.view viewWithTag:SubBall_radBallCountTag];
+        UILabel *redBallCountLabel = [tapGesture.view viewWithTag:SubBall_redBallCountTag];
         UILabel *blueBallCountLabel = [tapGesture.view viewWithTag:SubBall_blueBallCountTag];
-        [self.delegate calculatorBonusView:self showMySelectBallSelector:radBallCountLabel.text oldBlueCount:blueBallCountLabel.text result:^(NSString * _Nonnull newRadCount, NSString * _Nonnull newBlueCount) {
-            [weakSelf reloadMyBallView:tapGesture.view radCount:newRadCount blueCount:newBlueCount];
+        [self.delegate calculatorBonusView:self showMySelectBallSelector:redBallCountLabel.text oldBlueCount:blueBallCountLabel.text result:^(NSString * _Nonnull newRedCount, NSString * _Nonnull newBlueCount) {
+            [weakSelf reloadMyBallView:tapGesture.view redCount:newRedCount blueCount:newBlueCount];
         }];
     } else if (tapGesture.view == self.myTargetBallView && [self.delegate respondsToSelector:@selector(calculatorBonusView:showMyTargetBallSelector:oldBlueCount:result:)]){
-        UILabel *radBallCountLabel = [tapGesture.view viewWithTag:SubBall_radBallCountTag];
+        UILabel *redBallCountLabel = [tapGesture.view viewWithTag:SubBall_redBallCountTag];
         UILabel *blueBallCountLabel = [tapGesture.view viewWithTag:SubBall_blueBallCountTag];
-        [self.delegate calculatorBonusView:self showMyTargetBallSelector:radBallCountLabel.text oldBlueCount:blueBallCountLabel.text result:^(NSString * _Nonnull newRadCount, NSString * _Nonnull newBlueCount) {
-            [weakSelf reloadMyBallView:tapGesture.view radCount:newRadCount blueCount:newBlueCount];
+        [self.delegate calculatorBonusView:self showMyTargetBallSelector:redBallCountLabel.text oldBlueCount:blueBallCountLabel.text result:^(NSString * _Nonnull newRedCount, NSString * _Nonnull newBlueCount) {
+            [weakSelf reloadMyBallView:tapGesture.view redCount:newRedCount blueCount:newBlueCount];
         }];
     }
 }
@@ -421,14 +421,14 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 
 - (UIView *)mySelectBallView{
     if (!_mySelectBallView){
-        _mySelectBallView = [self createMyBallView:kLocalizedString(@"我的投注") defRadBallCount:@"0" defBlueBallCount:@"0"];
+        _mySelectBallView = [self createMyBallView:kLocalizedString(@"我的投注") defRedBallCount:@"0" defBlueBallCount:@"0"];
     }
     return _mySelectBallView;
 }
 
 - (UIView *)myTargetBallView{
     if (!_myTargetBallView){
-        _myTargetBallView = [self createMyBallView:kLocalizedString(@"我的命中") defRadBallCount:@"0" defBlueBallCount:@"0"];
+        _myTargetBallView = [self createMyBallView:kLocalizedString(@"我的命中") defRedBallCount:@"0" defBlueBallCount:@"0"];
     }
     return _myTargetBallView;
 }

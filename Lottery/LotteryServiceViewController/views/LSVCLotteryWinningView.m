@@ -33,7 +33,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
 /**彩种及时间奖池等信息*/
 @property (nonatomic, strong) UIView *lotteryInfoView;
 /**红蓝球中间的线*/
-@property (nonatomic, strong) UIView *radBallRightLineView;
+@property (nonatomic, strong) UIView *redBallRightLineView;
 
 /**工具栏(走势图，算奖工具)*/
 @property (nonatomic, strong) LotteryBottomToolsbar *toolsBar;//CalculatorBonusViewController
@@ -80,8 +80,8 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     [self.lotteryInfoView addSubview:self.dateLabel];
     [self.lotteryInfoView addSubview:self.jackpotLabel];
     
-    [self.backView addSubview:self.radBallView];
-    [self.backView addSubview:self.radBallRightLineView];
+    [self.backView addSubview:self.redBallView];
+    [self.backView addSubview:self.redBallRightLineView];
     [self.backView addSubview:self.blueBallView];
     [self.backView addSubview:self.ballBackLineView];
     [self.backView addSubview:self.testNumberLabel];
@@ -121,25 +121,25 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         make.left.mas_equalTo(self.dateLabel.mas_right).offset(kPadding10);
         make.centerY.mas_equalTo(self.dateLabel);
     }];
-    [self.radBallView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.redBallView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconView);
         make.top.mas_equalTo(self.lotteryInfoView.mas_bottom).offset(kPadding10);
         make.bottom.mas_equalTo(-kPadding15);
     }];
-    [self.radBallRightLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.radBallView.mas_right).offset(kPadding10);
-        make.centerY.mas_equalTo(self.radBallView);
+    [self.redBallRightLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.redBallView.mas_right).offset(kPadding10);
+        make.centerY.mas_equalTo(self.redBallView);
         make.width.mas_equalTo(2);
-        make.height.mas_equalTo(self.radBallView.mas_height).multipliedBy(1/2.0);
+        make.height.mas_equalTo(self.redBallView.mas_height).multipliedBy(1/2.0);
     }];
     [self.blueBallView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.radBallRightLineView.mas_right).offset(kPadding10);
-        make.centerY.mas_equalTo(self.radBallRightLineView);
+        make.left.mas_equalTo(self.redBallRightLineView.mas_right).offset(kPadding10);
+        make.centerY.mas_equalTo(self.redBallRightLineView);
     }];
     
     [self.ballBackLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.radBallView.mas_bottom).offset(kPadding15);
+        make.top.mas_equalTo(self.redBallView.mas_bottom).offset(kPadding15);
         make.height.mas_equalTo(1);
     }];
     [self.rightArrowView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -208,14 +208,14 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         make.centerY.mas_equalTo(self.kindNameLabel);
         make.right.mas_equalTo(self.jackpotLabel.superview).offset(-kPadding10);
     }];
-    [self.radBallView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.redBallView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconView);
         make.top.mas_equalTo(self.iconView.mas_bottom).offset(kPadding10);
         make.bottom.mas_equalTo(-kPadding15);
     }];
     [self.rightArrowView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-kPadding15);
-        make.centerY.mas_equalTo(self.radBallView);
+        make.centerY.mas_equalTo(self.redBallView);
     }];
     
     [self.backLineView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -243,7 +243,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         make.left.mas_equalTo(self.dateLabel.mas_right).offset(kPadding10);
         make.centerY.mas_equalTo(self.dateLabel);
     }];
-    [self.radBallView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.redBallView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconView);
         make.top.mas_equalTo(self.lotteryInfoView.mas_bottom).offset(kPadding10);
         make.bottom.mas_equalTo(-kPadding15);
@@ -277,7 +277,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         make.left.mas_equalTo(self.dateLabel.mas_right).offset(kPadding10);
         make.centerY.mas_equalTo(self.dateLabel);
     }];
-    [self.radBallView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.redBallView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconView);
         make.top.mas_equalTo(self.lotteryInfoView.mas_bottom).offset(kPadding10);
         make.bottom.mas_equalTo(-kPadding15);
@@ -310,9 +310,9 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     }
     
     [self reloadRightArrowViewImage];
-    [self reloadBallView:self.radBallView ballStyle:LSVCBallStyle_radBall ballStr:self.model.radBall];
+    [self reloadBallView:self.redBallView ballStyle:LSVCBallStyle_redBall ballStr:self.model.redBall];
     [self reloadBallView:self.blueBallView ballStyle:LSVCBallStyle_blueBall ballStr:self.model.blueBall];
-    [self.radBallRightLineView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.redBallRightLineView mas_updateConstraints:^(MASConstraintMaker *make) {
         if ([self.model.blueBall isEqualToString:@""]){
             make.width.mas_equalTo(0);
         } else {
@@ -359,11 +359,11 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
 
 - (void)reloadBallView:(UIView *)ballView ballStyle:(LSVCBallStyle)ballStyle ballStr:(NSString *)ballStr{
     [ballView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    NSArray *radBallArray = [ballStr componentsSeparatedByString:@","];
-    if (radBallArray.count && ![radBallArray.firstObject isEqualToString:@""]){
+    NSArray *redBallArray = [ballStr componentsSeparatedByString:@","];
+    if (redBallArray.count && ![redBallArray.firstObject isEqualToString:@""]){
         UIView *lastView;
-        for (NSString *radBall in radBallArray){
-            LSVCBallImageView *ballImageView = [[LSVCBallImageView alloc] initWithBallStyle:ballStyle ballTitle:radBall];
+        for (NSString *redBall in redBallArray){
+            LSVCBallImageView *ballImageView = [[LSVCBallImageView alloc] initWithBallStyle:ballStyle ballTitle:redBall];
             [ballImageView setBallTitleLabelFontSize:kLotteryWinningViewBallLabelSize];
             [ballView addSubview:ballImageView];
             [ballImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -445,19 +445,19 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     return _jackpotLabel;
 }
 
-- (UIView *)radBallView{
-    if (!_radBallView){
-        _radBallView = [[UIView alloc] init];
+- (UIView *)redBallView{
+    if (!_redBallView){
+        _redBallView = [[UIView alloc] init];
     }
-    return _radBallView;
+    return _redBallView;
 }
 
-- (UIView *)radBallRightLineView{
-    if (!_radBallRightLineView){
-        _radBallRightLineView = [[UIView alloc] init];
-        _radBallRightLineView.backgroundColor = kDividingLineColor;
+- (UIView *)redBallRightLineView{
+    if (!_redBallRightLineView){
+        _redBallRightLineView = [[UIView alloc] init];
+        _redBallRightLineView.backgroundColor = kDividingLineColor;
     }
-    return _radBallRightLineView;
+    return _redBallRightLineView;
 }
 
 - (UIView *)blueBallView{

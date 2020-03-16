@@ -222,29 +222,29 @@ kImportantReminder(@"由于otherBackView的点击手势与tableViewCell点击手
     }];
 }
 
-- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMySelectBallSelector:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRadCount, NSString *newBlueCount))result{
-    [self showMySelectBallView:SelectBallViewStyle model:calculatorBonusView.model oldRadCount:oldRadCount oldBlueCount:oldBlueCount result:result];
+- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMySelectBallSelector:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result{
+    [self showMySelectBallView:SelectBallViewStyle model:calculatorBonusView.model oldRedCount:oldRedCount oldBlueCount:oldBlueCount result:result];
 }
 
-- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMyTargetBallSelector:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRadCount, NSString *newBlueCount))result{
-    [self showMySelectBallView:TargetBallViewStyle model:calculatorBonusView.model oldRadCount:oldRadCount oldBlueCount:oldBlueCount result:result];
+- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMyTargetBallSelector:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result{
+    [self showMySelectBallView:TargetBallViewStyle model:calculatorBonusView.model oldRedCount:oldRedCount oldBlueCount:oldBlueCount result:result];
 }
 
-- (void)showMySelectBallView:(MySelectBallViewStyle)style model:(LotteryWinningModel *)model oldRadCount:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRadCount, NSString *newBlueCount))result{
+- (void)showMySelectBallView:(MySelectBallViewStyle)style model:(LotteryWinningModel *)model oldRedCount:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result{
     MySelectBallView *mySelectBallView = [[MySelectBallView alloc] initWithStyle:style];
     mySelectBallView.backgroundColor = [UIColor whiteColor];
     [self.otherBackView addSubview:mySelectBallView];
     mySelectBallView.model = model;
-    [mySelectBallView setOldRadCount:oldRadCount oldBlueCount:oldBlueCount];
+    [mySelectBallView setOldRedCount:oldRedCount oldBlueCount:oldBlueCount];
     
     WS(weakSelf);
     [mySelectBallView setCancelBlock:^{
         [weakSelf removeOtherBackView];
     }];
     
-    [mySelectBallView setFinishBlock:^(NSString * _Nonnull radCount, NSString * _Nonnull blueCount) {
+    [mySelectBallView setFinishBlock:^(NSString * _Nonnull redCount, NSString * _Nonnull blueCount) {
         if (result){
-            result(radCount, blueCount);
+            result(redCount, blueCount);
         }
        [weakSelf removeOtherBackView];
     }];

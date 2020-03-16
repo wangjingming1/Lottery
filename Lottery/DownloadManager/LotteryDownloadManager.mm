@@ -191,7 +191,7 @@
     }
     model.sales = [NSString stringWithFormat:@"%lld", sales];
     model.jackpot = [NSString stringWithFormat:@"%lld", jackpot];
-    model.radBall = [LotteryDownloadManager getRandomBallByMaxNumber:playRulesModel.radBullRange.length minNumber:playRulesModel.radBullRange.location maxCount:playRulesModel.radBullCount allowDuplicate:playRulesModel.radBullSame isSort:playRulesModel.sortOrder];
+    model.redBall = [LotteryDownloadManager getRandomBallByMaxNumber:playRulesModel.redBullRange.length minNumber:playRulesModel.redBullRange.location maxCount:playRulesModel.redBullCount allowDuplicate:playRulesModel.redBullSame isSort:playRulesModel.sortOrder];
     model.blueBall = [LotteryDownloadManager getRandomBallByMaxNumber:playRulesModel.blueBullRange.length minNumber:playRulesModel.blueBullRange.location maxCount:playRulesModel.blueBullCount allowDuplicate:playRulesModel.blueBullSame isSort:playRulesModel.sortOrder];
 }
 

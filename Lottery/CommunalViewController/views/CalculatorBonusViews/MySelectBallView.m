@@ -17,22 +17,22 @@
 @interface MySelectBallView() <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic) MySelectBallViewStyle style;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UICollectionView *radBallCollectionView;
+@property (nonatomic, strong) UICollectionView *redBallCollectionView;
 @property (nonatomic, strong) UICollectionView *blueBallCollectionView;
 
-@property (nonatomic, strong) UILabel *radBallLabel;
+@property (nonatomic, strong) UILabel *redBallLabel;
 @property (nonatomic, strong) UILabel *blueBallLabel;
 
-@property (nonatomic, strong) NSMutableArray *radBallCountArray;
+@property (nonatomic, strong) NSMutableArray *redBallCountArray;
 @property (nonatomic, strong) NSMutableArray *blueBallCountArray;
 @end
 
 @implementation MySelectBallView
 {
-    NSInteger _radCellSelectIdx;
+    NSInteger _redCellSelectIdx;
     NSInteger _blueCellSelectIdx;
     
-    UIColor *_radBallColor;
+    UIColor *_redBallColor;
     UIColor *_blueBallColor;
 }
 
@@ -48,13 +48,13 @@
 }
 
 - (void)initData{
-    _radCellSelectIdx = 0;
+    _redCellSelectIdx = 0;
     _blueCellSelectIdx = 0;
     
-    _radBallColor = [LSVCBallImageView getColor:LSVCBallStyle_radBall];
+    _redBallColor = [LSVCBallImageView getColor:LSVCBallStyle_redBall];
     _blueBallColor = [LSVCBallImageView getColor:LSVCBallStyle_blueBall];
     
-    self.radBallCountArray = [@[] mutableCopy];
+    self.redBallCountArray = [@[] mutableCopy];
     self.blueBallCountArray = [@[] mutableCopy];
 }
 
@@ -74,9 +74,9 @@
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = kDividingLineColor;
     
-    UIView *radBallView = [[UIView alloc] init];
-    LSVCBallImageView *radBallImageView = [[LSVCBallImageView alloc] init];
-    radBallImageView.ballStyle = LSVCBallStyle_radBall;
+    UIView *redBallView = [[UIView alloc] init];
+    LSVCBallImageView *redBallImageView = [[LSVCBallImageView alloc] init];
+    redBallImageView.ballStyle = LSVCBallStyle_redBall;
     
     UIView *blueBallView = [[UIView alloc] init];
     LSVCBallImageView *blueBallImageView = [[LSVCBallImageView alloc] init];
@@ -88,10 +88,10 @@
     [headerView addSubview:finishButton];
     [self addSubview:lineView];
     
-    [self addSubview:radBallView];
-    [radBallView addSubview:radBallImageView];
-    [radBallView addSubview:self.radBallLabel];
-    [radBallView addSubview:self.radBallCollectionView];
+    [self addSubview:redBallView];
+    [redBallView addSubview:redBallImageView];
+    [redBallView addSubview:self.redBallLabel];
+    [redBallView addSubview:self.redBallCollectionView];
     
     [self addSubview:blueBallView];
     [blueBallView addSubview:blueBallImageView];
@@ -126,37 +126,37 @@
         make.height.mas_equalTo(1);
     }];
     
-    [radBallView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [redBallView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(headerView);
         make.top.mas_equalTo(lineView.mas_bottom);
     }];
-    [radBallImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [redBallImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding10);
         make.top.mas_equalTo(kPadding10);
         make.size.mas_equalTo(CGSizeMake(ballImageViewSize, ballImageViewSize));
     }];
     
-    [self.radBallLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(radBallImageView.mas_right).offset(kPadding10/2);
-        make.centerY.mas_equalTo(radBallImageView);
+    [self.redBallLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(redBallImageView.mas_right).offset(kPadding10/2);
+        make.centerY.mas_equalTo(redBallImageView);
     }];
     
-    [self.radBallCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.redBallCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding10 + ballImageViewSize);
         make.right.mas_equalTo(-(kPadding10 + ballImageViewSize));
-        make.top.mas_equalTo(self.radBallLabel.mas_bottom).offset(kPadding10);
+        make.top.mas_equalTo(self.redBallLabel.mas_bottom).offset(kPadding10);
         make.height.mas_equalTo(100);
         make.bottom.mas_equalTo(-kPadding10);
     }];
     
     [blueBallView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(radBallView);
-        make.top.mas_equalTo(radBallView.mas_bottom);
+        make.left.right.mas_equalTo(redBallView);
+        make.top.mas_equalTo(redBallView.mas_bottom);
         make.bottom.mas_equalTo(0);
     }];
     [blueBallImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding10);
-        make.top.mas_equalTo(self.radBallCollectionView.mas_bottom).offset(kPadding20);
+        make.top.mas_equalTo(self.redBallCollectionView.mas_bottom).offset(kPadding20);
         make.size.mas_equalTo(CGSizeMake(ballImageViewSize, ballImageViewSize));
     }];
     [self.blueBallLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -174,42 +174,42 @@
 
 - (void)setModel:(LotteryWinningModel *)model{
     _model = model;
-    NSInteger minRadCount = 0, minBlueCount = 0;
-    NSInteger maxRadCount = 0, maxBlueCount = 0;
+    NSInteger minRedCount = 0, minBlueCount = 0;
+    NSInteger maxRedCount = 0, maxBlueCount = 0;
     if (self.style == SelectBallViewStyle){
-        minRadCount = model.playRulesModel.radBullCount;
+        minRedCount = model.playRulesModel.redBullCount;
         minBlueCount = model.playRulesModel.blueBullCount;
         if (model.playRulesModel.multipleBets){
-            maxRadCount = model.playRulesModel.radBullMultipleMaxCount;
+            maxRedCount = model.playRulesModel.redBullMultipleMaxCount;
             maxBlueCount = model.playRulesModel.blueBullMultipleMaxCount;
         } else {
-            maxRadCount = model.playRulesModel.radBullRange.length;
+            maxRedCount = model.playRulesModel.redBullRange.length;
             maxBlueCount = model.playRulesModel.blueBullRange.length;
         }
     } else if (self.style == TargetBallViewStyle){
-        maxRadCount = model.playRulesModel.radBullCount;
+        maxRedCount = model.playRulesModel.redBullCount;
         maxBlueCount = model.playRulesModel.blueBullCount;
     }
-    [self.radBallCountArray removeAllObjects];
+    [self.redBallCountArray removeAllObjects];
     [self.blueBallCountArray removeAllObjects];
-    for (NSInteger i = minRadCount; i <= maxRadCount; i++){
-        [self.radBallCountArray addObject:[NSString stringWithFormat:@"%ld", i]];
+    for (NSInteger i = minRedCount; i <= maxRedCount; i++){
+        [self.redBallCountArray addObject:[NSString stringWithFormat:@"%ld", i]];
     }
     
     for (NSInteger i = minBlueCount; i <= maxBlueCount; i++){
         [self.blueBallCountArray addObject:[NSString stringWithFormat:@"%ld", i]];
     }
-    [self.radBallCollectionView reloadData];
+    [self.redBallCollectionView reloadData];
     [self.blueBallCollectionView reloadData];
 }
 
-- (void)setOldRadCount:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount {
-    [self reloadBallLabel:self.radBallLabel ballStr:kLocalizedString(@"红球") count:oldRadCount countColor:_radBallColor];
+- (void)setOldRedCount:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount {
+    [self reloadBallLabel:self.redBallLabel ballStr:kLocalizedString(@"红球") count:oldRedCount countColor:_redBallColor];
     [self reloadBallLabel:self.blueBallLabel ballStr:kLocalizedString(@"蓝球") count:oldBlueCount countColor:_blueBallColor];
-    _radCellSelectIdx = [self.radBallCountArray indexOfObject:oldRadCount];
+    _redCellSelectIdx = [self.redBallCountArray indexOfObject:oldRedCount];
     _blueCellSelectIdx = [self.blueBallCountArray indexOfObject:oldBlueCount];
     
-    [self.radBallCollectionView reloadData];
+    [self.redBallCollectionView reloadData];
     [self.blueBallCollectionView reloadData];
 }
 
@@ -237,9 +237,9 @@
 
 - (void)finishButtonClick:(UIButton *)button{
     if (self.finishBlock){
-        NSString *radCount = self.radBallCountArray[_radCellSelectIdx];
+        NSString *redCount = self.redBallCountArray[_redCellSelectIdx];
         NSString *blueCount = self.blueBallCountArray[_blueCellSelectIdx];
-        self.finishBlock(radCount, blueCount);
+        self.finishBlock(redCount, blueCount);
     }
 }
 
@@ -277,13 +277,13 @@
     return _titleLabel;
 }
 
-- (UILabel *)radBallLabel{
-    if (!_radBallLabel){
-        _radBallLabel = [[UILabel alloc] init];
-        _radBallLabel.font = [UIFont systemFontOfSize:15];
-        _radBallLabel.textColor = kTitleTintTextColor;
+- (UILabel *)redBallLabel{
+    if (!_redBallLabel){
+        _redBallLabel = [[UILabel alloc] init];
+        _redBallLabel.font = [UIFont systemFontOfSize:15];
+        _redBallLabel.textColor = kTitleTintTextColor;
     }
-    return _radBallLabel;
+    return _redBallLabel;
 }
 
 - (UILabel *)blueBallLabel{
@@ -295,11 +295,11 @@
     return _blueBallLabel;
 }
 
-- (UICollectionView *)radBallCollectionView{
-    if (!_radBallCollectionView){
-        _radBallCollectionView = [self createCollectionView:[MySelectBallViewCell radCellIdentifier]];
+- (UICollectionView *)redBallCollectionView{
+    if (!_redBallCollectionView){
+        _redBallCollectionView = [self createCollectionView:[MySelectBallViewCell redCellIdentifier]];
     }
-    return _radBallCollectionView;
+    return _redBallCollectionView;
 }
 
 - (UICollectionView *)blueBallCollectionView{
@@ -316,8 +316,8 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if(collectionView == self.radBallCollectionView){
-        return self.radBallCountArray.count;
+    if(collectionView == self.redBallCollectionView){
+        return self.redBallCountArray.count;
     } else if (collectionView == self.blueBallCollectionView){
         return self.blueBallCountArray.count;
     }
@@ -328,10 +328,10 @@
     NSString *identifier = @"";
     NSInteger selectIdx = -1;
     NSString *title = @"";
-    if (collectionView == self.radBallCollectionView){
-        identifier = [MySelectBallViewCell radCellIdentifier];
-        selectIdx = _radCellSelectIdx;
-        title = self.radBallCountArray[indexPath.row];
+    if (collectionView == self.redBallCollectionView){
+        identifier = [MySelectBallViewCell redCellIdentifier];
+        selectIdx = _redCellSelectIdx;
+        title = self.redBallCountArray[indexPath.row];
     } else if (collectionView == self.blueBallCollectionView){
         identifier = [MySelectBallViewCell blueCellIdentifier];
         selectIdx = _blueCellSelectIdx;
@@ -347,9 +347,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (collectionView == self.radBallCollectionView && indexPath.row < self.radBallCountArray.count){
-        _radCellSelectIdx = indexPath.row;
-        [self reloadBallLabel:self.radBallLabel ballStr:kLocalizedString(@"红球") count:self.radBallCountArray[indexPath.row] countColor:_radBallColor];
+    if (collectionView == self.redBallCollectionView && indexPath.row < self.redBallCountArray.count){
+        _redCellSelectIdx = indexPath.row;
+        [self reloadBallLabel:self.redBallLabel ballStr:kLocalizedString(@"红球") count:self.redBallCountArray[indexPath.row] countColor:_redBallColor];
     } else if (collectionView == self.blueBallCollectionView && indexPath.row < self.blueBallCountArray.count){
         _blueCellSelectIdx = indexPath.row;
         [self reloadBallLabel:self.blueBallLabel ballStr:kLocalizedString(@"蓝球") count:self.blueBallCountArray[indexPath.row] countColor:_blueBallColor];
@@ -370,7 +370,7 @@
 //移除监听
 -(void)dealloc
 {
-    [self.radBallCollectionView removeObserver:self forKeyPath:@"contentSize"];
+    [self.redBallCollectionView removeObserver:self forKeyPath:@"contentSize"];
     [self.blueBallCollectionView removeObserver:self forKeyPath:@"contentSize"];
 }
 /*

@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showIssueNumberSelector:(void(^)(LotteryWinningModel *newModel))result;
 
-- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMySelectBallSelector:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRadCount, NSString *newBlueCount))result;
-- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMyTargetBallSelector:(NSString *)oldRadCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRadCount, NSString *newBlueCount))result;
+- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMySelectBallSelector:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result;
+- (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMyTargetBallSelector:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result;
 @end
 
 @interface CalculatorBonusView : UIView

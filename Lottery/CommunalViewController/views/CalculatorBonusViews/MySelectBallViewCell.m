@@ -17,8 +17,8 @@
 @end
 
 @implementation MySelectBallViewCell
-+ (NSString *)radCellIdentifier {
-    return @"radCellIdentifier";
++ (NSString *)redCellIdentifier {
+    return @"redCellIdentifier";
 }
 
 + (NSString *)blueCellIdentifier {
@@ -61,8 +61,8 @@
 
 - (void)setSelected:(BOOL)selected{
     [super setSelected:selected];
-    if ([self.reuseIdentifier isEqualToString:[MySelectBallViewCell radCellIdentifier]]){
-        self.backgroundColor = selected ? [LSVCBallImageView getColor:LSVCBallStyle_radBall] : [UIColor clearColor];
+    if ([self.reuseIdentifier isEqualToString:[MySelectBallViewCell redCellIdentifier]]){
+        self.backgroundColor = selected ? [LSVCBallImageView getColor:LSVCBallStyle_redBall] : [UIColor clearColor];
     } else if ([self.reuseIdentifier isEqualToString:[MySelectBallViewCell blueCellIdentifier]]){
         self.backgroundColor = selected ? [LSVCBallImageView getColor:LSVCBallStyle_blueBall] : [UIColor clearColor];
         

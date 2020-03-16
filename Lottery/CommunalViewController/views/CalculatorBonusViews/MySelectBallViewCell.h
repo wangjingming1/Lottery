@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MySelectBallViewCell : UICollectionViewCell
 @property (nonatomic, strong) NSString *title;
-+ (NSString *)radCellIdentifier;
++ (NSString *)redCellIdentifier;
 + (NSString *)blueCellIdentifier;
 @end
 

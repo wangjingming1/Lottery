@@ -30,13 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray <LotteryPrizeInfoModel *> *prizeInfoArray;
 
 /**红球是否允许重复*/
-@property (nonatomic) BOOL radBullSame;
+@property (nonatomic) BOOL redBullSame;
 /**红球范围*/
-@property (nonatomic) NSRange radBullRange;
+@property (nonatomic) NSRange redBullRange;
 /**红球数量*/
-@property (nonatomic) NSInteger radBullCount;
+@property (nonatomic) NSInteger redBullCount;
 /**复式选球红色最大选取数量*/
-@property (nonatomic) NSInteger radBullMultipleMaxCount;
+@property (nonatomic) NSInteger redBullMultipleMaxCount;
 
 /**蓝球是否允许重复*/
 @property (nonatomic) BOOL blueBullSame;
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**获奖规则*/
 @interface LotteryWinningRulesModel : NSObject
 /**红球相同数量*/
-@property (nonatomic) NSInteger radBullSameCount;
+@property (nonatomic) NSInteger redBullSameCount;
 /**蓝球相同数量*/
 @property (nonatomic) NSInteger blueBullSameCount;
 /**球是否需要连续一致*/

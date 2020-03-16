@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, LSVCBallStyle) {
-    LSVCBallStyle_radBall, //207,112,86
+    LSVCBallStyle_redBall, //207,112,86
     LSVCBallStyle_blueBall,//110,152,240
 };
 

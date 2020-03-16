@@ -26,7 +26,7 @@
         self.date = @"";
         self.sales = @"";
         self.jackpot = @"";
-        self.radBall = @"";
+        self.redBall = @"";
         self.blueBall = @"";
         self.testNumber = @"";
         self.newest = NO;
@@ -46,7 +46,7 @@
         self.date = [dict objectForKey:@"date"];
         self.sales = [dict objectForKey:@"sales"];
         self.jackpot = [dict objectForKey:@"jackpot"];
-        self.radBall = [dict objectForKey:@"radBall"];
+        self.redBall = [dict objectForKey:@"redBall"];
         self.blueBall = [dict objectForKey:@"blueBall"];
         self.testNumber = [dict objectForKey:@"testNumber"];
     }
@@ -84,49 +84,13 @@ int combination(int m,int n){
     return k/j;
 }
 
-void calculateRed(int red,int guessRed,int blue,int guessBlue, int RED, int BLUE){
-   int notGuessBule = blue - guessBlue;
-    for(int i=guessRed; i>=0;i--){
-        if(red-guessRed+i<RED)
-            break;
-        int recoreds = combination(guessRed,i)*combination(red-guessRed,RED-i);
-        if(recoreds*guessBlue!=0){
-            NSLog(@"红球中%d个，篮球中%d个的注数是%d注",i, guessBlue, recoreds*guessBlue);
-        }
-        if(recoreds*notGuessBule!=0){
-            NSLog(@"红球中%d个，篮球中0个的注数是%d注", i, recoreds*notGuessBule);
-        }
-    }
-}
-
-void calculateRed1(int red,int guessRed,int blue,int guessBlue, int RED, int BLUE){
-    int notGuessBule = blue - guessBlue;
-    for(int i=guessRed; i>=0;i--){
-        if(red-guessRed+i<RED)
-            break;
-        int recoredsRad = combination(guessRed,i)*combination(red-guessRed,RED-i);
-        for (int j = guessBlue; j >= 0; j--){
-            if (blue - guessBlue + j < BLUE){
-                break;
-            }
-            int recoredsBlue = combination(guessBlue,j)*combination(blue-guessBlue,BLUE-j);
-            if(recoredsRad*j!=0){
-                NSLog(@"红球中%d个，篮球中%d个的注数是%d注",i, j, recoredsRad*recoredsBlue);
-            }
-        }
-        if(recoredsRad*notGuessBule!=0){
-            NSLog(@"红球中%d个，篮球中0个的注数是%d注", i, recoredsRad*notGuessBule);
-        }
-    }
-}
-
 - (NSArray *)calculateRed1:(int)red guessRed:(int)guessRed blue:(int)blue guessBlue:(int)guessBlue RED:(int)RED BLUE:(int)BLUE{
     NSMutableArray *array = [@[] mutableCopy];
     int notGuessBule = blue - guessBlue;
     for(int i = guessRed; i >= 0; i--){
         if(red - guessRed + i < RED)
             break;
-        int recoredsRad = combination(guessRed, i)*combination(red - guessRed, RED - i);
+        int recoredsRed = combination(guessRed, i)*combination(red - guessRed, RED - i);
         int j = guessBlue;
         for (; j >= 0; j--){
             if (blue - guessBlue + j < BLUE){
@@ -134,29 +98,29 @@ void calculateRed1(int red,int guessRed,int blue,int guessBlue, int RED, int BLU
             }
             NSMutableDictionary *dict = [@{} mutableCopy];
             int recoredsBlue = combination(guessBlue, j)*combination(blue - guessBlue, BLUE - j);
-            if(recoredsRad*j != 0){
-                NSLog(@"红球中%d个，篮球中%d个的注数是%d注",i, j, recoredsRad*recoredsBlue);
+            if(recoredsRed*j != 0){
+                NSLog(@"红球中%d个，篮球中%d个的注数是%d注",i, j, recoredsRed*recoredsBlue);
                 dict[@"guessRed"] = @(i);
                 dict[@"guessBlue"] = @(j);
-                dict[@"count"] = @(recoredsRad*recoredsBlue);
+                dict[@"count"] = @(recoredsRed*recoredsBlue);
                 [array addObject:dict];
             }
         }
-        if(recoredsRad*notGuessBule!=0 && notGuessBule > BLUE){
+        if(recoredsRed*notGuessBule!=0 && notGuessBule > BLUE){
             int recoreds = combination(notGuessBule, BLUE);
             NSMutableDictionary *dict = [@{} mutableCopy];
-            NSLog(@"红球中%d个，篮球中0个的注数是%d注", i, recoredsRad*recoreds);
+            NSLog(@"红球中%d个，篮球中0个的注数是%d注", i, recoredsRed*recoreds);
             dict[@"guessRed"] = @(i);
             dict[@"guessBlue"] = @(0);
-            dict[@"count"] = @(recoredsRad*recoreds);
+            dict[@"count"] = @(recoredsRed*recoreds);
             [array addObject:dict];
         }
     }
     return array;
 }
 
-- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRadCount:(NSString *)selectRadCount selectBlueCount:(NSString *)selectBlueCount guessRadCount:(NSString *)guessRadCount guessBlueCount:(NSString *)guessBlueCount{
-    NSArray *calculateArray = [self calculateRed1:[selectRadCount intValue] guessRed:[guessRadCount intValue] blue:[selectBlueCount intValue] guessBlue:[guessBlueCount intValue] RED:(int)self.playRulesModel.radBullCount BLUE:(int)self.playRulesModel.blueBullCount];
+- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRedCount:(NSString *)selectRedCount selectBlueCount:(NSString *)selectBlueCount guessRedCount:(NSString *)guessRedCount guessBlueCount:(NSString *)guessBlueCount{
+    NSArray *calculateArray = [self calculateRed1:[selectRedCount intValue] guessRed:[guessRedCount intValue] blue:[selectBlueCount intValue] guessBlue:[guessBlueCount intValue] RED:(int)self.playRulesModel.redBullCount BLUE:(int)self.playRulesModel.blueBullCount];
     auto findLotteryPrizeModel = [self](NSString *level){
         LotteryPrizeModel *prizeModel;
         for (LotteryPrizeModel *model in self.prizeArray){
@@ -181,7 +145,7 @@ void calculateRed1(int red,int guessRed,int blue,int guessBlue, int RED, int BLU
                 NSInteger guessRed = [dict[@"guessRed"] integerValue];
                 NSInteger guessBlue = [dict[@"guessBlue"] integerValue];
                 NSInteger guessCount = [dict[@"count"] integerValue];
-                if (guessRed == rulesModel.radBullSameCount && guessBlue == rulesModel.blueBullSameCount){
+                if (guessRed == rulesModel.redBullSameCount && guessBlue == rulesModel.blueBullSameCount){
                     count += guessCount;
                 }
             }
@@ -192,7 +156,7 @@ void calculateRed1(int red,int guessRed,int blue,int guessBlue, int RED, int BLU
     return prizeArray;
 }
 
-- (LotteryPrizeModel *)calculatorPrize:(LotteryPrizeInfoModel *)originModel selectRadCount:(NSString *)selectRadCount selectBlueCount:(NSString *)selectBlueCount targerRadCount:(NSString *)targetRadCount targetBlueCount:(NSString *)targetBlueCount{
+- (LotteryPrizeModel *)calculatorPrize:(LotteryPrizeInfoModel *)originModel selectRedCount:(NSString *)selectRedCount selectBlueCount:(NSString *)selectBlueCount targerRedCount:(NSString *)targetRedCount targetBlueCount:(NSString *)targetBlueCount{
     LotteryPrizeModel *targetModel = [[LotteryPrizeModel alloc] init];
     targetModel.level = originModel.level;
     
