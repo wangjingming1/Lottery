@@ -10,8 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class LotteryPrizeModel;
-@class LotteryPlayRulesModel;
+@class LotteryPrizeModel, LotteryPlayRulesModel;
 
 @interface LotteryWinningModel : NSObject
 /**彩票标示码*/

@@ -74,7 +74,9 @@
 //默认的时间格式2020.01.01
 #define kDefaultDateFormat     @"yyyy.MM.dd"
 
-
+//本地化字符串
 #define kLocalizedString(str)     str
 
+//开奖服务-查看历史
+#define kLSVCViewingHistory     @"kLSVCViewingHistory"
 #endif /* GlobalDefines_h */

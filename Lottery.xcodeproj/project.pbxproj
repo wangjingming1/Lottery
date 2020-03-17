@@ -61,6 +61,10 @@
 		E8CC5CA52419165B00BA0F4B /* MySelectBallView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CA42419165B00BA0F4B /* MySelectBallView.m */; };
 		E8CC5CA8241B3BAA00BA0F4B /* MySelectBallViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CA7241B3BAA00BA0F4B /* MySelectBallViewCell.m */; };
 		E8CC5CAB241B8B1A00BA0F4B /* BonusView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CAA241B8B1A00BA0F4B /* BonusView.m */; };
+		E8CC5CAE241F7A6400BA0F4B /* LSVCViewingHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CAD241F7A6400BA0F4B /* LSVCViewingHistoryView.m */; };
+		E8CC5CB124209EC000BA0F4B /* UIView+AttributeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CB024209EC000BA0F4B /* UIView+AttributeExtension.m */; };
+		E8CC5CB42420A38200BA0F4B /* LotteryInformationAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CB32420A38200BA0F4B /* LotteryInformationAccess.m */; };
+		E8CC5CB72420CF0B00BA0F4B /* UIScrollView+Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC5CB62420CF0B00BA0F4B /* UIScrollView+Touch.m */; };
 		E8CF485823B3CFDD0081BE1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485723B3CFDD0081BE1F /* AppDelegate.m */; };
 		E8CF485B23B3CFDD0081BE1F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485A23B3CFDD0081BE1F /* SceneDelegate.m */; };
 		E8CF485E23B3CFDD0081BE1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CF485D23B3CFDD0081BE1F /* ViewController.m */; };
@@ -219,6 +223,14 @@
 		E8CC5CA7241B3BAA00BA0F4B /* MySelectBallViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySelectBallViewCell.m; sourceTree = "<group>"; };
 		E8CC5CA9241B8B1A00BA0F4B /* BonusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BonusView.h; sourceTree = "<group>"; };
 		E8CC5CAA241B8B1A00BA0F4B /* BonusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BonusView.m; sourceTree = "<group>"; };
+		E8CC5CAC241F7A6400BA0F4B /* LSVCViewingHistoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSVCViewingHistoryView.h; sourceTree = "<group>"; };
+		E8CC5CAD241F7A6400BA0F4B /* LSVCViewingHistoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSVCViewingHistoryView.m; sourceTree = "<group>"; };
+		E8CC5CAF24209EC000BA0F4B /* UIView+AttributeExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AttributeExtension.h"; sourceTree = "<group>"; };
+		E8CC5CB024209EC000BA0F4B /* UIView+AttributeExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AttributeExtension.m"; sourceTree = "<group>"; };
+		E8CC5CB22420A38200BA0F4B /* LotteryInformationAccess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LotteryInformationAccess.h; sourceTree = "<group>"; };
+		E8CC5CB32420A38200BA0F4B /* LotteryInformationAccess.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LotteryInformationAccess.m; sourceTree = "<group>"; };
+		E8CC5CB52420CF0B00BA0F4B /* UIScrollView+Touch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Touch.h"; sourceTree = "<group>"; };
+		E8CC5CB62420CF0B00BA0F4B /* UIScrollView+Touch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Touch.m"; sourceTree = "<group>"; };
 		E8CF485323B3CFDD0081BE1F /* 欢乐彩票.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "欢乐彩票.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8CF485623B3CFDD0081BE1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8CF485723B3CFDD0081BE1F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -458,12 +470,16 @@
 		E89F76F923FFE1CD00F83C05 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E8CC5CB52420CF0B00BA0F4B /* UIScrollView+Touch.h */,
+				E8CC5CB62420CF0B00BA0F4B /* UIScrollView+Touch.m */,
 				E81ECF7B23CF5C7500647D0E /* UITableView+HYBCacheHeight.h */,
 				E81ECF7C23CF5C7500647D0E /* UITableView+HYBCacheHeight.m */,
 				E81ECF7E23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.h */,
 				E81ECF7D23CF5C7600647D0E /* UITableViewCell+HYBMasonryAutoCellHeight.m */,
 				E8E2070C23BE150A0072A144 /* UIView+Color.h */,
 				E8E2070D23BE150A0072A144 /* UIView+Color.m */,
+				E8CC5CAF24209EC000BA0F4B /* UIView+AttributeExtension.h */,
+				E8CC5CB024209EC000BA0F4B /* UIView+AttributeExtension.m */,
 				E853DED823BF35C2004686BB /* UIImageView+AddImage.h */,
 				E853DED923BF35C2004686BB /* UIImageView+AddImage.m */,
 				E81ECF7823CA26DB00647D0E /* UINavigationController+Cloudox.h */,
@@ -483,6 +499,8 @@
 			children = (
 				E89F77432404EEF300F83C05 /* LotteryPracticalMethod.h */,
 				E89F77442404EEF300F83C05 /* LotteryPracticalMethod.m */,
+				E8CC5CB22420A38200BA0F4B /* LotteryInformationAccess.h */,
+				E8CC5CB32420A38200BA0F4B /* LotteryInformationAccess.m */,
 			);
 			path = FunctionFile;
 			sourceTree = "<group>";
@@ -502,6 +520,8 @@
 				E8163DD7240AA27C000858BA /* LotteryWinningTipsView.m */,
 				E8163E082410F255000858BA /* LSVCBallImageView.h */,
 				E8163E092410F255000858BA /* LSVCBallImageView.m */,
+				E8CC5CAC241F7A6400BA0F4B /* LSVCViewingHistoryView.h */,
+				E8CC5CAD241F7A6400BA0F4B /* LSVCViewingHistoryView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -801,19 +821,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8CC5CB42420A38200BA0F4B /* LotteryInformationAccess.m in Sources */,
 				E890CAE62409186E0042F13F /* LotteryBottomToolsbar.m in Sources */,
 				E8163E0A2410F255000858BA /* LSVCBallImageView.m in Sources */,
 				E8E44A6023C4F10300FDDC56 /* ProvinceListViewController.m in Sources */,
 				E81ECF7F23CF5C7600647D0E /* UITableView+HYBCacheHeight.m in Sources */,
 				E89F770D24011BD700F83C05 /* LotteryConvenientServiceModel.m in Sources */,
 				E8024FEB23B4A2C500DC035C /* HomePageViewController.m in Sources */,
+				E8CC5CB72420CF0B00BA0F4B /* UIScrollView+Touch.m in Sources */,
 				E8CC5C9E2417DFE700BA0F4B /* WJMTagLabel.m in Sources */,
+				E8CC5CAE241F7A6400BA0F4B /* LSVCViewingHistoryView.m in Sources */,
 				E8E206CE23BDD5F90072A144 /* BaseCollectionViewCell.m in Sources */,
 				E8163DEB240E14B9000858BA /* LotteryBonusListView.m in Sources */,
 				E8CC5CA8241B3BAA00BA0F4B /* MySelectBallViewCell.m in Sources */,
 				E89F76FC23FFE22B00F83C05 /* LotteryRefreshHeaderView.m in Sources */,
 				E81ECF8A23D2F6DF00647D0E /* NewsDownloadManager.m in Sources */,
 				E89F77452404EEF300F83C05 /* LotteryPracticalMethod.m in Sources */,
+				E8CC5CB124209EC000BA0F4B /* UIView+AttributeExtension.m in Sources */,
 				E8E44A6923C61A5600FDDC56 /* HPVCNewsListView.m in Sources */,
 				E81ECF6C23C7848100647D0E /* LotteryNewsModel.m in Sources */,
 				E8CF485E23B3CFDD0081BE1F /* ViewController.m in Sources */,

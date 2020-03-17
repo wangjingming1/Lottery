@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LotteryPrizeInfoModel;
-@class LotteryWinningRulesModel;
-@class LotteryTestBonus;
-
+@class LotteryPrizeInfoModel, LotteryWinningRulesModel, LotteryTestBonus;
 /**彩票玩法及中奖规则*/
 @interface LotteryPlayRulesModel : NSObject
 /**彩票标示码*/

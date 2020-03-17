@@ -8,10 +8,10 @@
 
 #import "LotteryWinningModel.h"
 #import "LotteryKindName.h"
-#import "LotteryPracticalMethod.h"
 #import "GlobalDefines.h"
 #import "LotteryKeyword.h"
 #import "LotteryPlayRulesModel.h"
+#import "NSDate+ExtendedDate.h"
 
 @implementation LotteryWinningModel
 
@@ -68,7 +68,7 @@
     NSDateFormatter *otherFormatter = [[NSDateFormatter alloc]init];
     [otherFormatter setDateFormat:@"MM.dd"];
     NSString *dateStr = [otherFormatter stringFromDate:date];
-    NSString *weakday = [LotteryPracticalMethod weekdayStringWithDate:date];
+    NSString *weakday = [NSDate weekdayStringWithDate:date];
     NSString *newDate = [NSString stringWithFormat:@"%@（%@）", dateStr, weakday];
     return newDate;
 }

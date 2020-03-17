@@ -25,11 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)getMaxUnitText:(long long)number withPrecisionNum:(NSInteger)precision;
 
-/*! 返回@[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"]*/
-+ (NSArray <NSString *> *)getWeekdayArray;
-/*! 获取指定date是星期几 */
-+ (NSString *)weekdayStringWithDate:(NSDate *)date;
-
 /*! 生成一个number位的随机数*/
 + (NSString *)arc4random:(int)number;
 

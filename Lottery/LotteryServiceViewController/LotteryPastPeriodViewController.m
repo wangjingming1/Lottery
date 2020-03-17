@@ -15,6 +15,7 @@
 
 #import "LotteryDownloadManager.h"
 #import "LotteryWinningModel.h"
+#import "LotteryInformationAccess.h"
 
 #import "GlobalDefines.h"
 #import "UITableViewCell+HYBMasonryAutoCellHeight.h"
@@ -37,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.identifier = [self.params objectForKey:@"identifier"];
+    [LotteryInformationAccess setLotteryViewingHistory:self.identifier];
     
     [self initData];
     [self setUI];

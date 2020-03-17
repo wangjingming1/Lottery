@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class LotteryBannerView;
-@class LotteryBannerModel;
+@class LotteryBannerView, LotteryBannerModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol HPVCHeaderViewDelegate <NSObject>

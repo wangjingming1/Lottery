@@ -9,28 +9,38 @@
 #import "LotteryServiceViewController.h"
 #import "LSVCLotteryWinningView.h"
 #import "LotteryDownloadManager.h"
-
+#import "MJRefresh.h"
+#import "UIView+Color.h"
 #import "Masonry.h"
 #import "GlobalDefines.h"
 #import "LotteryKindName.h"
-
-#import "MJRefresh.h"
-
-#import "UIView+Color.h"
+#import "LSVCViewingHistoryView.h"
+#import "LotteryWinningModel.h"
+#import "LotteryInformationAccess.h"
+#import "UIScrollView+Touch.h"
 
 @interface LotteryServiceViewController ()<LSVCLotteryWinningViewDelegate>
 @property (nonatomic, strong) NSArray *identifiers;
-@property (nonatomic, strong) NSMutableDictionary <NSString *, NSArray<LSVCLotteryWinningView *> *> *lotteryWinningDict;
+@property (nonatomic, strong) LSVCViewingHistoryView *historyView;
+@property (nonatomic, strong) NSDictionary <NSString *, NSArray<LotteryWinningModel *> *> *lotteryWinningModelDict;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, NSArray<LSVCLotteryWinningView *> *> *lotteryWinningViewDict;
 @end
 
 @implementation LotteryServiceViewController
-
+{
+    MASConstraint *_historyViewHeight;
+}
 - (NSString *)navBarLeftButtonImage{
     return @"";
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self reloadHistoryView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kLSVCViewingHistory];
     // Do any additional setup after loading the view.
     [self setNavBarLeftButtonTitle:@"开奖服务"];
     [self initData];
@@ -47,15 +57,48 @@
         kLotteryIdentifier_qixingcai,
         kLotteryIdentifier_qilecai
     ];
-    self.lotteryWinningDict = [@{} mutableCopy];
+    self.lotteryWinningModelDict = @{};
+    self.lotteryWinningViewDict = [@{} mutableCopy];
     for (NSString *ide in self.identifiers){
-        self.lotteryWinningDict[ide] = @[];
+        self.lotteryWinningViewDict[ide] = @[];
     }
 }
 
 - (void)setUI{
+    WS(weakSelf);
+    self.historyView = [[LSVCViewingHistoryView alloc] init];
+    [self.historyView setSelectOneLottery:^(NSString * _Nonnull identifier) {
+        LotteryWinningModel *model = weakSelf.lotteryWinningModelDict[identifier].firstObject;
+        NSMutableDictionary *params = [@{} mutableCopy];
+        params[@"leftTitle"] = model.kindName;
+        params[@"identifier"] = model.identifier;
+        [weakSelf pushViewController:NSClassFromString(@"LotteryPastPeriodViewController") params:params];
+    }];
+    [self.scrollView addSubview:self.historyView];
+    [self reloadHistoryView];
+    
+    [self.historyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(0);
+        make.width.mas_equalTo(self.scrollView);
+        _historyViewHeight = make.height.mas_equalTo(0);
+    }];
+    
     [self addRefreshHearderView:@selector(reloadNewData) otherScrollView:self.scrollView];
     [self.scrollView.mj_header beginRefreshing];
+}
+
+- (void)reloadHistoryView{
+    if (!self.historyView) return;
+    NSArray *viewingHistoryArray = [LotteryInformationAccess getLotteryViewingHistoryArray];
+    NSArray* reversedArray = [[viewingHistoryArray reverseObjectEnumerator] allObjects];
+    [self.historyView setViewingHistory:reversedArray];
+    self.historyView.hidden = !reversedArray.count;
+    if (self.historyView.hidden) {
+        [_historyViewHeight install];
+    } else {
+        [_historyViewHeight uninstall];
+    }
 }
 
 - (void)reloadNewData{
@@ -67,9 +110,10 @@
 }
 
 - (void)refreshLotterServiceView:(NSDictionary <NSString *,NSArray *> *)lotteryDict {
+    self.lotteryWinningModelDict = lotteryDict;
     UIView *lastBackView;
     for (NSString *ide in self.identifiers){
-        NSMutableArray *array = [self.lotteryWinningDict[ide] mutableCopy];
+        NSMutableArray *array = [self.lotteryWinningViewDict[ide] mutableCopy];
         if (array && array.count > 0 && array.count == lotteryDict[ide].count){
             for (int i = 0; i < array.count && i < lotteryDict[ide].count; i++){
                 LSVCLotteryWinningView *view = array[i];
@@ -102,6 +146,7 @@
                     make.left.right.mas_equalTo(0);
                 }];
                 lastView = view;
+                [array addObject:view];
             }
             if (lastView){
                 [lastView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -114,21 +159,23 @@
                 if (lastBackView){
                     make.top.mas_equalTo(lastBackView.mas_bottom).offset(kPadding15);
                 } else {
-                    make.top.mas_equalTo(kPadding15);
+                    make.top.mas_equalTo(self.historyView.mas_bottom).offset(kPadding15);
                 }
             }];
             
             [backView setShadowAndColor:kShadowColor];
             lastBackView = backView;
         }
-        self.lotteryWinningDict[ide] = array;
+        self.lotteryWinningViewDict[ide] = array;
     }
     if (lastBackView){
-        [self.view layoutIfNeeded];
-        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(lastBackView.frame) + 20);
+        [lastBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(-kPadding20);
+        }];
     }
     [self.scrollView.mj_header endRefreshing];
 }
+
 /*
 #pragma mark - Navigation
 

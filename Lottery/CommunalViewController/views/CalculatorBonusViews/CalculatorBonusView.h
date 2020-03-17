@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LotteryWinningModel;
-@class CalculatorBonusView;
+@class LotteryWinningModel, CalculatorBonusView;
 
 @protocol CalculatorBonusViewDelegate <NSObject>
 

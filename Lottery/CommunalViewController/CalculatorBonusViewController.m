@@ -176,7 +176,7 @@
     }
 }
 
-kImportantReminder(@"由于otherBackView的点击手势与tableViewCell点击手势冲突,所以这里做了判断")
+kImportantReminder(@"由于TableViewCell的点击事件被父视图otherBackView捕获,所以这里做了判断")
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
 //    获取点击视图的类型
     UIView *touchView = touch.view;

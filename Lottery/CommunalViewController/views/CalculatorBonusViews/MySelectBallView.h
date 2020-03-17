@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LotteryWinningModel;
-@class MASViewAttribute;
+@class LotteryWinningModel, MASViewAttribute;
 
 typedef NS_ENUM(NSInteger, MySelectBallViewStyle) {
     SelectBallViewStyle,

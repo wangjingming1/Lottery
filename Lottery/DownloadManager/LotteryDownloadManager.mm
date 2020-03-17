@@ -14,7 +14,7 @@
 
 #import "LotteryWinningModel.h"
 #import "LotteryPlayRulesModel.h"
-#import "LotteryPracticalMethod.h"
+#import "NSDate+ExtendedDate.h"
 
 @implementation LotteryDownloadManager
 
@@ -113,7 +113,7 @@
     //星期几
     NSArray *weekday = [otherArray subarrayWithRange:NSMakeRange(0, otherArray.count - 1)];
     NSMutableArray *weekdayArray = [@[] mutableCopy];
-    NSArray *allWeekdayArray = [LotteryPracticalMethod getWeekdayArray];
+    NSArray *allWeekdayArray = [NSDate getWeekdayArray];
     for (NSString *str in weekday){
         //转成数组下标，不能从1开始，需要-1
         NSInteger weekdayIndex = [str integerValue] - 1;
@@ -131,7 +131,7 @@
         //往前推i天的时间
         NSTimeInterval days = -(24 * 60 * 60 * i);  // (24 * 60 * 60)表示一天一共有多少秒
         NSDate *appointDate = [currentDate dateByAddingTimeInterval:days];
-        NSString *weekdata = [LotteryPracticalMethod weekdayStringWithDate:appointDate];
+        NSString *weekdata = [NSDate weekdayStringWithDate:appointDate];
         //判断是否是开奖日期(如大乐透是每周一、三、六 20:30开奖)
         if ([weekdayArray indexOfObject:weekdata] != NSNotFound){
             if (dayCount >= begin){
