@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kLSVCViewingHistory];
+//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kLSVCViewingHistory];
     // Do any additional setup after loading the view.
     [self setNavBarLeftButtonTitle:@"开奖服务"];
     [self initData];

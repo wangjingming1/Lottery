@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseUIViewController : UIViewController
+@property (nonatomic, strong) UIButton *navBarLeftButton;
 @property (nonatomic, copy) NSString *navBarLeftButtonTitle;
 @property (nonatomic, strong) NSAttributedString *navBarLeftButtonAttributedTitle;
 @property (nonatomic, strong) UIView *backgroundView;
@@ -22,9 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)getCurrentAlpha;
 
 
+- (void)popViewController;
 - (NSString *)navBarLeftButtonImage;
-- (UIButton *)createNavBarLeftButton;
 
+- (void)navBarBackButtonClick:(UIButton *)leftButton;
 - (void)navBarLeftButtonClick:(UIButton *)leftButton;
 
 - (void)addRefreshHearderView:(SEL)refreshingAction otherScrollView:(UIScrollView *)otherScrollView;

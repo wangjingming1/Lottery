@@ -16,8 +16,9 @@
 #import "LotteryDownloadManager.h"
 #import "IssueNumberSelectView.h"
 #import "MySelectBallView.h"
+#import "UIView+AttributeExtension.h"
 
-@interface CalculatorBonusViewController ()<WJMTableCollectionDelegate, CalculatorBonusViewDelegate, UIGestureRecognizerDelegate>
+@interface CalculatorBonusViewController ()<WJMTableCollectionMenuBarDelegate, CalculatorBonusViewDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, strong) CalculatorBonusView *calculatorBonusView;
 @property (nonatomic, strong) WJMTableCollection *menuCollectionView;
@@ -42,12 +43,6 @@
     // Do any additional setup after loading the view.
 }
 
-- (UIButton *)createNavBarLeftButton{
-    UIButton *leftButton = [super createNavBarLeftButton];
-    [leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -33, 0, -33)];
-    return leftButton;
-}
-
 - (void)initData{
     self.lotteryData = [@{} mutableCopy];
     self.showCalculatorBonusArray = [@[kLotteryIdentifier_shuangseqiu, kLotteryIdentifier_daletou] mutableCopy];
@@ -63,7 +58,6 @@
     }
     [self.menuCollectionView setTableCollectionMenus:menus];
     self.menuCollectionView.menuBarHeight = 40;
-    
 
     UILabel *tipsLab = [[UILabel alloc] init];
     tipsLab.text = kLocalizedString(@"开奖结果仅供参考，以官方开奖信息为准");
@@ -72,9 +66,6 @@
     
     [self.backgroundView addSubview:self.menuCollectionView];
     [self.menuCollectionView.containerView addSubview:tipsLab];
-    
-    kImportantReminder(@"使用scrollView需要借助中间视图(calculatorBonusView)，由中间视图去撑constSize")
-    [self.menuCollectionView.containerView addSubview:self.calculatorBonusView];
     
     [self.menuCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
@@ -85,11 +76,7 @@
         kImportantReminder(@"这里由于没法使用scrollView来做约束,所以使用了scrollView的s父视图来做约束");
         kImportantReminder(@"这里对scrollView做约束实际上与对self.calculatorBonusView做约束效果是一样的,\
                            而calculatorBonusView是被自己子视图撑起来的，所以并不能达到预期效果");
-        make.bottom.mas_equalTo(self.backgroundView).offset(-kPadding20);
-    }];
-    [self.calculatorBonusView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.menuCollectionView.containerView);
-        make.width.mas_equalTo(self.menuCollectionView.containerView);
+        make.bottom.mas_equalTo(self.menuCollectionView.containerView).offset(-kPadding20);
     }];
 }
 
@@ -101,13 +88,13 @@
     [self.menuCollectionView.menuBar setSelectedMenu:idx];
 }
 
-- (void)reloadCalculatorBonusView:(NSString *)identifier{
+- (void)reloadCalculatorBonusView:(NSString *)identifier finsh:(void (^)(void))finsh{
     WS(weakSelf);
     [LotteryDownloadManager lotteryDownload:0 count:10 identifiers:@[identifier
     ] finsh:^(NSDictionary<NSString *,NSArray <LotteryWinningModel *>*> * _Nonnull lotteryDict) {
         NSArray<LotteryWinningModel *>*lotteryWinningModels = lotteryDict[identifier];
         weakSelf.lotteryData[identifier] = lotteryWinningModels;
-        weakSelf.calculatorBonusView.model = lotteryWinningModels.firstObject;
+        if (finsh) finsh();
     }];
 }
 
@@ -194,10 +181,35 @@ kImportantReminder(@"由于TableViewCell的点击事件被父视图otherBackView
 }
 
 #pragma mark - WJMTableCollectionDelegate
+- (void)tableCollectionMenuBar:(WJMTableCollectionMenuBar *)tableCollectionMenuBar selectTableCollectionMenuView:(WJMTableCollectionMenuView *)selectTableCollectionMenuView {
+    CalculatorBonusView *calculatorBonusView = (CalculatorBonusView *)[selectTableCollectionMenuView.containerView viewWithStringTag:@"calculatorBonusView"];
+    if (!calculatorBonusView){
+        [selectTableCollectionMenuView.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        calculatorBonusView = [[CalculatorBonusView alloc] init];
+        calculatorBonusView.stringTag = @"calculatorBonusView";
+        calculatorBonusView.delegate = self;
+
+        [selectTableCollectionMenuView.containerView addSubview:calculatorBonusView];
+        [calculatorBonusView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(selectTableCollectionMenuView.containerView);
+            make.width.mas_equalTo(selectTableCollectionMenuView.containerView);
+        }];
+    }
+    NSString *ide = self.showCalculatorBonusArray[selectTableCollectionMenuView.index];
+    self.identifier = ide;
+    
+    WS(weakSelf);
+    [self reloadCalculatorBonusView:ide finsh:^{
+        calculatorBonusView.model = [weakSelf.lotteryData[ide] firstObject];
+    }];
+}
+
 - (void)tableCollectionSelectIndex:(NSUInteger)index {
     NSString *ide = self.showCalculatorBonusArray[index];
     self.identifier = ide;
-    [self reloadCalculatorBonusView:ide];
+    [self reloadCalculatorBonusView:ide finsh:^{
+        
+    }];
 }
 
 #pragma mark - CalculatorBonusViewDelegate
@@ -220,6 +232,9 @@ kImportantReminder(@"由于TableViewCell的点击事件被父视图otherBackView
         make.left.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
     }];
+    if (@available(iOS 11.0, *)) {
+        [self.issueNumberSelectView setSafeAreaLayoutGuideBottom:self.view.mas_safeAreaLayoutGuideBottom];
+    }
 }
 
 - (void)calculatorBonusView:(CalculatorBonusView *)calculatorBonusView showMySelectBallSelector:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result{

@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CalculatorBonusView : UIView
 @property (nonatomic, weak) id <CalculatorBonusViewDelegate> delegate;
 @property (nonatomic, strong)LotteryWinningModel *model;
+@property (nonatomic) BOOL initSelectBall; //default NO;
+
 @end
 
 NS_ASSUME_NONNULL_END

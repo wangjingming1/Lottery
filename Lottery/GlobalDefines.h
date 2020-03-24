@@ -52,9 +52,9 @@
 /**浅灰色*/
 #define kLightGreyColor                     kUIColorFromRGB10(230, 230, 230)
 /**默认文字颜色(选中)*/
-#define kTintTextColor                      kUIColorFromRGB16(0xd81e06)
+#define kSelectedTintTextColor              kUIColorFromRGB16(0xd81e06)
 /**默认文字颜色*/
-#define kUnselectedItemTintTextColor        kUIColorFromRGB16(0x333333)
+#define kUnselectedTintTextColor            kUIColorFromRGB16(0x333333)
 /**标题文本颜色*/
 #define kTitleTintTextColor                 kUIColorFromRGB10(62, 63, 64)
 /**小标题文本颜色*/
@@ -77,6 +77,4 @@
 //本地化字符串
 #define kLocalizedString(str)     str
 
-//开奖服务-查看历史
-#define kLSVCViewingHistory     @"kLSVCViewingHistory"
 #endif /* GlobalDefines_h */

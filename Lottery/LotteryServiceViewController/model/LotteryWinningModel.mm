@@ -119,8 +119,8 @@ int combination(int m,int n){
     return array;
 }
 
-- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRedCount:(NSString *)selectRedCount selectBlueCount:(NSString *)selectBlueCount guessRedCount:(NSString *)guessRedCount guessBlueCount:(NSString *)guessBlueCount{
-    NSArray *calculateArray = [self calculateRed1:[selectRedCount intValue] guessRed:[guessRedCount intValue] blue:[selectBlueCount intValue] guessBlue:[guessBlueCount intValue] RED:(int)self.playRulesModel.redBullCount BLUE:(int)self.playRulesModel.blueBullCount];
+- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRedCount:(int)selectRedCount selectBlueCount:(int)selectBlueCount guessRedCount:(int)guessRedCount guessBlueCount:(int)guessBlueCount{
+    NSArray *calculateArray = [self calculateRed1:selectRedCount guessRed:guessRedCount blue:selectBlueCount guessBlue:guessBlueCount RED:(int)self.playRulesModel.redBullCount BLUE:(int)self.playRulesModel.blueBullCount];
     auto findLotteryPrizeModel = [self](NSString *level){
         LotteryPrizeModel *prizeModel;
         for (LotteryPrizeModel *model in self.prizeArray){

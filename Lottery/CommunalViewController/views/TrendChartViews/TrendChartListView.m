@@ -1,37 +1,37 @@
 //
-//  IssueNumberSelectView.m
+//  TrendChartListView.m
 //  Lottery
 //
-//  Created by wangjingming on 2020/3/5.
+//  Created by wangjingming on 2020/3/18.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
 
-#import "IssueNumberSelectView.h"
+#import "TrendChartListView.h"
 #import "GlobalDefines.h"
 #import "Masonry.h"
-#import "WJMTagLabel.h"
-#import "LotteryWinningModel.h"
+#import "LotteryKeyword.h"
 
-#define kIssueNumberSelectViewCellIdentifier @"issueNumberSelectViewCellIdentifier"
-
-@interface IssueNumberSelectView()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+#define kTrendChartListViewCellIdentifier @"TrendChartListViewCellIdentifier"
+@interface TrendChartListView()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSArray *lotteryIdentifiers;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic) NSInteger selectIdx;
+@property (nonatomic, strong) LotteryKeyword *lotteryKeyword;
 @end
 
-@interface IssueNumberCell : UITableViewCell
-@property (nonatomic, strong) UILabel *issueNumberLabel;
-@property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) WJMTagLabel *newestLabel;
-@property (nonatomic, strong) LotteryWinningModel *model;
+@interface TrendChartListCell : UITableViewCell
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *selectImgV;
+- (void)setTitle:(NSString *)title;
 @end
 
-@implementation IssueNumberSelectView
+@implementation TrendChartListView
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.count = 10;
+        self.lotteryKeyword = [[LotteryKeyword alloc] init];
         [self setUI];
     }
     return self;
@@ -41,8 +41,7 @@
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.backgroundColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = kLocalizedString(@"期次选择");
-    
+    titleLabel.text = kLocalizedString(@"彩种选择");
 
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = kDividingLineColor;
@@ -66,7 +65,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lineView.mas_bottom);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(self.tableView.rowHeight*self.count);
+        make.height.mas_equalTo(self.tableView.rowHeight);
         make.bottom.mas_equalTo(0);
     }];
 }
@@ -77,11 +76,21 @@
     }];
 }
 
+- (void)setLotteryIdentifiers:(NSArray *)lotteryIdentifiers curIdentifier:(NSString *)curIdentifier{
+    self.lotteryIdentifiers = lotteryIdentifiers;
+    self.selectIdx = [lotteryIdentifiers indexOfObject:curIdentifier];
+    
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.tableView.rowHeight*lotteryIdentifiers.count);
+    }];
+    [self.tableView reloadData];
+}
+
 - (UITableView *)tableView{
     if (!_tableView){
         _tableView = [[UITableView alloc] init];
         _tableView.rowHeight = 40;
-        [_tableView registerClass:[IssueNumberCell class] forCellReuseIdentifier:kIssueNumberSelectViewCellIdentifier];
+        [_tableView registerClass:[TrendChartListCell class] forCellReuseIdentifier:kTrendChartListViewCellIdentifier];
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
@@ -93,26 +102,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.modelArray.count;
+    return self.lotteryIdentifiers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    IssueNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:kIssueNumberSelectViewCellIdentifier];
+    TrendChartListCell *cell = [tableView dequeueReusableCellWithIdentifier:kTrendChartListViewCellIdentifier];
     if (!cell) {
-        cell = [[IssueNumberCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:kIssueNumberSelectViewCellIdentifier];
+        cell = [[TrendChartListCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:kTrendChartListViewCellIdentifier];
     }
-    LotteryWinningModel *model = [[LotteryWinningModel alloc] init];
-    if (indexPath.row < self.modelArray.count){
-        model = self.modelArray[indexPath.row];
-    }
+    NSString *identifier = self.lotteryIdentifiers[indexPath.row];
+    NSString *title = [self.lotteryKeyword identifierToName:identifier];
     //调整cell分割线
-    if (indexPath.row == self.modelArray.count - 1){
+    if (indexPath.row == self.lotteryIdentifiers.count - 1){
         cell.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(tableView.frame), 0, 0);
     } else {
         cell.separatorInset = UIEdgeInsetsZero;
     }
-    cell.model = model;
+    [cell setTitle:title];
     [cell setSelected:self.selectIdx == indexPath.row];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
@@ -120,9 +127,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     self.selectIdx = indexPath.row;
-    if (self.selectModel){
-        LotteryWinningModel *model = self.modelArray[indexPath.row];
-        self.selectModel(model);
+    if (self.selectIdentifier){
+        self.selectIdentifier(self.lotteryIdentifiers[indexPath.row]);
     }
 }
 
@@ -137,8 +143,7 @@
 @end
 
 
-
-@implementation IssueNumberCell
+@implementation TrendChartListCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -148,38 +153,23 @@
 }
 
 - (void)setUI{
-    [self.contentView addSubview:self.issueNumberLabel];
-    [self.contentView addSubview:self.dateLabel];
-    [self.contentView addSubview:self.newestLabel];
+    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.selectImgV];
     
-    [self.issueNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(kPadding10);
         make.top.mas_equalTo(0);
         make.height.mas_equalTo(self.contentView);
-    }];
-    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.issueNumberLabel.mas_right).offset(kPadding10);
-        make.top.mas_equalTo(0);
-        make.height.mas_equalTo(self.issueNumberLabel);
-    }];
-    
-    [self.newestLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.dateLabel.mas_right).offset(0);
-        make.top.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(35, 25));
     }];
     [self.selectImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView);
         make.right.mas_equalTo(-kPadding20);
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
-    self.newestLabel.hidden = YES;
 }
 
-- (void)setModel:(LotteryWinningModel *)model {
-    _model = model;
-    [self reloadIssueNumberCell];
+- (void)setTitle:(NSString *)title{
+    self.titleLabel.text = title;
 }
 
 - (void)setSelected:(BOOL)selected{
@@ -187,41 +177,13 @@
     self.selectImgV.hidden = !self.selected;
 }
 
-- (void)reloadIssueNumberCell{
-    self.issueNumberLabel.text = self.model.issueNumber;
-    self.dateLabel.text = [self.model dateToGeneralFormat];
-    self.newestLabel.hidden = !self.model.newest;
-}
-
-- (UILabel *)issueNumberLabel{
-    if (!_issueNumberLabel){
-        _issueNumberLabel = [[UILabel alloc] init];
-        _issueNumberLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:17];
-        _issueNumberLabel.textColor = kTitleTintTextColor;
+- (UILabel *)titleLabel{
+    if (!_titleLabel){
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:17];
+        _titleLabel.textColor = kTitleTintTextColor;
     }
-    return _issueNumberLabel;
-}
-
-- (UILabel *)dateLabel{
-    if (!_dateLabel){
-        _dateLabel = [[UILabel alloc] init];
-        _dateLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:15];
-        _dateLabel.textColor = kSubtitleTintTextColor;
-    }
-    return _dateLabel;
-}
-
-- (WJMTagLabel *)newestLabel{
-    if (!_newestLabel){
-        _newestLabel = [[WJMTagLabel alloc] init];
-        _newestLabel.text = kLocalizedString(@"最新");
-        _newestLabel.backgroundColor = [UIColor redColor];
-        _newestLabel.textColor = [UIColor whiteColor];
-        _newestLabel.textAlignment = NSTextAlignmentCenter;
-        _newestLabel.font = [UIFont systemFontOfSize:14];
-        _newestLabel.adjustsFontSizeToFitWidth = YES;
-    }
-    return _newestLabel;
+    return _titleLabel;
 }
 
 - (UIImageView *)selectImgV{

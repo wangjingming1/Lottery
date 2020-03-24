@@ -68,34 +68,73 @@
 
 - (void)setNavBarLeftButtonTitle:(NSString *)navBarLeftButtonTitle {
     _navBarLeftButtonTitle = navBarLeftButtonTitle;
-    UIButton *leftButton = [self createNavBarLeftButton];
-    [leftButton setTitle:self.navBarLeftButtonTitle forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    
+     UIView *leftView = [self createLeftBarButtonItemView];
+     [self.navBarLeftButton setTitle:self.navBarLeftButtonTitle forState:UIControlStateNormal];
+     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftView];
 }
 
 - (void)setNavBarLeftButtonAttributedTitle:(NSAttributedString *)navBarLeftButtonAttributedTitle{
     _navBarLeftButtonAttributedTitle = navBarLeftButtonAttributedTitle;
-    UIButton *leftButton = [self createNavBarLeftButton];
-    [leftButton setAttributedTitle:navBarLeftButtonAttributedTitle forState:UIControlStateNormal];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    
+     UIView *leftView = [self createLeftBarButtonItemView];
+     [self.navBarLeftButton setAttributedTitle:navBarLeftButtonAttributedTitle forState:UIControlStateNormal];
+     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftView];
 }
 
 - (NSString *)navBarLeftButtonImage{
     return @"leftWhiteArrow";
 }
 
-- (UIButton *)createNavBarLeftButton{
-    UIButton *leftButton = [[UIButton alloc] init];
-    [leftButton setImage:[UIImage imageNamed:[self navBarLeftButtonImage]] forState:UIControlStateNormal];
+- (UIView *)createLeftBarButtonItemView{
+    UIView *view = [[UIView alloc] init];
+    NSString *backButtonImageStr = [self navBarLeftButtonImage];
     
-    [leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -33, 0, -33)];
-    [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(navBarLeftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    return leftButton;
+    UIButton *backButton = [[UIButton alloc] init];
+    [backButton setBackgroundImage:[UIImage imageNamed:backButtonImageStr] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(navBarBackButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [view addSubview:backButton];
+    [view addSubview:self.navBarLeftButton];
+    
+    [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.centerY.mas_equalTo(self.navBarLeftButton);
+    }];
+    
+    [self.navBarLeftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        if ([backButtonImageStr isEqualToString:@""]){
+            make.left.mas_equalTo(0);
+        } else {
+            make.left.mas_equalTo(backButton.mas_right);
+        }
+        make.top.bottom.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+    }];
+    
+    return view;
+}
+
+- (UIButton *)navBarLeftButton{
+    if (!_navBarLeftButton){
+        _navBarLeftButton = [[UIButton alloc] init];
+        [_navBarLeftButton setTitle:self.navBarLeftButtonTitle forState:UIControlStateNormal];
+        [_navBarLeftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_navBarLeftButton addTarget:self action:@selector(navBarLeftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _navBarLeftButton;
+}
+
+- (void)popViewController{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)navBarBackButtonClick:(UIButton *)leftButton{
+    [self popViewController];
 }
 
 - (void)navBarLeftButtonClick:(UIButton *)leftButton{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self popViewController];
 }
 
 - (void)addRefreshHearderView:(SEL)refreshingAction otherScrollView:(UIScrollView *)otherScrollView{

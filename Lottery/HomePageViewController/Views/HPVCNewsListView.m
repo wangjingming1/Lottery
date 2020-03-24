@@ -127,7 +127,7 @@
 - (UILabel *)headLabel{
     if (!_headLabel){
         _headLabel = [[UILabel alloc] init];
-        _headLabel.textColor = kUnselectedItemTintTextColor;
+        _headLabel.textColor = kUnselectedTintTextColor;
         _headLabel.font = [UIFont boldSystemFontOfSize:kHeadLabelFontSize];
         _headLabel.text = @"彩票资讯";
     }
@@ -137,7 +137,7 @@
 - (UILabel *)footLabel{
     if (!_footLabel){
         _footLabel = [[UILabel alloc] init];
-        _footLabel.textColor = kUnselectedItemTintTextColor;
+        _footLabel.textColor = kUnselectedTintTextColor;
         _footLabel.font = [UIFont systemFontOfSize:kFootLabelFontSize];
         _footLabel.textAlignment = NSTextAlignmentCenter;
         _footLabel.text = @"查看更多资讯";

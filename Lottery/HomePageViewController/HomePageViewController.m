@@ -26,6 +26,7 @@
 #import "HomePageDownloadManager.h"
 #import "WebViewController.h"
 #import "MJRefresh.h"
+#import "LotteryInformationAccess.h"
 
 @interface HomePageViewController ()<UINavigationControllerDelegate, UIScrollViewDelegate, HPVCHeaderViewDelegate, HPVCConvenientServiceViewDelegate, HPVCWinningListViewDelegate, HPVCNewListViewDelegate>
 @property (nonatomic, weak) HPVCHeaderView *headerView;
@@ -39,6 +40,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    NSString *city = [LotteryInformationAccess getLotteryCurrentCity];
+    if (!city || city.length == 0){
+        city = @"全国";
+    }
+    self.city = city;
+    [self reloadNavBarLeftTitle];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -52,10 +59,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.city = @"全国";
+    
     self.scrollView.delegate = self;
     [self setNavTitleBar];
-    [self reloadNavBarLeftTitle];
     [self setUI];
     
     [self reloadNewData];

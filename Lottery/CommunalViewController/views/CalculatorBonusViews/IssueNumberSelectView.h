@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LotteryWinningModel;
+@class LotteryWinningModel, MASViewAttribute;
 @interface IssueNumberSelectView : UIView
 //一页显示多少个 默认10个
 @property (nonatomic) NSInteger count;
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray <LotteryWinningModel *> *modelArray;
 
+- (void)setSafeAreaLayoutGuideBottom:(MASViewAttribute *)bottom;
 @end
 
 NS_ASSUME_NONNULL_END

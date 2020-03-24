@@ -16,23 +16,23 @@ typedef NS_ENUM(NSInteger, WJMTableCollectionMenuBarPosition){
 };
 NS_ASSUME_NONNULL_BEGIN
 @class WJMTableCollection;
-
-@protocol WJMTableCollectionDelegate <NSObject>
-@required
-
-@optional
-- (void)tableCollectionSelectIndex:(NSUInteger)index;
-@end
+@protocol WJMTableCollectionMenuBarDelegate;
 
 @interface WJMTableCollection : UIView
+@property (nonatomic) BOOL canMenuScroll;     //default NO
 @property (nonatomic) CGFloat menuBarHeight;  // default 30;
+@property (nonatomic) CGFloat menuBarPadding; //default 0
+
+@property (nonatomic) MenuViewStyle menuBarStyle;//default MenuView_DividingLine
+
 @property (nonatomic) WJMTableCollectionMenuBarPosition style; // default is WJMTableCollectionMenuBarPosition_Top.
 
 @property (nonatomic, strong) WJMTableCollectionMenuBar *menuBar;
-@property (nonatomic, strong) UIScrollView *containerView;
+@property (nonatomic, strong) UIView *containerView;
 
-@property (nonatomic, weak) id<WJMTableCollectionDelegate> delegate;
+@property (nonatomic, weak) id<WJMTableCollectionMenuBarDelegate> delegate;
 - (void)setTableCollectionMenus:(NSArray <NSString *> *)menus;
+
 @end
 
 NS_ASSUME_NONNULL_END

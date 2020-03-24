@@ -8,6 +8,8 @@
 
 #import "WJMTableCollection.h"
 #import "Masonry.h"
+#import "UIView+AttributeExtension.h"
+#import "GlobalDefines.h"
 
 @interface WJMTableCollection()<WJMTableCollectionMenuBarDelegate>
 
@@ -18,7 +20,10 @@
 - (instancetype)init{
     self = [super init];
     if (self){
+        self.canMenuScroll = NO;
+        self.menuBarPadding = 0;
         self.menuBarHeight = 30;
+        self.menuBarStyle = MenuView_DividingLine;
     }
     return self;
 }
@@ -27,7 +32,12 @@
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     self.menuBar = [[WJMTableCollectionMenuBar alloc] initWithMenus:menus];
+    self.menuBar.canScroll = self.canMenuScroll;
+    self.menuBar.menuBarPadding = self.menuBarPadding;
     self.menuBar.delegate = self;
+    
+    [self.menuBar setSelectedMenu:0];//默认选择第一个
+    [self.menuBar setMenuViewStyle:self.menuBarStyle];
     [self addSubview:self.containerView];
     [self addSubview:self.menuBar];
     
@@ -51,17 +61,26 @@
     }];
 }
 
-- (UIScrollView *)containerView{
+- (UIView *)containerView{
     if (!_containerView){
-        _containerView = [[UIScrollView alloc] init];
+        _containerView = [[UIView alloc] init];
     }
     return _containerView;
 }
 
 #pragma mark - WJMTableCollectionMenuBarDelegate
 - (void)tableCollectionMenuBar:(WJMTableCollectionMenuBar *)tableCollectionMenuBar selectTableCollectionMenuView:(WJMTableCollectionMenuView *)selectTableCollectionMenuView{
-    if ([self.delegate respondsToSelector:@selector(tableCollectionSelectIndex:)]){
-        [self.delegate tableCollectionSelectIndex:selectTableCollectionMenuView.index];
+    if ([self.delegate respondsToSelector:@selector(tableCollectionMenuBar:selectTableCollectionMenuView:)]){
+        [self.delegate tableCollectionMenuBar:tableCollectionMenuBar selectTableCollectionMenuView:selectTableCollectionMenuView];
+        selectTableCollectionMenuView.containerView.stringTag = @"menuView.containerView";
+        UIView *oldView = [self.containerView viewWithStringTag:@"menuView.containerView"];
+        [oldView removeFromSuperview];
+        [self.containerView addSubview:selectTableCollectionMenuView.containerView];
+        [selectTableCollectionMenuView.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.mas_equalTo(0);
+            make.width.mas_equalTo(self.containerView);
+            make.bottom.mas_equalTo(0);
+        }];
     }
 }
 /*

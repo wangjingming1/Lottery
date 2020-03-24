@@ -149,7 +149,7 @@ static NSInteger ConvenientServiceViewTag = 100;
     nameLab.text = name;
     nameLab.numberOfLines = 1;
     nameLab.font = [UIFont systemFontOfSize:kSystemFontOfSize];
-    nameLab.textColor = kUnselectedItemTintTextColor;
+    nameLab.textColor = kUnselectedTintTextColor;
     nameLab.textAlignment = NSTextAlignmentCenter;
     //初始化一个点击手势
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAcyion:)];

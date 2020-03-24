@@ -27,8 +27,8 @@
     [self.tabBar setBackgroundColor:[UIColor whiteColor]];
     
     //显示文字自定义颜色, 不被系统默认渲染
-    self.tabBar.tintColor = kTintTextColor;//选中颜色
-    self.tabBar.unselectedItemTintColor = kUnselectedItemTintTextColor;//默认颜色
+    self.tabBar.tintColor = kSelectedTintTextColor;//选中颜色
+    self.tabBar.unselectedItemTintColor = kUnselectedTintTextColor;//默认颜色
     
     [self initTabbars];
     // Do any additional setup after loading the view.

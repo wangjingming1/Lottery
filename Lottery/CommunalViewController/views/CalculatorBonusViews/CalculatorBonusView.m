@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     _labelFontSize = 20;
     _subLabelFontSize = 15;
     _curIndex = 0;
+    self.initSelectBall = NO;
 }
 
 - (void)setUI{
@@ -92,16 +93,20 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 }
 
 - (void)setModel:(LotteryWinningModel *)model{
+    if (self.initSelectBall || !_model){
+        [self reloadMyBallView:self.mySelectBallView redCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.redBullCount] blueCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.blueBullCount]];
+        [self reloadMyBallView:self.myTargetBallView redCount:@"0" blueCount:@"0"];
+        [self removeBonusView];
+    }
     _model = model;
     self.issueNumberLabel.text = model.issueNumber;
     self.dateLabel.text = [model dateToGeneralFormat];
     self.newestLabel.hidden = !model.newest;
     
     [self reloadBallView:model];
-    
-    [self reloadMyBallView:self.mySelectBallView redCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.redBullCount] blueCount:[NSString stringWithFormat:@"%ld", model.playRulesModel.blueBullCount]];
-    [self reloadMyBallView:self.myTargetBallView redCount:@"0" blueCount:@"0"];
-    [self removeBonusView];
+    if (!self.initSelectBall) {
+        [self calculatorBonus];
+    }
 }
 
 - (void)reloadBallView:(LotteryWinningModel *)model{
@@ -117,14 +122,6 @@ typedef NS_ENUM(NSInteger, SubBallTag){
         make.size.mas_equalTo(CGSizeMake(27, 27));
         make.top.bottom.mas_equalTo(0);
     }];
-}
-
-- (void)reloadMyBallView:(UIView *)myBall redBallCount:(NSString *)redBallCount blueBallCount:(NSString *)blueBallCount{
-    UILabel *redBallCountLabel = [myBall viewWithTag:SubBall_redBallCountTag];
-    UILabel *blueBallCountLabel = [myBall viewWithTag:SubBall_blueBallCountTag];
-    
-    [redBallCountLabel setText:redBallCount];
-    [blueBallCountLabel setText:blueBallCount];
 }
 
 - (void)createSubBallLabel:(NSArray *)ballArray ballStyle:(LSVCBallStyle)ballStyle tag:(NSInteger)tag{
@@ -251,8 +248,8 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     [redBallCountLabel setText:redCount];
     [blueBallCountLabel setText:blueCount];
 
-    if (myBallView == self.myTargetBallView){
-        self.calculatorBtn.enabled = !([redCount isEqualToString:@"0"] && [blueCount isEqualToString:@"0"]);
+    self.calculatorBtn.enabled = [self isCalculatorBonus];
+    if (!self.calculatorBtn.enabled){
         [self removeBonusView];
     }
 }
@@ -274,14 +271,28 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 
 - (void)calculatorButtonClick:(UIButton *)button{
     NSLog(@"计算奖金click");
-    NSString *selectRedCount = ((UILabel *)[self.mySelectBallView viewWithTag:SubBall_redBallCountTag]).text;
-    NSString *selectBlueCount = ((UILabel *)[self.mySelectBallView viewWithTag:SubBall_blueBallCountTag]).text;
+    [self calculatorBonus];
+}
+
+- (BOOL)isCalculatorBonus{
+    int selectRedCount = [((UILabel *)[self.mySelectBallView viewWithTag:SubBall_redBallCountTag]).text intValue];
+    int selectBlueCount = [((UILabel *)[self.mySelectBallView viewWithTag:SubBall_blueBallCountTag]).text intValue];
     
-    NSString *guessRedCount = ((UILabel *)[self.myTargetBallView viewWithTag:SubBall_redBallCountTag]).text;
-    NSString *guessBlueCount = ((UILabel *)[self.myTargetBallView viewWithTag:SubBall_blueBallCountTag]).text;
-    
-    NSArray <LotteryPrizeModel *> *array = [self.model calculatorPrizeArrayWithSelectRedCount:selectRedCount selectBlueCount:selectBlueCount guessRedCount:guessRedCount guessBlueCount:guessBlueCount];
-    [self createBonusView:array];
+    int guessRedCount = [((UILabel *)[self.myTargetBallView viewWithTag:SubBall_redBallCountTag]).text intValue];
+    int guessBlueCount = [((UILabel *)[self.myTargetBallView viewWithTag:SubBall_blueBallCountTag]).text intValue];
+    return (selectRedCount && selectBlueCount && (guessRedCount || guessBlueCount));
+}
+
+- (void)calculatorBonus{
+    if ([self isCalculatorBonus]){
+        int selectRedCount = [((UILabel *)[self.mySelectBallView viewWithTag:SubBall_redBallCountTag]).text intValue];
+        int selectBlueCount = [((UILabel *)[self.mySelectBallView viewWithTag:SubBall_blueBallCountTag]).text intValue];
+        
+        int guessRedCount = [((UILabel *)[self.myTargetBallView viewWithTag:SubBall_redBallCountTag]).text intValue];
+        int guessBlueCount = [((UILabel *)[self.myTargetBallView viewWithTag:SubBall_blueBallCountTag]).text intValue];
+        NSArray <LotteryPrizeModel *> *array = [self.model calculatorPrizeArrayWithSelectRedCount:selectRedCount selectBlueCount:selectBlueCount guessRedCount:guessRedCount guessBlueCount:guessBlueCount];
+        [self createBonusView:array];
+    }
 }
 
 - (void)showOtherViewByTapGesture:(UITapGestureRecognizer *)tapGesture{

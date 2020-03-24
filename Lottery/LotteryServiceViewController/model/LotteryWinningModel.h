@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)dateToGeneralFormat;
 
-- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRedCount:(NSString *)selectRedCount selectBlueCount:(NSString *)selectBlueCount guessRedCount:(NSString *)guessRedCount guessBlueCount:(NSString *)guessBlueCount;
+- (NSArray <LotteryPrizeModel *> *)calculatorPrizeArrayWithSelectRedCount:(int)selectRedCount selectBlueCount:(int)selectBlueCount guessRedCount:(int)guessRedCount guessBlueCount:(int)guessBlueCount;
 @end
 
 
