@@ -180,7 +180,7 @@ kImportantReminder(@"由于TableViewCell的点击事件被父视图otherBackView
     return touchView == _otherBackView;
 }
 
-#pragma mark - WJMTableCollectionDelegate
+#pragma mark - WJMTableCollectionMenuBarDelegate
 - (void)tableCollectionMenuBar:(WJMTableCollectionMenuBar *)tableCollectionMenuBar selectTableCollectionMenuView:(WJMTableCollectionMenuView *)selectTableCollectionMenuView {
     CalculatorBonusView *calculatorBonusView = (CalculatorBonusView *)[selectTableCollectionMenuView.containerView viewWithStringTag:@"calculatorBonusView"];
     if (!calculatorBonusView){

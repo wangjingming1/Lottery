@@ -32,7 +32,6 @@ static NSString * const ProvinceListViewCellIdentifier = @"ProvinceListViewCellI
 - (void)initData{
     LotteryCitysManager *manager = [[LotteryCitysManager alloc] init];
     self.provinceArray = [manager getProvincesArray];
-    
 }
 
 - (void)setUI{

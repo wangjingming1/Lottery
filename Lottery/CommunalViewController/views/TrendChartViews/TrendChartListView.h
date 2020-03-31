@@ -1,7 +1,7 @@
 //
 //  TrendChartListView.h
 //  Lottery
-//
+//  走势图-彩种切换(navigationItem.leftBarButtonItem)
 //  Created by wangjingming on 2020/3/18.
 //  Copyright © 2020 wangjingming. All rights reserved.
 //

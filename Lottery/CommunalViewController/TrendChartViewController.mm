@@ -9,24 +9,33 @@
 #import "TrendChartViewController.h"
 #import "LotteryKindName.h"
 #import "LotteryKeyword.h"
-#import "TrendChartListView.h"
 #import "Masonry.h"
 #import "GlobalDefines.h"
 #import "WJMTableCollection.h"
+#import "LotteryDownloadManager.h"
+#import "LotteryWinningModel.h"
+
+#import "TrendChartListView.h"
 #import "TrendChartSettingView.h"
 #import "LotteryTrendChartSettingModel.h"
+#import "BonusTrendChartView.h"
+
 
 @interface TrendChartViewController ()<UIGestureRecognizerDelegate, WJMTableCollectionMenuBarDelegate>
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, strong) NSArray *lotteryIdentifierArray;
 @property (nonatomic, strong) LotteryKeyword *lotteryKeyword;
-
-@property (nonatomic, strong) TrendChartListView *trendChartListView;
-@property (nonatomic, strong) UIView *otherBackView;
-@property (nonatomic, strong) WJMTableCollection *menuCollectionView;
-@property (nonatomic, strong) TrendChartSettingView *settingView;
 @property (nonatomic, strong) LotteryTrendChartSettingModel *settingModel;
 @property (nonatomic, strong) NSMutableDictionary <NSString *, NSArray <LotterySettingModel *> *> *cacheSettingModel;
+@property (nonatomic, strong) NSArray *lotteryDataArray;
+
+@property (nonatomic, strong) TrendChartSettingView *settingView;
+@property (nonatomic, strong) WJMTableCollection *menuCollectionView;
+
+@property (nonatomic, strong) UIView *otherBackView;
+@property (nonatomic, strong) TrendChartListView *trendChartListView;
+
+@property (nonatomic, strong) UIView *trendChartView;
 @end
 
 @implementation TrendChartViewController
@@ -38,7 +47,6 @@
     
     [self setUI];
     [self reloadMenuController];
-    [self reloadTrendChartView:self.identifier];
     // Do any additional setup after loading the view.
 }
 
@@ -127,10 +135,10 @@
 }
 
 - (NSArray <LotterySettingModel *> *)getCurrentSettingModelArray{
-    NSString *title = [self getCurrentMenu];
-    NSArray <LotterySettingModel *> *settingArray = self.cacheSettingModel[title];
+    NSString *curMenu = [self getCurrentMenu];
+    NSArray <LotterySettingModel *> *settingArray = self.cacheSettingModel[curMenu];
     if (!settingArray || settingArray.count == 0){
-        settingArray = [self.settingModel getParameterArray:title];
+        settingArray = [self.settingModel getParameterArray:curMenu];
     }
     return settingArray;
 }
@@ -138,7 +146,8 @@
 - (void)showSettingView:(UIButton *)button{
     NSLog(@"showSettingView");
     [self.otherBackView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    NSString *title = [NSString stringWithFormat:@"%@%@",[self getCurrentMenu],kLocalizedString(@"设置")];
+    NSString *curMenu = [self getCurrentMenu];
+    NSString *title = [NSString stringWithFormat:@"%@%@", curMenu, kLocalizedString(@"设置")];
     self.settingView = [[TrendChartSettingView alloc] initWithTitle:title];
     
     NSArray <LotterySettingModel *> *settingArray = [self getCurrentSettingModelArray];
@@ -155,7 +164,8 @@
     
     WS(weakSelf);
     self.settingView.finishBlock = ^(){
-        weakSelf.cacheSettingModel[title] = weakSelf.settingView.settingArray;
+        weakSelf.cacheSettingModel[curMenu] = weakSelf.settingView.settingArray;
+        [weakSelf reloadLotteryDataArray];
         [weakSelf removeOtherBackView];
     };
     self.settingView.cancelBlock = ^(){
@@ -182,7 +192,7 @@
     
     WS(weakSelf);
     [self.trendChartListView setSelectIdentifier:^(NSString * _Nonnull identifier) {
-        [weakSelf reloadTrendChartView:identifier];
+        [weakSelf changeNewIdentifier:identifier];
     }];
     
     [self.trendChartListView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -194,13 +204,95 @@
     }
 }
 
-- (void)reloadTrendChartView:(NSString *)identifier{
+- (void)changeNewIdentifier:(NSString *)identifier{
     self.identifier = identifier;
     self.settingModel.identifier = identifier;
     [self reloadMenuController];
     
     [self reloadNavBarLeftButton];
     [self removeOtherBackView];
+}
+
+- (void)reloadLotteryDataArray{
+    self.lotteryDataArray = @[];
+    
+    NSArray <LotterySettingModel *> *modelArray = [self getCurrentSettingModelArray];
+    NSString *issueNumberStr = @"";
+    for (LotterySettingModel *model in modelArray){
+        if ([model.title isEqualToString:@"期数"]){
+            issueNumberStr = model.defaultSelection;
+            break;
+        }
+        if ([model.title isEqualToString:@"奖金信息"]){
+            issueNumberStr = @"5";
+            break;
+        }
+    }
+    if (issueNumberStr.length == 0) return;
+    NSInteger issueNumber = [issueNumberStr integerValue];
+    
+    WS(weakSelf);
+    NSString *ide = self.identifier;
+    [LotteryDownloadManager lotteryDownload:0 count:issueNumber identifiers:@[ide] finsh:^(NSDictionary<NSString *,NSArray<LotteryWinningModel *> *> * _Nonnull lotteryDict) {
+        [weakSelf setLotteryDataArray:lotteryDict[ide]];
+        [weakSelf reloadTrendChartView];
+    }];
+}
+
+- (void)reloadTrendChartView{
+    NSString *menu = [self getCurrentMenu];
+    if ([menu isEqualToString:@"奖金走势"] && [self.trendChartView isKindOfClass:[BonusTrendChartView class]]){
+        BonusTrendChartView *bonusTrendChartView = (BonusTrendChartView *)self.trendChartView;
+        NSArray <BonusTrendChartModel *> *bonusTrendChartModelArray = [self getBonusTrendChartModelArray:self.lotteryDataArray];
+        bonusTrendChartView.modelArray = bonusTrendChartModelArray;
+    }
+}
+
+- (NSArray <BonusTrendChartModel *> *)getBonusTrendChartModelArray:(NSArray<LotteryWinningModel *> *)winningModelArray{
+    NSArray <BonusTrendChartModel *> *bonusTrendChartModelArray = @[];
+    if (winningModelArray.count == 0) return bonusTrendChartModelArray;
+    NSArray <LotterySettingModel *> *settingModelArray = [self getCurrentSettingModelArray];
+    if (settingModelArray.count == 0) return bonusTrendChartModelArray;
+    LotterySettingModel *settingModel = settingModelArray.firstObject;
+    NSString *defaultShowData = settingModel.defaultSelection;
+    auto createBonusTrendChartModel = [self](NSString *title, NSString *footnote, UIColor *titleColor, UIColor *nodeColor, UIColor *lineColor){
+        BonusTrendChartModel *model = [[BonusTrendChartModel alloc] init];
+        model.title = title;
+        model.footnote = footnote;
+        model.titleColor = titleColor;
+        model.nodeColor = nodeColor;
+        model.lineColor = lineColor;
+        model.trendChartDataModelArray = @[];
+        return model;
+    };
+    auto createSubtrendChartDataModel = [self](BonusTrendChartModel *bonusTrendChartModel, NSString *data, NSString *unit, NSString *footnote){
+        BonusTrendChartDataModel *model = [[BonusTrendChartDataModel alloc] init];
+        model.data = data;
+        model.unit = unit;
+        model.footnote = footnote;
+        NSMutableArray *trendChartDataModelArray = [bonusTrendChartModel.trendChartDataModelArray mutableCopy];
+        [trendChartDataModelArray addObject:model];
+        bonusTrendChartModel.trendChartDataModelArray = trendChartDataModelArray;
+    };
+    BonusTrendChartModel *singleBonus = createBonusTrendChartModel(kLocalizedString(@"单注奖金"), kLocalizedString(@"期次"), kTitleTintTextColor, kUIColorFromRGB10(240, 175, 85), kUIColorFromRGB10(240, 175, 85));
+    BonusTrendChartModel *prizeCount = createBonusTrendChartModel(kLocalizedString(@"中奖注数"), kLocalizedString(@"期次"), kTitleTintTextColor, kUIColorFromRGB10(100, 195, 185), kUIColorFromRGB10(100, 195, 185));
+    BonusTrendChartModel *jackpot = createBonusTrendChartModel(kLocalizedString(@"奖池金额"), kLocalizedString(@"期次"), kTitleTintTextColor, kUIColorFromRGB10(240, 175, 85), kUIColorFromRGB10(240, 175, 85));
+    for (LotteryWinningModel *winningmodel in winningModelArray){
+        NSString *issueNumber = winningmodel.issueNumber;
+        issueNumber = [issueNumber substringFromIndex:issueNumber.length - 4];
+        createSubtrendChartDataModel(singleBonus, winningmodel.prizeArray.firstObject.bonus, @"", issueNumber);
+        createSubtrendChartDataModel(prizeCount, winningmodel.prizeArray.firstObject.number, kLocalizedString(@"注"), issueNumber);
+        createSubtrendChartDataModel(jackpot, winningmodel.jackpot, @"", issueNumber);
+    }
+    //全部显示,仅显示奖金,仅显示注数
+    if ([defaultShowData isEqualToString:@"全部显示"]){
+        bonusTrendChartModelArray = @[singleBonus, prizeCount, jackpot];
+    } else if ([defaultShowData isEqualToString:@"仅显示奖金"]){
+        bonusTrendChartModelArray = @[singleBonus, jackpot];
+    } else if ([defaultShowData isEqualToString:@"仅显示注数"]){
+        bonusTrendChartModelArray = @[prizeCount, jackpot];
+    }
+    return bonusTrendChartModelArray;
 }
 
 - (LotteryKeyword *)lotteryKeyword{
@@ -262,6 +354,23 @@ kImportantReminder(@"由于TableViewCell的点击事件被父视图otherBackView
 //        return true;
 //    }
     return touchView == _otherBackView;
+}
+
+#pragma mark - WJMTableCollectionMenuBarDelegate
+- (void)tableCollectionMenuBar:(WJMTableCollectionMenuBar *)tableCollectionMenuBar selectTableCollectionMenuView:(WJMTableCollectionMenuView *)selectTableCollectionMenuView{
+    NSString *menu = [self getCurrentMenu];
+    [selectTableCollectionMenuView.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    if ([menu isEqualToString:@"奖金走势"]){
+        BonusTrendChartView *bonusTrendChartView = [[BonusTrendChartView alloc] init];
+        [selectTableCollectionMenuView.containerView addSubview:bonusTrendChartView];
+        
+        [bonusTrendChartView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(selectTableCollectionMenuView.containerView);
+            make.height.width.mas_equalTo(selectTableCollectionMenuView.containerView);
+        }];
+        self.trendChartView = bonusTrendChartView;
+    }
+    [self reloadLotteryDataArray];
 }
 /*
 #pragma mark - Navigation

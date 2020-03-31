@@ -39,13 +39,10 @@ static NSString * const HPVCHistoryCityArray = @"HPVCHistoryCityArray";
         cityHistoryArray = [@[] mutableCopy];
     }
     [cityHistoryArray removeObject:currentCity];
-    
-    if ([currentCity isEqualToString:@"全国"]){
-        [cityHistoryArray insertObject:currentCity atIndex:0];
-    } else if (cityHistoryArray.count < 3){
-        [cityHistoryArray addObject:currentCity];
-    } else {
+    if ([cityHistoryArray containsObject:@"全国"]){
         [cityHistoryArray insertObject:currentCity atIndex:1];
+    } else {
+        [cityHistoryArray insertObject:currentCity atIndex:0];
     }
     
     if (cityHistoryArray.count > 3){

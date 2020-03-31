@@ -17,6 +17,10 @@
             break;
         }
     }
+    if (colors.count == 0){
+        [layer removeFromSuperlayer];
+        return;
+    }
     NSMutableArray *cgColors = [[NSMutableArray alloc] initWithCapacity:0];
     for (UIColor *color in colors){
         [cgColors addObject:(id)color.CGColor];

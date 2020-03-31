@@ -96,6 +96,9 @@
         rect.origin.x -= self.triangleSide*2 + kPadding10;
         rect.size.width -= (self.triangleSide*2 + kPadding10);
     }
+    if (rect.origin.x < 1){
+        rect.origin.x = 1;
+    }
     CGFloat x = CGRectGetMinX(rect);
     CGFloat w = CGRectGetWidth(frame);
     CGFloat h = CGRectGetHeight(frame);
