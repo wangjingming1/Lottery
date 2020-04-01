@@ -207,6 +207,7 @@
 - (void)changeNewIdentifier:(NSString *)identifier{
     self.identifier = identifier;
     self.settingModel.identifier = identifier;
+    [self.cacheSettingModel removeAllObjects];
     [self reloadMenuController];
     
     [self reloadNavBarLeftButton];
