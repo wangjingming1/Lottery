@@ -152,39 +152,9 @@
         //这里不调用一句这个layer就不会进drawInContext方法...
         [layer setNeedsDisplay];
         [self.drawTrendChartView.layer addSublayer:layer];
-//
-//        CABasicAnimation *anim = [CABasicAnimation animation];
-//        anim.keyPath = @"bounds";
-//        anim.fromValue = [NSValue valueWithCGRect:CGRectMake(0, 0, 0, layerH)];
-//        anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, CGRectGetWidth(self.drawTrendChartView.frame), layerH)];
-//        anim.duration = 0.5;
-//        anim.removedOnCompletion = NO;
-//        //保存动画最前面效果
-//        anim.fillMode = kCAFillModeForwards;
-//
-//        CABasicAnimation *Anim = [CABasicAnimation animation];
-//        //设置属性
-//        Anim.keyPath = @"position.x";
-//        Anim.fromValue = @(0);// @(-(CGRectGetWidth(self.drawTrendChartView.frame)/2 - 200));
-//        Anim.toValue = @(CGRectGetWidth(self.drawTrendChartView.frame)/2);
-//
-//        CAAnimationGroup *group = [CAAnimationGroup animation];
-//        group.animations = @[anim,Anim];
-//        group.removedOnCompletion = NO;
-//        group.fillMode = kCAFillModeForwards;
-//        group.duration = 0.5;
-
-//        [backgroudlayer addAnimation:anim forKey:nil];
-        //添加动画
-//        [layer addAnimation:group forKey:nil];
+        [layer startAnimated];
         y += layerH;
     }
-//    CGRect frame = self.drawTrendChartView.frame;
-//    self.drawTrendChartView.frame = CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(frame), 50, CGRectGetHeight(frame));
-//    [UIView animateWithDuration:1 animations:^{
-//        self.drawTrendChartView.frame = frame;
-//    }];
-//    self.drawTrendChartView.layer.masksToBounds = YES;
 }
 
 - (void)segmentedButtonClick:(UIButton *)button {

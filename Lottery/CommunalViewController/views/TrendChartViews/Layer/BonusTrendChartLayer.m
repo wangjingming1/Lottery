@@ -13,6 +13,13 @@
 #import "BonusTrendChartModel.h"
 #import "LotteryPracticalMethod.h"
 
+@interface BonusTrendChartLayer()
+@property (nonatomic) NSTimeInterval startTime;
+@property (nonatomic) NSTimeInterval animatedDurationTime;
+@property (nonatomic, strong) CADisplayLink *displayLink;
+@property (nonatomic) BOOL isDrawMask;
+@end
+
 @implementation BonusTrendChartLayer
 - (instancetype)init
 {
@@ -21,9 +28,40 @@
         self.showFootnote = YES;
         self.lineWidth = 1;
         self.footnoteHeight = 20;
-        [self setContentsScale:[[UIScreen mainScreen] scale]];
+        self.isDrawMask = NO;
     }
     return self;
+}
+
+- (void)startAnimated {
+    [self invalidateDisplayLink];
+    
+    self.animatedDurationTime = 0.5;
+    self.startTime = [NSDate timeIntervalSinceReferenceDate];
+    self.isDrawMask = YES;
+    
+    [self.displayLink removeFromRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(maskAnimated:)];
+    [self.displayLink addToRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
+}
+
+- (void)invalidateDisplayLink{
+    [self.displayLink invalidate];
+    self.displayLink = nil;
+    self.animatedDurationTime = 0;
+    self.isDrawMask = NO;
+    [self setNeedsDisplay];
+}
+
+- (void)maskAnimated:(CADisplayLink *)displayLink{
+    NSTimeInterval curTime = [NSDate timeIntervalSinceReferenceDate];
+    double timeOffset = curTime - self.startTime;
+    
+    if (timeOffset > self.animatedDurationTime){
+        [self invalidateDisplayLink];
+    } else {
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)calculateXArray:(CGFloat *)xArray yArray:(CGFloat *)yArray dataArray:(long long *)dataArray width:(CGFloat)width height:(CGFloat)height{
@@ -87,6 +125,9 @@
     drawTextAtPoint(ctx, radius*2 + kPadding10, radius + kPadding10, DrawTextStyle_X_Left | DrawTextStyle_Y_Center, self.model.title, 0, 12, self.model.titleColor);
     
     [self drawBonusTrendChartData:ctx xArray:xArray yArray:yArray bonusDataArray:dataArray unit:unit arrayCount:dateCount drawH:height radius:radius];
+    if (self.isDrawMask) {
+        [self drawMask:ctx width:width height:height];
+    }
 }
 
 - (void)drawBonusTrendChartData:(CGContextRef)ctx xArray:(const CGFloat *)xArray yArray:(const CGFloat *)yArray bonusDataArray:(const long long *)dataArray unit:(NSString *)unit arrayCount:(NSInteger)arrayCount drawH:(CGFloat)drawH radius:(CGFloat)radius{
@@ -130,5 +171,26 @@
     
     //注意释放CGMutablePathRef
     CGPathRelease(path);
+}
+
+- (void)drawMask:(CGContextRef)ctx width:(CGFloat)width height:(CGFloat)height{
+    NSTimeInterval curTime = [NSDate timeIntervalSinceReferenceDate];
+    double timeOffset = curTime - self.startTime;
+    if (timeOffset > self.animatedDurationTime){
+        timeOffset = self.animatedDurationTime;
+    }
+    double percentage = timeOffset / self.animatedDurationTime;
+    
+    NSInteger dateCount = self.model.trendChartDataModelArray.count;
+    CGFloat singleWidth = width/dateCount;
+    CGFloat minX = singleWidth/2 + (width - singleWidth)*percentage, maxX = width;
+    CGFloat minY = 50, maxY = height;
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, minX, minY);
+    CGPathAddLineToPoint(path, NULL, maxX, minY);
+    CGPathAddLineToPoint(path, NULL, maxX, maxY);
+    CGPathAddLineToPoint(path, NULL, minX, maxY);
+    
+    drawPolygon(ctx, path, kBackgroundColor.CGColor, [UIColor clearColor].CGColor, 0);
 }
 @end

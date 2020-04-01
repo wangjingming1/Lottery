@@ -22,6 +22,21 @@ void drawCircle(CGContextRef ctx, CGPoint center, int radius, CGColorRef fillCol
     CGContextRestoreGState(ctx);
 }
 
+void drawPolygon(CGContextRef ctx, CGPathRef path, CGColorRef fillColor, CGColorRef strokeColor, CGFloat strokeWidth) {
+    CGContextSaveGState(ctx);
+    CGContextSetFillColorWithColor(ctx, fillColor);
+    CGContextSetStrokeColorWithColor(ctx, strokeColor);
+    CGContextSetLineWidth(ctx, strokeWidth);
+    
+    CGContextAddPath(ctx, path);
+    
+    //stroke
+    CGContextDrawPath(ctx, kCGPathFillStroke);
+    CGContextFillPath(ctx);
+    
+    CGContextRestoreGState(ctx);
+}
+
 void drawAuxiliaryLine(CGContextRef ctx, CGPoint p1, CGPoint p2, CGFloat lineWidth, CGColorRef lineColor, BOOL dash, CGFloat dashSize, BOOL setLineCap) {
     CGContextSaveGState(ctx);
     

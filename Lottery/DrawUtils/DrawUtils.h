@@ -20,7 +20,11 @@ typedef enum : NSInteger{
 } DrawTextStyle;
 
 void drawCircle(CGContextRef ctx, CGPoint center, int radius, CGColorRef fillColor, CGColorRef strokeColor, CGFloat strokeWidth);
+
+void drawPolygon(CGContextRef ctx, CGPathRef path, CGColorRef fillColor, CGColorRef strokeColor, CGFloat strokeWidth);
+
 void drawAuxiliaryLine(CGContextRef ctx, CGPoint p1, CGPoint p2, CGFloat lineWidth, CGColorRef lineColor, BOOL dash, CGFloat dashSize, BOOL setLineCap);
+
 void drawTextAtPoint(CGContextRef context, double x, double y, DrawTextStyle drawTextStyle, NSString *text, double radian, CGFloat fontSize, UIColor *color);
 
 void drawGradationColor(CGContextRef context, CGPathRef path, NSArray <UIColor *> * colors, CGPoint startPoint, CGPoint endPoint);

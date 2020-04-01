@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat footnoteHeight;   //20
 @property (nonatomic) CGFloat lineWidth;        //1
 @property (nonatomic) BOOL showFootnote;        //YES
+
+- (void)startAnimated;
 @end
 
 NS_ASSUME_NONNULL_END
