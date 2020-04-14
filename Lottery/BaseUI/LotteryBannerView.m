@@ -16,13 +16,6 @@
  遵守滚动式图的代理方法 实现拖拽效果
  */
 @interface LotteryBannerView () <UIScrollViewDelegate>
-{
-    /**
-     定时器 用来自动播放图片
-     */
-    NSTimer * _timer;
-}
-
 /**
  分页控件
  */
@@ -35,6 +28,10 @@
  图片数组
  */
 @property (nonatomic , strong) NSMutableArray * dataArray;
+/**
+    定时器 用来自动播放图片
+    */
+@property (nonatomic, strong) NSTimer * timer;
 @end
 
 @implementation LotteryBannerView
@@ -116,7 +113,7 @@
      滚动范围(手动拖拽时的范围)
      如果不写就不能手动拖拽(但是定时器可以让图片滚动)
      */
-    self.mainScrollView.contentSize = CGSizeMake(CGRectGetMaxX(lastV.frame), CGRectGetHeight(self.mainScrollView.frame));
+    self.mainScrollView.contentSize = CGSizeMake(CGRectGetMaxX(lastV.frame) + padding, CGRectGetHeight(self.mainScrollView.frame));
     //滚动视图的起始偏移量
     self.mainScrollView.contentOffset = CGPointMake(CGRectGetWidth(self.mainScrollView.frame), 0);
 }
@@ -170,7 +167,11 @@
  */
 - (void)addTimer{
     //初始化定时器 时间戳:2.0秒 目标:本类 方法选择器:timerFUNC 用户信息:nil 是否循环:yes
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFUNC:) userInfo:nil repeats:YES];
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(timerFUNC:) userInfo:nil repeats:YES];
+    WS(weakSelf);
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [weakSelf timerFUNC:[weakSelf timer]];
+    }];
     /**
      将定时器添加到当前线程中(currentRunLoop 当前线程)
      [NSRunLoop currentRunLoop]可以的到一个当前线程下的NSRunLoop对象

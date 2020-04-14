@@ -138,9 +138,14 @@
         make.top.mas_equalTo(navBarH);
     }];
     [self.view layoutIfNeeded];
-    NSArray *colors = @[[UIColor redColor], [UIColor blueColor], [UIColor clearColor]];
-    [headerView setGradationColor:colors startPoint:CGPointMake(0.5, 0.0) endPoint:CGPointMake(0.5, 1.0)];
+//    NSArray *colors = @[[UIColor redColor], [UIColor blueColor], [UIColor clearColor]];
+//    [headerView setGradationColor:colors startPoint:CGPointMake(0.5, 0.0) endPoint:CGPointMake(0.5, 1.0)];
     
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"homePageHeaderBG@2x" ofType:@"png"];
+    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+    UIImage *image = [UIImage imageWithData:imageData];
+    headerView.image = image;
+    headerView.contentMode = UIViewContentModeScaleAspectFill;
     self.headerView = headerView;
 }
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pushViewController:(Class)vcClass params:(NSDictionary *)params;
 @end
 
-@interface HPVCHeaderView : UIView
+@interface HPVCHeaderView : UIImageView
 @property (nonatomic, weak) id<HPVCHeaderViewDelegate> delegate;
 @property (nonatomic, weak) LotteryBannerView *bannerView;
 - (void)reloadBannerView:(NSArray<LotteryBannerModel *> *)datas;

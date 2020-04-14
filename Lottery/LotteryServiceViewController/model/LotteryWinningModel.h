@@ -65,6 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *number;
 /**单注奖金*/
 @property (nonatomic, copy) NSString *bonus;
+
+@property (nonatomic, copy) NSString *gender;
+
 - (instancetype)initWithDict:(NSDictionary *)dict;
 @end
 NS_ASSUME_NONNULL_END
