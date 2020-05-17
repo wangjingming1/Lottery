@@ -14,11 +14,22 @@
 
 @implementation WJMAlertController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
++ (WJMAlertController *)showAlertController:(NSString *)title message:(NSString *)message confirmText:(NSString*)confirmText cancelText:(NSString*)cancelText confirm:(void(^)(void))confirm cancel:(void(^)(void))cancel{
+    WJMAlertController *alertController = [WJMAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelText style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+        if (cancel) cancel();
+    }];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^ void (UIAlertAction *action){
+        if (confirm) confirm();
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction: confirmAction];
+    
+    return alertController;
 }
-
 /*
 #pragma mark - Navigation
 

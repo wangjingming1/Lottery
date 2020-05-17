@@ -6,7 +6,7 @@
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
 
-#import <MJRefresh/MJRefresh.h>
+#import "MJRefresh.h"
 
 #import "NewsViewController.h"
 #import "NewsCollectionViewCell.h"
@@ -80,6 +80,7 @@
     if (!_newsTableView){
         _newsTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
         _newsTableView.estimatedRowHeight = 44;
+        _newsTableView.backgroundColor = [UIColor clearColor];
         _newsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//不使用分割线样式
         _newsTableView.rowHeight = UITableViewAutomaticDimension;
         [_newsTableView registerClass:[NewsCollectionViewCell class] forCellReuseIdentifier:kNewsViewControllerCellIdentifier];

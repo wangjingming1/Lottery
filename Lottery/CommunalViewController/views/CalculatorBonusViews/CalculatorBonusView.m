@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 }
 
 - (void)initData{
-    _labelFontSize = 20;
+    _labelFontSize = 17;
     _subLabelFontSize = 15;
     _curIndex = 0;
     self.initSelectBall = NO;
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 
 - (UIView *)createMyBallView:(NSString *)title defRedBallCount:(NSString *)defRedBallCount defBlueBallCount:(NSString *)defBlueBallCount{
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
     UILabel *titleLabel = [self createLabel:title fontSize:_subLabelFontSize];
         
     UIView *redBallView = [[UIView alloc] init];
@@ -249,9 +249,9 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     [blueBallCountLabel setText:blueCount];
 
     self.calculatorBtn.enabled = [self isCalculatorBonus];
-    if (!self.calculatorBtn.enabled){
+//    if (!self.calculatorBtn.enabled){
         [self removeBonusView];
-    }
+//    }
 }
 
 - (void)createBonusView:(NSArray <LotteryPrizeModel *> *)modelArray{
@@ -338,7 +338,7 @@ typedef NS_ENUM(NSInteger, SubBallTag){
     if (!_issueNumberLabel){
         _issueNumberLabel = [[UILabel alloc] init];
         _issueNumberLabel.font = [UIFont boldSystemFontOfSize:_labelFontSize];
-        _issueNumberLabel.textColor = kTitleTintTextColor;
+        _issueNumberLabel.textColor = UIColor.commonTitleTintTextColor;
     }
     return _issueNumberLabel;
 }
@@ -346,7 +346,7 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 - (UILabel *)dateLabel{
     if (!_dateLabel){
         _dateLabel = [self createLabel:@"" fontSize:_subLabelFontSize];
-        _dateLabel.textColor = kSubtitleTintTextColor;
+        _dateLabel.textColor = UIColor.commonSubtitleTintTextColor;
     }
     return _dateLabel;
 }
@@ -374,15 +374,15 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 - (UIView *)issueNumberBackView {
     if (!_issueNumberBackView){
         _issueNumberBackView = [[UIView alloc] init];
-        _issueNumberBackView.backgroundColor = [UIColor whiteColor];
+        _issueNumberBackView.backgroundColor = UIColor.commonGroupedBackgroundColor;// [UIColor whiteColor];
         
         UILabel *issueNumberSelectLabel = [self createLabel:kLocalizedString(@"期次选择") fontSize:_subLabelFontSize];
-        issueNumberSelectLabel.textColor = kSubtitleTintTextColor;
+        issueNumberSelectLabel.textColor = UIColor.commonSubtitleTintTextColor;
         
         UIImageView *rightArrowView = [self createRightArrowView];
         UIView *dividingLineView = [[UIView alloc] init];
-        dividingLineView.backgroundColor = kUIColorFromRGB10(240, 240, 240);
-        
+        dividingLineView.backgroundColor = UIColor.commonBackgroundColor;
+
         [_issueNumberBackView addSubview:issueNumberSelectLabel];
         [_issueNumberBackView addSubview:self.issueNumberLabel];
         [_issueNumberBackView addSubview:self.newestLabel];
@@ -452,7 +452,9 @@ typedef NS_ENUM(NSInteger, SubBallTag){
         
         [_calculatorBtn setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
         [_calculatorBtn setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateHighlighted];
-        [_calculatorBtn setBackgroundImage:[UIImage imageWithColor:kLightGreyColor] forState:UIControlStateDisabled];
+//        [_calculatorBtn setBackgroundImage:[UIImage imageWithColor:UIColor.commonLightGreyColor] forState:UIControlStateDisabled];
+        [_calculatorBtn setBackgroundImage:[UIImage imageWithColor:kUIColorFromRGB10(230, 230, 230)] forState:UIControlStateDisabled];
+        
         
         [_calculatorBtn setEnabled:NO];
         
@@ -464,7 +466,7 @@ typedef NS_ENUM(NSInteger, SubBallTag){
 - (UIView *)calculatorView{
     if (!_calculatorView){
         _calculatorView = [[UIView alloc] init];
-        _calculatorView.backgroundColor = [UIColor whiteColor];
+        _calculatorView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
 
         [_calculatorView addSubview:self.calculatorBtn];
         [self.calculatorBtn mas_makeConstraints:^(MASConstraintMaker *make) {

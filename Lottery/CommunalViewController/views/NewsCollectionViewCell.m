@@ -43,6 +43,7 @@
 }
 
 - (void)setUI{
+    self.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.thumbnailImageView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.timeLabel];
@@ -114,7 +115,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel){
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = kTitleTintTextColor;
+        _titleLabel.textColor = UIColor.commonTitleTintTextColor;
         _titleLabel.font = [UIFont systemFontOfSize:kNCVCellTitleLabelFontSize];
         _titleLabel.numberOfLines = 0;
     }
@@ -124,7 +125,7 @@
 - (UILabel *)informationSourcesLabel{
     if (!_informationSourcesLabel){
         _informationSourcesLabel = [[UILabel alloc] init];
-        _informationSourcesLabel.textColor = kSubtitleTintTextColor;
+        _informationSourcesLabel.textColor = UIColor.commonSubtitleTintTextColor;
         _informationSourcesLabel.font = [UIFont systemFontOfSize:kNCVCellTimeLabelFontSize];
     }
     return _informationSourcesLabel;
@@ -133,7 +134,7 @@
 - (UILabel *)timeLabel{
     if (!_timeLabel){
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.textColor = kSubtitleTintTextColor;
+        _timeLabel.textColor = UIColor.commonSubtitleTintTextColor;
         _timeLabel.font = [UIFont systemFontOfSize:kNCVCellTimeLabelFontSize];
     }
     return _timeLabel;
@@ -152,7 +153,7 @@
 - (UIView *)bottomLineView{
     if (!_bottomLineView){
         _bottomLineView = [[UIView alloc] init];
-        _bottomLineView.backgroundColor = kSubtitleTintTextColor;
+        _bottomLineView.backgroundColor = UIColor.commonSubtitleTintTextColor;
     }
     return _bottomLineView;
 }

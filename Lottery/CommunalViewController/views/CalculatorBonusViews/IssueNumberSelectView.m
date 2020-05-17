@@ -39,7 +39,8 @@
 
 - (void)setUI{
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.backgroundColor = [UIColor whiteColor];
+    titleLabel.textColor = UIColor.commonTitleTintTextColor;
+    titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = kLocalizedString(@"期次选择");
     
@@ -80,7 +81,9 @@
 - (UITableView *)tableView{
     if (!_tableView){
         _tableView = [[UITableView alloc] init];
+        _tableView.backgroundColor = UIColor.commonGroupedBackgroundColor;
         _tableView.rowHeight = 40;
+        _tableView.separatorColor = kDividingLineColor;
         [_tableView registerClass:[IssueNumberCell class] forCellReuseIdentifier:kIssueNumberSelectViewCellIdentifier];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -148,6 +151,7 @@
 }
 
 - (void)setUI{
+    self.contentView.backgroundColor = UIColor.commonGroupedBackgroundColor;
     [self.contentView addSubview:self.issueNumberLabel];
     [self.contentView addSubview:self.dateLabel];
     [self.contentView addSubview:self.newestLabel];
@@ -197,7 +201,7 @@
     if (!_issueNumberLabel){
         _issueNumberLabel = [[UILabel alloc] init];
         _issueNumberLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:17];
-        _issueNumberLabel.textColor = kTitleTintTextColor;
+        _issueNumberLabel.textColor = UIColor.commonTitleTintTextColor;
     }
     return _issueNumberLabel;
 }
@@ -206,7 +210,7 @@
     if (!_dateLabel){
         _dateLabel = [[UILabel alloc] init];
         _dateLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:15];
-        _dateLabel.textColor = kSubtitleTintTextColor;
+        _dateLabel.textColor = UIColor.commonSubtitleTintTextColor;
     }
     return _dateLabel;
 }

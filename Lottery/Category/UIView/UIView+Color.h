@@ -21,11 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  画渐变色
- @params context    指定绘制在context上
- @params path         渐变色路径(由点组成的闭合路径, 可以定义成任意形状, 对其填充渐变色)
+ @params context     指定绘制在context上
+ @params pointArray 渐变色路径(由点组成路径, 可以定义成任意形状, 对其填充渐变色)
  其他参数同上
 */
-- (void)drawGradationColor:(CGContextRef)context path:(CGPathRef)path colors:(NSArray <UIColor *> *)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+- (void)drawGradationColor:(CGContextRef)context pointArray:(NSArray <NSValue *> *)pointArray colors:(NSArray <UIColor *> *)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 /**
  添加阴影并设置颜色
  @params color 阴影颜色

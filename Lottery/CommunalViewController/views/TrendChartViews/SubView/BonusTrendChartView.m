@@ -43,7 +43,7 @@
 }
 
 - (void)setUI{
-    self.backgroundColor = kBackgroundColor;
+    self.backgroundColor = UIColor.commonBackgroundColor;
     [self addSubview:self.headerView];
     [self addSubview:self.drawTrendChartView];
     
@@ -89,7 +89,7 @@
             [button setTitle:type forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
             [button setTitleColor:kUIColorFromRGB10(215, 87, 63) forState:UIControlStateNormal];
-            [button setBackgroundColor:kUIColorFromRGB10(245, 245, 245)];
+            [button setBackgroundColor:UIColor.commonLightGreyColor];
             [button addTarget:self action:@selector(segmentedButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             button.stringTag = type;
             [_headerView addSubview:button];
@@ -135,7 +135,7 @@
     if (modelArray.count == 0) return;
     [self.drawTrendChartView setNeedsLayout];//设置重新布局标记
     [self.drawTrendChartView layoutIfNeeded];//在当前runloop中立即重新布局
-    CGFloat y = 0;
+    CGFloat y = 0, padding = 20;
     for (int i = 0; i < modelArray.count; i++){
         BonusTrendChartModel *model = modelArray[i];
         BonusTrendChartLayer *layer = [[BonusTrendChartLayer alloc] init];
@@ -143,8 +143,8 @@
         if (i == modelArray.count - 1){
             layerH += layer.footnoteHeight;
         }
-        layer.drawRect = CGRectMake(0, y, CGRectGetWidth(self.drawTrendChartView.frame), layerH);
-        layer.frame = layer.drawRect;
+        layer.drawRect = CGRectMake(padding, 0, CGRectGetWidth(self.drawTrendChartView.frame), layerH);
+        layer.frame = CGRectMake(-padding, y, CGRectGetWidth(self.drawTrendChartView.frame) + padding*2, layerH);//layer.drawRect;
         layer.model = model;
         layer.lineWidth = 1;
         layer.showFootnote = i == modelArray.count - 1;
@@ -153,7 +153,7 @@
         [layer setNeedsDisplay];
         [self.drawTrendChartView.layer addSublayer:layer];
         [layer startAnimated];
-        y += layerH;
+        y += CGRectGetHeight(layer.frame);
     }
 }
 
@@ -187,6 +187,10 @@
     if (!CGRectEqualToRect(self.frame, CGRectZero) && self.modelArray.count && self.drawTrendChartView.layer.sublayers.count){
         [self reloadTrendChartView];
     }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection{
+    [self.drawTrendChartView.layer.sublayers makeObjectsPerformSelector:@selector(setNeedsDisplay)];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

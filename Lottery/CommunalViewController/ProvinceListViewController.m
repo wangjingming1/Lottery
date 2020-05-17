@@ -34,6 +34,9 @@ static NSString * const ProvinceListViewCellIdentifier = @"ProvinceListViewCellI
     self.provinceArray = [manager getProvincesArray];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection{
+    
+}
 - (void)setUI{
     self.provinceTableView = [[UITableView alloc] init];
     self.provinceTableView.rowHeight = 45;
@@ -119,7 +122,7 @@ static NSString * const ProvinceListViewCellIdentifier = @"ProvinceListViewCellI
 
 - (UILabel *)createSubTitleLabel:(NSString *)title{
     UILabel *label = [[UILabel alloc] init];
-    label.textColor = kSubtitleTintTextColor;
+    label.textColor = UIColor.commonSubtitleTintTextColor;
     label.text = title;
     label.font = [UIFont systemFontOfSize:15];
     return label;
@@ -129,11 +132,11 @@ static NSString * const ProvinceListViewCellIdentifier = @"ProvinceListViewCellI
     UIButton *button = [[UIButton alloc] init];
     [button setTitle:city forState:UIControlStateNormal];
     button.stringTag = city;
-    button.backgroundColor = [UIColor whiteColor];
+    button.backgroundColor = UIColor.commonBackgroundColor;// [UIColor whiteColor];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     button.titleLabel.font = [UIFont systemFontOfSize:17];
 
-    [button setTitleColor:kTitleTintTextColor forState:UIControlStateNormal];
+    [button setTitleColor:UIColor.commonTitleTintTextColor forState:UIControlStateNormal];
     [button addTarget:self action:@selector(cityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     button.layer.masksToBounds = YES;
     button.layer.cornerRadius = 6;

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WJMAlertController : UIAlertController
 
++ (WJMAlertController *)showAlertController:(NSString *)title message:(NSString *)message confirmText:(NSString*)confirmText cancelText:(NSString*)cancelText confirm:(void(^)(void))confirm cancel:(void(^)(void))cancel;
 @end
 
 NS_ASSUME_NONNULL_END

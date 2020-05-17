@@ -149,7 +149,7 @@ static NSInteger ConvenientServiceViewTag = 100;
     nameLab.text = name;
     nameLab.numberOfLines = 1;
     nameLab.font = [UIFont systemFontOfSize:kSystemFontOfSize];
-    nameLab.textColor = kUnselectedTintTextColor;
+    nameLab.textColor = UIColor.commonUnselectedTintTextColor;
     nameLab.textAlignment = NSTextAlignmentCenter;
     //初始化一个点击手势
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAcyion:)];
@@ -175,7 +175,7 @@ static NSInteger ConvenientServiceViewTag = 100;
 - (UIView *)backView{
     if (!_backView){
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor whiteColor];
+        _backView.backgroundColor = UIColor.commonGroupedBackgroundColor;// [UIColor whiteColor];
         _backView.layer.cornerRadius = kCornerRadius;
         _backView.layer.masksToBounds = YES;
     }

@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
     self.identifier = [self.params objectForKey:@"identifier"];
     [self initData];
     [self setUI];
@@ -61,7 +61,7 @@
 
     UILabel *tipsLab = [[UILabel alloc] init];
     tipsLab.text = kLocalizedString(@"开奖结果仅供参考，以官方开奖信息为准");
-    tipsLab.textColor = kSubTipsTintTextColor;
+    tipsLab.textColor = UIColor.commonSubTipsTintTextColor;
     tipsLab.font = [UIFont systemFontOfSize:kSubTipsFontOfSize];
     
     [self.backgroundView addSubview:self.menuCollectionView];
@@ -109,7 +109,7 @@
 - (IssueNumberSelectView *)issueNumberSelectView{
     if (!_issueNumberSelectView){
         _issueNumberSelectView = [[IssueNumberSelectView alloc] init];
-        _issueNumberSelectView.backgroundColor = [UIColor whiteColor];
+        _issueNumberSelectView.backgroundColor = UIColor.commonGroupedBackgroundColor;// [UIColor whiteColor];
     }
     return _issueNumberSelectView;
 }
@@ -247,7 +247,7 @@ kImportantReminder(@"由于TableViewCell的点击事件被父视图otherBackView
 
 - (void)showMySelectBallView:(MySelectBallViewStyle)style model:(LotteryWinningModel *)model oldRedCount:(NSString *)oldRedCount oldBlueCount:(NSString *)oldBlueCount result:(void(^)(NSString *newRedCount, NSString *newBlueCount))result{
     MySelectBallView *mySelectBallView = [[MySelectBallView alloc] initWithStyle:style];
-    mySelectBallView.backgroundColor = [UIColor whiteColor];
+    mySelectBallView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
     [self.otherBackView addSubview:mySelectBallView];
     mySelectBallView.model = model;
     [mySelectBallView setOldRedCount:oldRedCount oldBlueCount:oldBlueCount];

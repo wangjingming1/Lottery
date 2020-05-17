@@ -124,7 +124,7 @@
             [array removeAllObjects];
             
             UIView *backView = [[UIView alloc] init];
-            [backView setShadowAndColor:kShadowColor];
+            [backView setShadowAndColor:UIColor.commonShadowColor];
             [self.scrollView addSubview:backView];
             
             LSVCLotteryWinningView *lastView;
@@ -163,7 +163,7 @@
                 }
             }];
             
-            [backView setShadowAndColor:kShadowColor];
+            [backView setShadowAndColor:UIColor.commonShadowColor];
             lastBackView = backView;
         }
         self.lotteryWinningViewDict[ide] = array;

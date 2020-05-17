@@ -15,7 +15,7 @@
 #import "GlobalDefines.h"
 
 @interface LotteryTabBarViewController ()
-
+@property (nonatomic, strong)NSArray <Class>* classArray;
 @end
 
 @implementation LotteryTabBarViewController
@@ -24,11 +24,12 @@
     [super viewDidLoad];
     //设置tabbar背景色
     [self.tabBar setBackgroundImage:[[UIImage alloc]init]];
-    [self.tabBar setBackgroundColor:[UIColor whiteColor]];
+    [self.tabBar setBackgroundColor:[UIColor commonBackgroundColor]];
+//    [self.tabBar setBackgroundColor:[UIColor whiteColor]];
     
     //显示文字自定义颜色, 不被系统默认渲染
-    self.tabBar.tintColor = kSelectedTintTextColor;//选中颜色
-    self.tabBar.unselectedItemTintColor = kUnselectedTintTextColor;//默认颜色
+    self.tabBar.tintColor = UIColor.commonSelectedTintTextColor;//选中颜色
+    self.tabBar.unselectedItemTintColor = UIColor.commonUnselectedTintTextColor;//默认颜色
     
     [self initTabbars];
     // Do any additional setup after loading the view.
@@ -45,14 +46,14 @@
 */
 
 - (void)initTabbars{
-    NSArray <Class>* classArray = @[
+    self.classArray = @[
         [HomePageViewController class],
         [LotteryServiceViewController class],
         [GamesViewController class],
         [MineViewController class],
     ];
     
-    for (Class class in classArray){
+    for (Class class in self.classArray){
         BaseUIViewController *vc = [[class alloc] init];
         NSString *title = [self getTheDataINeed:@"title" class:class];
         NSString *imageName = [self getTheDataINeed:@"imageName" class:class];
@@ -68,7 +69,7 @@
             return @"首页";
         }
         if ([type isEqualToString:@"imageName"]){
-            return @"shouye_unselect";
+            return @"shouye";
         }
         if ([type isEqualToString:@"selectImageName"]){
             return @"shouye_selected";
@@ -101,7 +102,7 @@
             return @"mine";
         }
         if ([type isEqualToString:@"selectImageName"]){
-            return @"mine_selected";
+            return @"mine1_selected";
         }
     }
     return @"";
@@ -119,8 +120,21 @@
     viewCollectionView.tabBarItem.selectedImage = [[UIImage imageNamed:selectImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     LotteryNavigationController *nav = [[LotteryNavigationController alloc] initWithRootViewController:viewCollectionView];
-    nav.navigationBar.barTintColor = [UIColor redColor];
+    nav.navigationBar.barTintColor = UIColor.commonNavigationControllerBarTintColor;//[UIColor redColor];
     [self addChildViewController:nav];
     index++;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection{
+    for (LotteryNavigationController *navVC in self.viewControllers){
+        if (![navVC isKindOfClass:[LotteryNavigationController class]]) continue;
+        for (UIViewController *vc in navVC.viewControllers){
+            if ([self.classArray indexOfObject:[vc class]] == NSNotFound) continue;
+            NSString *imageName = [self getTheDataINeed:@"imageName" class:[vc class]];
+            NSString *selectImageName = [self getTheDataINeed:@"selectImageName" class:[vc class]];
+            vc.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];;
+            vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
+    }
 }
 @end

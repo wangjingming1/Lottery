@@ -160,7 +160,7 @@
         make.width.mas_equalTo(weakSelf.view).offset(-kPadding20);
         make.top.mas_equalTo(weakSelf.headerView.mas_bottom).offset(kPadding10);
     }];
-    [csView setShadowAndColor:kShadowColor];
+    [csView setShadowAndColor:UIColor.commonShadowColor];
     
     self.convenientServiceView = csView;
 }
@@ -175,7 +175,7 @@
         make.left.width.mas_equalTo(weakSelf.convenientServiceView);
         make.top.mas_equalTo(weakSelf.convenientServiceView.mas_bottom).offset(kPadding10);
     }];
-    [winningListVie setShadowAndColor:kShadowColor];
+    [winningListVie setShadowAndColor:UIColor.commonShadowColor];
     
     self.winningListView = winningListVie;
 }
@@ -191,7 +191,7 @@
         make.top.mas_equalTo(weakSelf.winningListView.mas_bottom).offset(kPadding10);
     }];
     
-    [newsListView setShadowAndColor:kShadowColor];
+    [newsListView setShadowAndColor:UIColor.commonShadowColor];
     self.newsListView = newsListView;
 }
 
@@ -247,6 +247,14 @@
 }
 
 #pragma mark - scrollViewDelegate
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection{
+    if (@available(iOS 13.0, *)) {
+        [self.convenientServiceView setShadowAndColor:UIColor.commonShadowColor];
+        [self.winningListView setShadowAndColor:UIColor.commonShadowColor];
+        [self.newsListView setShadowAndColor:UIColor.commonShadowColor];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self changeBarImageViewAlpha:scrollView.contentOffset.y];
 }

@@ -85,7 +85,7 @@
 
     UILabel *tipsLab = [[UILabel alloc] init];
     tipsLab.text = kLocalizedString(@"开奖结果仅供参考，以官方开奖信息为准");
-    tipsLab.textColor = kSubTipsTintTextColor;
+    tipsLab.textColor = UIColor.commonSubTipsTintTextColor;
     tipsLab.font = [UIFont systemFontOfSize:kSubTipsFontOfSize];
     
     [self.backgroundView addSubview:self.menuCollectionView];
@@ -149,7 +149,7 @@
     NSString *curMenu = [self getCurrentMenu];
     NSString *title = [NSString stringWithFormat:@"%@%@", curMenu, kLocalizedString(@"设置")];
     self.settingView = [[TrendChartSettingView alloc] initWithTitle:title];
-    
+    self.settingView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
     NSArray <LotterySettingModel *> *settingArray = [self getCurrentSettingModelArray];
     [self.settingView setSettingArray:settingArray];
     [self.otherBackView addSubview:self.settingView];
@@ -179,7 +179,7 @@
     //这里由于设置了view的Padding后,只有内容大小受改变才会重新去计算view的大小,而SelectedMenu会改变字体,所以这个方法调用需要在前面
     [self.menuCollectionView.menuBar reloadMenuBarToFull];
     if (kLotteryIsDaletou(self.identifier) || kLotteryIsShuangseqiu(self.identifier)){
-        [self.menuCollectionView.menuBar setSelectedMenu:1];
+        [self.menuCollectionView.menuBar setSelectedMenu:0];//1
     } else {
         [self.menuCollectionView.menuBar setSelectedMenu:0];
     }
@@ -256,11 +256,12 @@
     if (settingModelArray.count == 0) return bonusTrendChartModelArray;
     LotterySettingModel *settingModel = settingModelArray.firstObject;
     NSString *defaultShowData = settingModel.defaultSelection;
-    auto createBonusTrendChartModel = [self](NSString *title, NSString *footnote, UIColor *titleColor, UIColor *nodeColor, UIColor *lineColor){
+    auto createBonusTrendChartModel = [self](NSString *title, NSString *footnote, UIColor *titleColor, UIColor *footNoteColor, UIColor *nodeColor, UIColor *lineColor){
         BonusTrendChartModel *model = [[BonusTrendChartModel alloc] init];
         model.title = title;
         model.footnote = footnote;
         model.titleColor = titleColor;
+        model.footNoteColor =
         model.nodeColor = nodeColor;
         model.lineColor = lineColor;
         model.trendChartDataModelArray = @[];
@@ -275,9 +276,9 @@
         [trendChartDataModelArray addObject:model];
         bonusTrendChartModel.trendChartDataModelArray = trendChartDataModelArray;
     };
-    BonusTrendChartModel *singleBonus = createBonusTrendChartModel(kLocalizedString(@"单注奖金"), kLocalizedString(@"期次"), kTitleTintTextColor, kUIColorFromRGB10(240, 175, 85), kUIColorFromRGB10(240, 175, 85));
-    BonusTrendChartModel *prizeCount = createBonusTrendChartModel(kLocalizedString(@"中奖注数"), kLocalizedString(@"期次"), kTitleTintTextColor, kUIColorFromRGB10(100, 195, 185), kUIColorFromRGB10(100, 195, 185));
-    BonusTrendChartModel *jackpot = createBonusTrendChartModel(kLocalizedString(@"奖池金额"), kLocalizedString(@"期次"), kTitleTintTextColor, kUIColorFromRGB10(240, 175, 85), kUIColorFromRGB10(240, 175, 85));
+    BonusTrendChartModel *singleBonus = createBonusTrendChartModel(kLocalizedString(@"单注奖金"), kLocalizedString(@"期次"), UIColor.commonTitleTintTextColor, UIColor.commonSubtitleTintTextColor, kUIColorFromRGB10(240, 175, 85), kUIColorFromRGB10(240, 175, 85));
+    BonusTrendChartModel *prizeCount = createBonusTrendChartModel(kLocalizedString(@"中奖注数"), kLocalizedString(@"期次"), UIColor.commonTitleTintTextColor, UIColor.commonSubtitleTintTextColor ,kUIColorFromRGB10(100, 195, 185), kUIColorFromRGB10(100, 195, 185));
+    BonusTrendChartModel *jackpot = createBonusTrendChartModel(kLocalizedString(@"奖池金额"), kLocalizedString(@"期次"), UIColor.commonTitleTintTextColor, UIColor.commonSubtitleTintTextColor, kUIColorFromRGB10(240, 175, 85), kUIColorFromRGB10(240, 175, 85));
     for (LotteryWinningModel *winningmodel in winningModelArray){
         NSString *issueNumber = winningmodel.issueNumber;
         issueNumber = [issueNumber substringFromIndex:issueNumber.length - 4];
@@ -306,7 +307,8 @@
 - (TrendChartListView *)trendChartListView{
     if (!_trendChartListView){
         _trendChartListView = [[TrendChartListView alloc] init];
-        _trendChartListView.backgroundColor = [UIColor whiteColor];
+//        _trendChartListView.backgroundColor = [UIColor whiteColor];
+        _trendChartListView.backgroundColor = UIColor.commonGroupedBackgroundColor;
     }
     return _trendChartListView;
 }

@@ -76,7 +76,7 @@
 - (UIView *)backView{
     if (!_backView){
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor whiteColor];
+        _backView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
         _backView.layer.cornerRadius = kCornerRadius;
         _backView.layer.masksToBounds = YES;
     }

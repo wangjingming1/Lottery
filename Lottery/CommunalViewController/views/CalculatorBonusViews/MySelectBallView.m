@@ -65,9 +65,9 @@
     finishButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [finishButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     
-    UIButton *cancelButton = [self createButton:kLocalizedString(@"取消") titleColor:kTitleTintTextColor action:@selector(cancelButtonClick:)];
+    UIButton *cancelButton = [self createButton:kLocalizedString(@"取消") titleColor:UIColor.commonTitleTintTextColor action:@selector(cancelButtonClick:)];
     cancelButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [cancelButton setTitleColor:kTitleTintTextColor forState:UIControlStateNormal];
+    [cancelButton setTitleColor:UIColor.commonTitleTintTextColor forState:UIControlStateNormal];
     
     self.titleLabel.text = self.style == SelectBallViewStyle ? kLocalizedString(@"我的投注") : kLocalizedString(@"我的命中");
     
@@ -271,7 +271,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel){
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.textColor = UIColor.commonTitleTintTextColor;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
@@ -281,7 +281,7 @@
     if (!_redBallLabel){
         _redBallLabel = [[UILabel alloc] init];
         _redBallLabel.font = [UIFont systemFontOfSize:15];
-        _redBallLabel.textColor = kTitleTintTextColor;
+        _redBallLabel.textColor = UIColor.commonTitleTintTextColor;
     }
     return _redBallLabel;
 }
@@ -290,7 +290,7 @@
     if (!_blueBallLabel){
         _blueBallLabel = [[UILabel alloc] init];
         _blueBallLabel.font = [UIFont systemFontOfSize:15];
-        _blueBallLabel.textColor = kTitleTintTextColor;
+        _blueBallLabel.textColor = UIColor.commonTitleTintTextColor;
     }
     return _blueBallLabel;
 }

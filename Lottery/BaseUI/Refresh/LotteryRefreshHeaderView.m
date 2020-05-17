@@ -10,6 +10,13 @@
 
 @implementation LotteryRefreshHeaderView
 
+- (void)prepare
+{
+    [super prepare];
+    self.stateLabel.textColor = UIColor.commonTitleTintTextColor;
+    self.lastUpdatedTimeLabel.textColor = UIColor.commonTitleTintTextColor;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

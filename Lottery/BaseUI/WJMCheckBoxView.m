@@ -42,7 +42,7 @@
     self = [self init];
     if (self){
         [self setUI];
-        self.titleLabel.backgroundColor = kBackgroundColor;
+        self.titleLabel.backgroundColor = UIColor.commonBackgroundColor;
         self.titleLabel.style = WJMTagLabelStyle_TickStyle;
         self.titleLabel.layer.borderColor = kUIColorFromRGB10(227, 227, 227).CGColor;
         [self setTitle:title andStringTag:stringTag];
@@ -67,7 +67,7 @@
     if (!_titleLabel){
         _titleLabel = [[WJMTagLabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:17];
-        _titleLabel.textColor = kSubtitleTintTextColor;
+        _titleLabel.textColor = UIColor.commonSubtitleTintTextColor;
         _titleLabel.layer.cornerRadius = 6;
         _titleLabel.layer.borderWidth = 1;
         _titleLabel.layer.borderColor = [UIColor clearColor].CGColor;
@@ -80,7 +80,7 @@
     [super setSelected:selected];
     self.titleLabel.selected = selected;
     if (self.titleLabel.style == WJMTagLabelStyle_TickStyle){
-        self.titleLabel.backgroundColor = selected ? kUIColorFromRGB10(251, 244, 241) : kBackgroundColor;
+        self.titleLabel.backgroundColor = selected ? kUIColorFromRGB10(251, 244, 241) : UIColor.commonBackgroundColor;
         self.titleLabel.layer.borderColor = selected ? kUIColorFromRGB10(237, 169, 153).CGColor : kUIColorFromRGB10(227,227,227).CGColor;
     }
 }

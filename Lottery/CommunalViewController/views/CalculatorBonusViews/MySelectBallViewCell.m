@@ -35,7 +35,7 @@
 }
 
 - (void)setUI{
-    self.layer.borderColor = kSubtitleTintTextColor.CGColor;
+    self.layer.borderColor = UIColor.commonSubtitleTintTextColor.CGColor;
     self.layer.borderWidth = 1;
     self.layer.cornerRadius = 4;
     [self addSubview:self.titleLabel];
@@ -67,7 +67,7 @@
         self.backgroundColor = selected ? [LSVCBallImageView getColor:LSVCBallStyle_blueBall] : [UIColor clearColor];
         
     }
-    self.layer.borderColor = selected ? [UIColor clearColor].CGColor : kSubtitleTintTextColor.CGColor;
-    self.titleLabel.textColor = selected ? [UIColor whiteColor] : kSubtitleTintTextColor;
+    self.layer.borderColor = selected ? [UIColor clearColor].CGColor : UIColor.commonSubtitleTintTextColor.CGColor;
+    self.titleLabel.textColor = selected ? [UIColor whiteColor] : UIColor.commonSubtitleTintTextColor;
 }
 @end

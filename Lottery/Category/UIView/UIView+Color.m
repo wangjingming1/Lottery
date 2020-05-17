@@ -7,6 +7,7 @@
 //
 
 #import "UIView+Color.h"
+#import "DrawUtils.h"
 
 @implementation UIView (Color)
 - (void)setGradationColor:(NSArray <UIColor *> *)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint{
@@ -32,6 +33,26 @@
     layer.locations = nil;// @[@0.0f,@0.6f,@1.0f];//渐变颜色的区间分布，locations的数组长度和color一致，这个值一般不用管它，默认是nil，会平均分布
     layer.frame = self.layer.bounds;
     [self.layer insertSublayer:layer atIndex:0];
+}
+
+- (void)drawGradationColor:(CGContextRef)context pointArray:(NSArray <NSValue *> *)pointArray colors:(NSArray <UIColor *> *)colors startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    if (pointArray.count < 3) return;
+    CGMutablePathRef path = CGPathCreateMutable();
+    for (int i = 0; i < pointArray.count; i++){
+        CGPoint point = [pointArray[i] CGPointValue];
+        if (i == 0){
+            CGPathMoveToPoint(path, NULL, point.x, point.y);
+        } else {
+            CGPathAddLineToPoint(path, NULL, point.x, point.y);
+        }
+    }
+    CGPathCloseSubpath(path);
+
+    //绘制渐变色
+    drawGradationColor(context, path, colors, startPoint, endPoint);
+    
+    //注意释放CGMutablePathRef
+    CGPathRelease(path);
 }
 
 - (void)setShadowAndColor:(UIColor *)color {

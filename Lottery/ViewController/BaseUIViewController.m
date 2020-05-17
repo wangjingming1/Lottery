@@ -59,7 +59,7 @@
     if (self.params && [self.params objectForKey:@"leftTitle"]){
         self.navBarLeftButtonTitle = self.params[@"leftTitle"];
     }
-    self.view.backgroundColor = kBackgroundColor;
+    self.view.backgroundColor = UIColor.commonBackgroundColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

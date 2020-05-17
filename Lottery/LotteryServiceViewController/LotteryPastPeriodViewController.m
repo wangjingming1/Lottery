@@ -6,7 +6,7 @@
 //  Copyright © 2020 wangjingming. All rights reserved.
 //
 
-#import <MJRefresh/MJRefresh.h>
+#import "MJRefresh.h"
 
 #import "LotteryPastPeriodViewController.h"
 #import "LotteryPastPeriodTableViewCell.h"

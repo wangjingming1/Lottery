@@ -110,7 +110,7 @@
 - (UIView *)backView{
     if (!_backView){
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor whiteColor];
+        _backView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
         _backView.layer.cornerRadius = kCornerRadius;
         _backView.layer.masksToBounds = YES;
     }
@@ -127,7 +127,7 @@
 - (UILabel *)headLabel{
     if (!_headLabel){
         _headLabel = [[UILabel alloc] init];
-        _headLabel.textColor = kUnselectedTintTextColor;
+        _headLabel.textColor = UIColor.commonUnselectedTintTextColor;
         _headLabel.font = [UIFont boldSystemFontOfSize:kHeadLabelFontSize];
         _headLabel.text = @"彩票资讯";
     }
@@ -137,7 +137,7 @@
 - (UILabel *)footLabel{
     if (!_footLabel){
         _footLabel = [[UILabel alloc] init];
-        _footLabel.textColor = kUnselectedTintTextColor;
+        _footLabel.textColor = UIColor.commonUnselectedTintTextColor;
         _footLabel.font = [UIFont systemFontOfSize:kFootLabelFontSize];
         _footLabel.textAlignment = NSTextAlignmentCenter;
         _footLabel.text = @"查看更多资讯";

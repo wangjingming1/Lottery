@@ -39,7 +39,7 @@
 }
 
 - (void)setUI{
-    self.backgroundColor = kBackgroundColor;
+    self.backgroundColor = UIColor.commonBackgroundColor;
     [self addSubview:self.backView];
     [self.backView addSubview:self.titleLabel];
     [self.backView addSubview:self.tipsIconImage];
@@ -59,6 +59,7 @@
     [self.tipsIconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel.mas_right).offset(kPadding10);
         make.centerY.mas_equalTo(self.titleLabel);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
     [self.tipsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLabel);
@@ -88,8 +89,8 @@
 - (UIView *)backView{
     if (!_backView){
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor whiteColor];
-        [_backView setShadowAndColor:kShadowColor];
+        _backView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
+        [_backView setShadowAndColor:UIColor.commonShadowColor];
     }
     return _backView;
 }
@@ -97,7 +98,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel){
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = kTitleTintTextColor;
+        _titleLabel.textColor = UIColor.commonTitleTintTextColor;
         _titleLabel.font = [UIFont boldSystemFontOfSize:kLotteryWinningTipsViewTitleLabelSize];
         _titleLabel.text = @"开奖提醒";
     }
@@ -107,7 +108,7 @@
 - (UILabel *)tipsLabel{
     if (!_tipsLabel){
         _tipsLabel = [[UILabel alloc] init];
-        _tipsLabel.textColor = kSubtitleTintTextColor;
+        _tipsLabel.textColor = UIColor.commonSubtitleTintTextColor;
         _tipsLabel.font = [UIFont systemFontOfSize:kLotteryWinningTipsViewTipsLabelSize];
     }
     return _tipsLabel;
@@ -124,12 +125,14 @@
 - (UIButton *)openingReminderButton{
     if (!_openingReminderButton){
         _openingReminderButton = [[UIButton alloc] init];
+//        [_openingReminderButton setContentEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
         _openingReminderButton.titleLabel.font = [UIFont boldSystemFontOfSize:kLotteryWinningTipsViewTitleLabelSize];
         [_openingReminderButton setTitle:@"开启提醒" forState:UIControlStateNormal];
         [_openingReminderButton setImage:[UIImage imageNamed:@"remind"] forState:UIControlStateNormal];
         [_openingReminderButton setImage:[UIImage imageNamed:@"remind"] forState:UIControlStateHighlighted];
         [_openingReminderButton addTarget:self action:@selector(openingReminderButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_openingReminderButton setTitleColor:kUIColorFromRGB10(78,132,239) forState:UIControlStateNormal];
+        [_openingReminderButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -5, 0, -5)];
     }
     return _openingReminderButton;
 }

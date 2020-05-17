@@ -32,14 +32,10 @@
 - (void)setUI{
 //    self.backgroundColor = [UIColor whiteColor];//kUIColorFromRGB10(252, 253, 233);
     
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = kLocalizedString(@"中奖奖金");
-    titleLabel.font = [UIFont systemFontOfSize:15];
+    UILabel *titleLabel = [self createLabel:kLocalizedString(@"中奖奖金") fontSize:15];
     
-    UILabel *tipsLab = [[UILabel alloc] init];
-    tipsLab.text = kLocalizedString(@"开奖结果仅供参考，以官方开奖信息为准");
-    tipsLab.textColor = kSubTipsTintTextColor;
-    tipsLab.font = [UIFont systemFontOfSize:kSubTipsFontOfSize];
+    UILabel *tipsLab = [self createLabel:kLocalizedString(@"开奖结果仅供参考，以官方开奖信息为准") fontSize:kSubTipsFontOfSize];
+    tipsLab.textColor = UIColor.commonSubTipsTintTextColor;
     
     [self addSubview:titleLabel];
     [self addSubview:self.bonusLabel];
@@ -98,7 +94,7 @@
     for (int i = 0; i < self.prizeModelArray.count; i++){
         UIView *view = [self createLotteryBonusDetailedView:self.prizeModelArray[i]];
         if (i % 2 == 0){
-            view.backgroundColor = [UIColor whiteColor];
+            view.backgroundColor = [UIColor whiteColor];//UIColor.commonGroupedBackgroundColor;
         } else {
             view.backgroundColor = kUIColorFromRGB10(237, 238, 239);
         }
@@ -175,31 +171,31 @@
     return backView;
 }
 
-- (UILabel *)createAllBonusLabel:(NSString *)allBonus{
-    UILabel *label = [[UILabel alloc] init];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = allBonus;
-    if ([allBonus isEqualToString:@"0"]){
-        label.textColor = kTitleTintTextColor;
-    } else {
-        label.textColor = [UIColor redColor];
-    }
-    return label;
-}
+//- (UILabel *)createAllBonusLabel:(NSString *)allBonus{
+//    UILabel *label = [[UILabel alloc] init];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.text = allBonus;
+//    if ([allBonus isEqualToString:@"0"]){
+//        label.textColor = UIColor.commonTitleTintTextColor;
+//    } else {
+//        label.textColor = [UIColor redColor];
+//    }
+//    return label;
+//}
 
 - (UILabel *)createLabel:(NSString *)text fontSize:(CGFloat)fontSize{
     UILabel *label = [[UILabel alloc] init];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:fontSize];
-    label.textColor = kTitleTintTextColor;
+    label.textColor = kUIColorFromRGB10(62, 63, 64);
+//    label.textColor = UIColor.commonTitleTintTextColor;
     label.text = text;
     return label;
 }
 
 - (UILabel *)bonusLabel{
     if (!_bonusLabel){
-        _bonusLabel = [[UILabel alloc] init];
-        _bonusLabel.font = [UIFont systemFontOfSize:14];
+        _bonusLabel = [self createLabel:@"" fontSize:14];
     }
     return _bonusLabel;
 }

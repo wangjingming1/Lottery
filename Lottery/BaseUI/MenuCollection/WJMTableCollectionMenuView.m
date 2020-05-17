@@ -56,11 +56,11 @@
     CGFloat menuNameLabelFont = 17;
     if (self.menuViewStyle == MenuView_DividingLine){
         self.selectLineView.backgroundColor = selected ? [UIColor redColor] : [UIColor clearColor];
-        self.menuNameLabel.textColor = selected ? kSelectedTintTextColor : kTitleTintTextColor;
+        self.menuNameLabel.textColor = selected ? UIColor.commonSelectedTintTextColor : UIColor.commonTitleTintTextColor;
         self.menuNameLabel.font = [UIFont systemFontOfSize:menuNameLabelFont];
     } else if (self.menuViewStyle == MenuView_HighlightSelection){
         menuNameLabelFont = selected ? menuNameLabelFont : 15;
-        self.menuNameLabel.textColor = selected ? kTitleTintTextColor : kSubtitleTintTextColor;
+        self.menuNameLabel.textColor = selected ? UIColor.commonTitleTintTextColor : UIColor.commonSubtitleTintTextColor;
         self.menuNameLabel.font = selected ? [UIFont boldSystemFontOfSize:menuNameLabelFont] : [UIFont systemFontOfSize:menuNameLabelFont];
     }
 }
@@ -69,7 +69,7 @@
     if (!_menuNameLabel){
         _menuNameLabel = [[UILabel alloc] init];
         _menuNameLabel.textAlignment = NSTextAlignmentCenter;
-        _menuNameLabel.textColor = kSelectedTintTextColor;
+        _menuNameLabel.textColor = UIColor.commonSelectedTintTextColor;
     }
     return _menuNameLabel;
 }

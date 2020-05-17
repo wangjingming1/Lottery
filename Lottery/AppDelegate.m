@@ -40,9 +40,46 @@
     if(@available(iOS 13, *)){
         
     } else {
-        self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.backgroundColor = UIColor.commonBackgroundColor;// [UIColor whiteColor];
         self.window.rootViewController = [[LotteryTabBarViewController alloc] initWithNibName:@"LotteryTabBarViewController" bundle:nil];
     }
+    return YES;
+}
+//说明：当应用程序将要进入非活动状态执行，在此期间，应用程序不接收消息或事件，比如来电话了。
+- (void)applicationWillResignActive:(UIApplication*)application{
+    NSLog(@"applicationWillResignActive:当应用程序将要进入非活动状态执行，在此期间，应用程序不接收消息或事件，比如来电话了。");
+}
+//说明：当应用程序进入活动状态执行，这个刚好和上面的那个方法相反
+- (void)applicationDidBecomeActive:(UIApplication *)application{
+    NSLog(@"applicationDidBecomeActive:当应用程序进入活动状态执行，这个刚好和上面的那个方法相反");
+}
+//说明：当程序被推送到后台的时候调用。所以要设置后台继续运行，则在这个函数里面设置即可。
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+    NSLog(@"applicationDidEnterBackground:当程序被推送到后台的时候调用。所以要设置后台继续运行，则在这个函数里面设置即可。");
+}
+//说明：当程序从后台将要重新回到前台时候调用，这个刚好跟上面的那个方法相反。
+- (void)applicationWillEnterForeground:(UIApplication *)application{
+    NSLog(@"applicationWillEnterForeground:当程序从后台将要重新回到前台时候调用，这个刚好跟上面的那个方法相反。");
+}
+//说明：当程序将要退出时调用，通常是用来保存数据和一些推出前的清理工作。这个需要设置UIApplicationExitsOnSuspend的键值。
+- (void)applicationWillTerminate:(UIApplication *)application{
+    NSLog(@"applicationWillTerminate:当程序将要退出时调用，通常是用来保存数据和一些推出前的清理工作。这个需要设置UIApplicationExitsOnSuspend的键值。");
+}
+
+//说明：内存警告，通常可以在这里进行内存清理工作防止程序被终止
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
+    NSLog(@"applicationDidReceiveMemoryWarning:内存警告，通常可以在这里进行内存清理工作防止程序被终止");
+}
+//说明：当系统时间发生改变时执行
+- (void)applicationSignificantTimeChange:(UIApplication *)application{
+    NSLog(@"当系统时间发生改变时执行:applicationSignificantTimeChange");
+}
+//说明：当程序载入后执行
+- (void)applicationDidFinishLaunching:(UIApplication *)application{
+    NSLog(@"当程序载入后执行:applicationDidFinishLaunching");
+}
+//说明：当前是通过URL启动
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
     return YES;
 }
 

@@ -30,8 +30,6 @@
 }
 
 - (void)setUI{
-    self.backgroundColor = [UIColor whiteColor];
-    
     UIView *headerView = [self createHeaderView];
     self.settingBackView = [[UIView alloc] init];
     
@@ -97,14 +95,14 @@
     [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    [button setTitleColor:kTitleTintTextColor forState:UIControlStateNormal];
+    [button setTitleColor:UIColor.commonTitleTintTextColor forState:UIControlStateNormal];
     return button;
 }
 
 - (UILabel *)titleLabel{
     if (!_titleLabel){
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = kTitleTintTextColor;
+        _titleLabel.textColor = UIColor.commonTitleTintTextColor;
         _titleLabel.font = [UIFont boldSystemFontOfSize:18];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -137,7 +135,7 @@
         
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.text = model.title;
-        titleLabel.textColor = kTitleTintTextColor;
+        titleLabel.textColor = UIColor.commonTitleTintTextColor;
         
         NSMutableArray *checkBoxBtnArray = [@[] mutableCopy];
         
@@ -198,7 +196,7 @@
                 make.width.mas_greaterThanOrEqualTo(view.mas_width).multipliedBy(1.0/maxContentCount).offset(-kPadding20);
             }];
         } else {
-            [checkBoxBtnArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:kPadding20 leadSpacing:0 tailSpacing:0];
+            [checkBoxBtnArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:kPadding15 leadSpacing:0 tailSpacing:0];
             [checkBoxBtnArray mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.bottom.mas_equalTo(0);
                 make.height.mas_equalTo(30);

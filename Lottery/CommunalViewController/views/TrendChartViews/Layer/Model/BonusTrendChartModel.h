@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *footnote;
 @property (nonatomic) UIColor *titleColor;
+@property (nonatomic) UIColor *footNoteColor;
 @property (nonatomic) UIColor *nodeColor;
 @property (nonatomic) UIColor *lineColor;
 

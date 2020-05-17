@@ -15,7 +15,7 @@
     if (@available(iOS 13, *)){
         UIWindowScene *windowScenr = (UIWindowScene *)scene;
         self.window = [[UIWindow alloc] initWithWindowScene:windowScenr];
-        self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.backgroundColor = UIColor.commonBackgroundColor;//[UIColor whiteColor];
         self.window.rootViewController = [[LotteryTabBarViewController alloc] initWithNibName:@"LotteryTabBarViewController" bundle:nil];
         [self.window makeKeyAndVisible];
     }

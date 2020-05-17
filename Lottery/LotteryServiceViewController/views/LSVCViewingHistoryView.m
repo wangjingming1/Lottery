@@ -115,7 +115,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel){
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = kTitleTintTextColor;
+        _titleLabel.textColor = UIColor.commonTitleTintTextColor;
         _titleLabel.text = kLocalizedString(@"查看历史");
         _titleLabel.font = [UIFont boldSystemFontOfSize:15];
     }

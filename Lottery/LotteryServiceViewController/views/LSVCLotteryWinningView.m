@@ -51,7 +51,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     self = [super init];
     if (self) {
         _style = LSVCLotteryWinningViewStyle_LotteryService;
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor whiteColor];
         [self setUI];
     }
     return self;
@@ -178,8 +178,8 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     
     self.iconView.hidden = self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod;
     self.kindNameLabel.hidden = self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod;
-    self.issueNumberLabel.textColor = self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kTitleTintTextColor : kSubtitleTintTextColor;
-    self.dateLabel.textColor = self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kTitleTintTextColor : kSubtitleTintTextColor;
+    self.issueNumberLabel.textColor = self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? UIColor.commonTitleTintTextColor : UIColor.commonSubtitleTintTextColor;
+    self.dateLabel.textColor = self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? UIColor.commonTitleTintTextColor : UIColor.commonSubtitleTintTextColor;
     
     self.ballBackLineView.hidden = self.style == LSVCLotteryWinningViewStyle_HomePage;
     self.backLineView.hidden = self.style == LSVCLotteryWinningViewStyle_LotteryService;
@@ -409,7 +409,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     if (!_kindNameLabel){
         _kindNameLabel = [[UILabel alloc] init];
         _kindNameLabel.numberOfLines = 1;
-        _kindNameLabel.textColor = kTitleTintTextColor;
+        _kindNameLabel.textColor = UIColor.commonTitleTintTextColor;
         _kindNameLabel.font = [UIFont boldSystemFontOfSize:kLotteryWinningViewKindNameLabelSize];
     }
     return _kindNameLabel;
@@ -419,7 +419,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     if (!_issueNumberLabel){
         _issueNumberLabel = [[UILabel alloc] init];
         _issueNumberLabel.numberOfLines = 1;
-        _issueNumberLabel.textColor = kSubtitleTintTextColor;
+        _issueNumberLabel.textColor = UIColor.commonSubtitleTintTextColor;
         _issueNumberLabel.font = [UIFont systemFontOfSize:kLotteryWinningViewLotteryInfoLabelSize];
     }
     return _issueNumberLabel;
@@ -429,7 +429,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
     if (!_dateLabel){
         _dateLabel = [[UILabel alloc] init];
         _dateLabel.numberOfLines = 1;
-        _dateLabel.textColor = kSubtitleTintTextColor;
+        _dateLabel.textColor = UIColor.commonSubtitleTintTextColor;
         _dateLabel.font = [UIFont systemFontOfSize:kLotteryWinningViewLotteryInfoLabelSize];
     }
     return _dateLabel;
@@ -489,7 +489,7 @@ self.style == LSVCLotteryWinningViewStyle_LotteryPastPeriod ? kLotteryWinningVie
         _bonusListView.layer.masksToBounds = YES;
         
         UIView *lineView = [[UIView alloc] init];
-        lineView.backgroundColor = kBackgroundColor;
+        lineView.backgroundColor = UIColor.commonBackgroundColor;
         [_bonusListView addSubview:lineView];
         
         [lineView mas_makeConstraints:^(MASConstraintMaker *make) {

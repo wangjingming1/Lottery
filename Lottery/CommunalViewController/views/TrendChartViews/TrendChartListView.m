@@ -39,7 +39,7 @@
 
 - (void)setUI{
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.backgroundColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = UIColor.clearColor;// [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = kLocalizedString(@"彩种选择");
 
@@ -89,6 +89,8 @@
 - (UITableView *)tableView{
     if (!_tableView){
         _tableView = [[UITableView alloc] init];
+        _tableView.backgroundColor = UIColor.commonGroupedBackgroundColor;
+        _tableView.separatorColor = kDividingLineColor;
         _tableView.rowHeight = 40;
         [_tableView registerClass:[TrendChartListCell class] forCellReuseIdentifier:kTrendChartListViewCellIdentifier];
         _tableView.delegate = self;
@@ -153,6 +155,7 @@
 }
 
 - (void)setUI{
+    self.contentView.backgroundColor = UIColor.commonGroupedBackgroundColor;//[UIColor clearColor];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.selectImgV];
     
@@ -181,7 +184,7 @@
     if (!_titleLabel){
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:17];
-        _titleLabel.textColor = kTitleTintTextColor;
+        _titleLabel.textColor = UIColor.commonTitleTintTextColor;
     }
     return _titleLabel;
 }
