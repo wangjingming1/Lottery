@@ -29,6 +29,7 @@
         self.lineWidth = 1;
         self.footnoteHeight = 20;
         self.isDrawMask = NO;
+        [self setContentsScale:[[UIScreen mainScreen] scale]];
     }
     return self;
 }
@@ -75,17 +76,17 @@
         if (data > maxData) maxData = data;
     }
     
-    CGFloat minY = 1/4.0*height;
+    CGFloat minY = CGRectGetMinY(self.drawRect) + 1/4.0*height;
     CGFloat contextY = height - minY*2;
     for (int i = 0; i < dateCount; i++) {
         long long data = *(dataArray + i);
-        CGFloat y = 0;
+        CGFloat y = minY;
         if (maxData != minData){
             y = minY + (maxData - data)*1.0/(maxData - minData)*contextY;//尴尬了,没有浮点数,这里乘上个1.0转一下
         }
         yArray[i] = y;
         
-        CGFloat x = singleWidth/2 + singleWidth*i;
+        CGFloat x = CGRectGetMinX(self.drawRect) + singleWidth/2 + singleWidth*i;
         xArray[i] = x;
     }
 }
@@ -95,38 +96,38 @@
     if (!self.model.trendChartDataModelArray.count) return;
     NSInteger dateCount = self.model.trendChartDataModelArray.count;
     CGFloat footnoteHeight = self.footnoteHeight;
-    CGFloat width = CGRectGetWidth(self.bounds);
-    CGFloat height = self.showFootnote ? CGRectGetHeight(self.bounds) - footnoteHeight : CGRectGetHeight(self.bounds);
+    CGFloat width = CGRectGetWidth(self.drawRect);
+    CGFloat height = self.showFootnote ? CGRectGetHeight(self.drawRect) - footnoteHeight : CGRectGetHeight(self.drawRect);
     
     CGFloat xArray[dateCount];
     CGFloat yArray[dateCount];
     long long dataArray[dateCount];
     
     [self calculateXArray:xArray yArray:yArray dataArray:dataArray width:width height:height];
-    
-    drawAuxiliaryLine(ctx, CGPointMake(0, 0), CGPointMake(width, 0), self.lineWidth, kSubtitleTintTextColor.CGColor, NO, 0, NO);
+    CGFloat minX = CGRectGetMinX(self.drawRect), minY = CGRectGetMinY(self.drawRect);
+    drawAuxiliaryLine(ctx, CGPointMake(minX, minY), CGPointMake(minX + width, minY), self.lineWidth, self.model.footNoteColor.CGColor, NO, 0, NO);
     for (int i = 0; i < dateCount; i++){
         CGFloat x = xArray[i];
-        drawAuxiliaryLine(ctx, CGPointMake(x, 0), CGPointMake(x, height), self.lineWidth, kSubtitleTintTextColor.CGColor, YES, 5, YES);
+        drawAuxiliaryLine(ctx, CGPointMake(x, minY), CGPointMake(x, height), self.lineWidth, self.model.footNoteColor.CGColor, YES, 5, YES);
         if (self.showFootnote){
             BonusTrendChartDataModel *dataModel = self.model.trendChartDataModelArray[i];
-            drawTextAtPoint(ctx, x, height + 5, DrawTextStyle_X_Left | DrawTextStyle_Y_Top, dataModel.footnote, 0, 12, kSubtitleTintTextColor);
+            drawTextAtPoint(ctx, x, height + 5, DrawTextStyle_X_Left | DrawTextStyle_Y_Top, dataModel.footnote, 0, 12, self.model.footNoteColor);
         }
     }
     
     if (self.showFootnote && self.model.footnote){
-        drawAuxiliaryLine(ctx, CGPointMake(0, height), CGPointMake(width, height), self.lineWidth, self.model.lineColor.CGColor, NO, 0, NO);
-        drawTextAtPoint(ctx, 0, height + 5, DrawTextStyle_X_Left | DrawTextStyle_Y_Top, self.model.footnote, 0, 12, kSubtitleTintTextColor);
+        drawAuxiliaryLine(ctx, CGPointMake(minX, height), CGPointMake(minX + width, height), self.lineWidth, self.model.lineColor.CGColor, NO, 0, NO);
+        drawTextAtPoint(ctx, minX, height + 5, DrawTextStyle_X_Left | DrawTextStyle_Y_Top, self.model.footnote, 0, 12, self.model.footNoteColor);
     }
     
     CGFloat radius = kPadding10/2;
     NSString *unit = self.model.trendChartDataModelArray.firstObject.unit;
-    drawCircle(ctx, CGPointMake(radius, radius + kPadding10), radius, self.model.nodeColor.CGColor, self.model.nodeColor.CGColor, 0);
-    drawTextAtPoint(ctx, radius*2 + kPadding10, radius + kPadding10, DrawTextStyle_X_Left | DrawTextStyle_Y_Center, self.model.title, 0, 12, self.model.titleColor);
+    drawCircle(ctx, CGPointMake(minX + radius, minY + radius + kPadding10), radius, self.model.nodeColor.CGColor, self.model.nodeColor.CGColor, 0);
+    drawTextAtPoint(ctx, minX + radius*2 + kPadding10, minY + radius + kPadding10, DrawTextStyle_X_Left | DrawTextStyle_Y_Center, self.model.title, 0, 12, self.model.titleColor);
     
     [self drawBonusTrendChartData:ctx xArray:xArray yArray:yArray bonusDataArray:dataArray unit:unit arrayCount:dateCount drawH:height radius:radius];
     if (self.isDrawMask) {
-        [self drawMask:ctx width:width height:height];
+        [self drawMask:ctx polygon:self.bounds];// width:width height:height];
     }
 }
 
@@ -159,7 +160,7 @@
     CGPathCloseSubpath(path);
     
     UIColor *startColor = [self.model.nodeColor colorWithAlphaComponent:0.5];
-    UIColor *endColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    UIColor *endColor = [UIColor.commonBackgroundColor colorWithAlphaComponent:0.5];
     CGRect pathRect = CGPathGetBoundingBox(path);
     
     //具体方向可根据需求修改
@@ -173,7 +174,7 @@
     CGPathRelease(path);
 }
 
-- (void)drawMask:(CGContextRef)ctx width:(CGFloat)width height:(CGFloat)height{
+- (void)drawMask:(CGContextRef)ctx polygon:(CGRect)polygon{
     NSTimeInterval curTime = [NSDate timeIntervalSinceReferenceDate];
     double timeOffset = curTime - self.startTime;
     if (timeOffset > self.animatedDurationTime){
@@ -182,15 +183,17 @@
     double percentage = timeOffset / self.animatedDurationTime;
     
     NSInteger dateCount = self.model.trendChartDataModelArray.count;
-    CGFloat singleWidth = width/dateCount;
-    CGFloat minX = singleWidth/2 + (width - singleWidth)*percentage, maxX = width;
-    CGFloat minY = 50, maxY = height;
+    
+    CGFloat singleWidth = CGRectGetWidth(polygon)/dateCount;
+    
+    CGFloat minX = CGRectGetMinX(polygon) + singleWidth/2 + (CGRectGetWidth(polygon) - singleWidth)*percentage, maxX = CGRectGetMaxX(polygon);
+    CGFloat minY = CGRectGetMinY(polygon) + 40, maxY = CGRectGetMaxY(polygon);
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minX, minY);
     CGPathAddLineToPoint(path, NULL, maxX, minY);
     CGPathAddLineToPoint(path, NULL, maxX, maxY);
     CGPathAddLineToPoint(path, NULL, minX, maxY);
     
-    drawPolygon(ctx, path, kBackgroundColor.CGColor, [UIColor clearColor].CGColor, 0);
+    drawPolygon(ctx, path, UIColor.commonBackgroundColor.CGColor, [UIColor clearColor].CGColor, 0);
 }
 @end
