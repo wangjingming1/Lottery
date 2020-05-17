@@ -195,8 +195,13 @@
 */
 - (void)drawTextInRect:(CGRect)rect{
     if (self.style == WJMTagLabelStyle_RadioStyle){
-        rect.origin.x = self.triangleSide*2 + kPadding10;
-        rect.size.width -= (self.triangleSide*2 + kPadding10);
+        if (self.textAlignment == NSTextAlignmentLeft){
+            rect.origin.x = self.triangleSide*2 + kPadding10;
+            rect.size.width -= (self.triangleSide*2 + kPadding10);
+        } else if (self.textAlignment == NSTextAlignmentCenter){
+            rect.origin.x = self.triangleSide + kPadding10;
+            rect.size.width -= (self.triangleSide + kPadding10);
+        }
     } else if (self.style == WJMTagLabelStyle_TickStyle){
         
     } else {
