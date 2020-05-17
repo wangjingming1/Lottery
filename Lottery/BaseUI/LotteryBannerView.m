@@ -29,8 +29,8 @@
  */
 @property (nonatomic , strong) NSMutableArray * dataArray;
 /**
-    定时器 用来自动播放图片
-    */
+ 定时器 用来自动播放图片
+*/
 @property (nonatomic, strong) NSTimer * timer;
 @end
 
@@ -129,15 +129,6 @@
  滚动视图正在滚动 (拖拽过程中触发的方法)
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    self.mainPage.currentPage = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame) - 1;
-}
-
-/**
- 滚动视图完成减速时调用 (就是手动拖拽完成后)
- */
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self startTimer];
-    
     //获取当前滚动视图的偏移量
     CGPoint currentPoint = scrollView.contentOffset;
     /** 判断拖拽完成后将要显示的图片时第几张 6 1 2 3 4 5 6 1 */
@@ -160,6 +151,13 @@
     CGPoint newPoint = scrollView.contentOffset;
     //改变分页控件上的页码
     self.mainPage.currentPage = newPoint.x / CGRectGetWidth(scrollView.frame) - 1;
+}
+
+/**
+ 滚动视图完成减速时调用 (就是手动拖拽完成后)
+ */
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self startTimer];
 }
 
 /**
@@ -207,48 +205,7 @@
      当前位置 + 一个屏幕宽度
      */
     CGFloat nextX = currentX + CGRectGetWidth(self.mainScrollView.frame);
-    /**
-     判断滚动视图上将要显示的图片是最后一张时
-     通过X值来判断 所以要 self.dataArray.count - 1
-     */
-    if (nextX == (self.dataArray.count - 1) * CGRectGetWidth(self.mainScrollView.frame)) {
-        /**
-         UIView的动画效果方法(分两个方法)
-         */
-        [UIView animateWithDuration:0.2 animations:^{
-            /**
-             动画效果的第一个方法
-             Duration:持续时间
-             animations:动画内容
-             这个动画执行 0.2秒 后进入下一个方法
-             */
-            //往最后一张图片走
-            self.mainScrollView.contentOffset = CGPointMake(nextX, 0);
-            /**
-             改变对应的分页控件显示圆点
-             */
-            self.mainPage.currentPage = 0;
-        } completion:^(BOOL finished) {
-            /**
-             动画效果的第二个方法
-             completion: 回调方法 (完成\结束的意思)
-             上一个方法结束后进入这个方法
-             */
-            //往第二张图片走
-            self.mainScrollView.contentOffset = CGPointMake(CGRectGetWidth(self.mainScrollView.frame), 0);
-        }];
-    }else{//如果滚动视图上要显示的图片不是最后一张时
-        //显示下一张图片
-        [UIView animateWithDuration:0.2 animations:^{
-            //让下一个图片显示出来
-            self.mainScrollView.contentOffset = CGPointMake( nextX, 0);
-            //改变对应的分页控件显示圆点
-            self.mainPage.currentPage = self.mainScrollView.contentOffset.x / CGRectGetWidth(self.mainScrollView.frame) - 1;
-        } completion:^(BOOL finished) {
-            //改变对应的分页控件显示圆点
-            self.mainPage.currentPage = self.mainScrollView.contentOffset.x / CGRectGetWidth(self.mainScrollView.frame) - 1;
-        }];
-    }
+    [self.mainScrollView setContentOffset:CGPointMake(nextX, 0) animated:YES];
 }
 
 /**
